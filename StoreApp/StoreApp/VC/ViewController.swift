@@ -24,10 +24,17 @@ class ViewController: UIViewController {
         myShoppingCollectionView.dataSource = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadItems(notification:)), name: NSNotification.Name("reloadItem"), object: nil)
+        
+        initNavigationBar()
     }
     
     @objc func reloadItems(notification: Notification) {
         myShoppingCollectionView.reloadData()
+    }
+    
+    func initNavigationBar(){
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.topItem?.title = "카카오 쇼핑"
     }
     
 }
