@@ -16,6 +16,8 @@ class ItemCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var participantOfDealLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
+        imgView.sizeToFit()
+        self.backgroundColor = .white
     }
     
     func updateUI(img: UIImage, title: String, talkDealPrice: Int, price: Int, numberOfParticipant: Int){
