@@ -15,6 +15,8 @@
 		C278948D25C798CD001319BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C278948B25C798CD001319BE /* LaunchScreen.storyboard */; };
 		C278949825C798CD001319BE /* StoreAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C278949725C798CD001319BE /* StoreAppTests.swift */; };
 		C27894A325C798CD001319BE /* StoreAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27894A225C798CD001319BE /* StoreAppUITests.swift */; };
+		C27894BD25C7AF5F001319BE /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27894BB25C7AF5F001319BE /* ItemCollectionViewCell.swift */; };
+		C27894BE25C7AF5F001319BE /* ItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C27894BC25C7AF5F001319BE /* ItemCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		C278949E25C798CD001319BE /* StoreAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StoreAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C27894A225C798CD001319BE /* StoreAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreAppUITests.swift; sourceTree = "<group>"; };
 		C27894A425C798CD001319BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C27894BB25C7AF5F001319BE /* ItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		C27894BC25C7AF5F001319BE /* ItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,8 @@
 				C278948925C798CD001319BE /* Assets.xcassets */,
 				C278948B25C798CD001319BE /* LaunchScreen.storyboard */,
 				C278948E25C798CD001319BE /* Info.plist */,
+				C27894BB25C7AF5F001319BE /* ItemCollectionViewCell.swift */,
+				C27894BC25C7AF5F001319BE /* ItemCollectionViewCell.xib */,
 			);
 			path = StoreApp;
 			sourceTree = "<group>";
@@ -232,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C278948D25C798CD001319BE /* LaunchScreen.storyboard in Resources */,
+				C27894BE25C7AF5F001319BE /* ItemCollectionViewCell.xib in Resources */,
 				C278948A25C798CD001319BE /* Assets.xcassets in Resources */,
 				C278948825C798CD001319BE /* Main.storyboard in Resources */,
 			);
@@ -259,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C278948525C798CD001319BE /* ViewController.swift in Sources */,
+				C27894BD25C7AF5F001319BE /* ItemCollectionViewCell.swift in Sources */,
 				C278948125C798CC001319BE /* AppDelegate.swift in Sources */,
 				C278948325C798CC001319BE /* SceneDelegate.swift in Sources */,
 			);
