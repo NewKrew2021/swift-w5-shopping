@@ -33,16 +33,14 @@ class ViewController: UIViewController {
     
 }
 
-
 extension ViewController : UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return item[section].count
     }
     
-    
-        func numberOfSections(in collectionView: UICollectionView) -> Int {
-            return item.allItems.count-1
-        }
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return item.allItems.count-1
+    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCollectionViewCell", for: indexPath) as! myCollectionViewCell
