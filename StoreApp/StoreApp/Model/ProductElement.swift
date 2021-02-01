@@ -11,7 +11,7 @@ import Foundation
 struct ProductElement: Codable, Hashable {
     enum ProductType: String, Codable {
         case BEST, MASK, GROCERY, FRYINGPAN
-        
+
         init?(rawValue: String) {
             switch rawValue {
             case "BEST":
@@ -44,8 +44,9 @@ struct ProductElement: Codable, Hashable {
     let reviewCount, reviewProductRating, productPositivePercentage, rank: Int?
     let new, alarmDisplaying: Bool
     let impId: String?
+    var type: ProductType?
     let identifier = UUID()
-    
+
     func hash(into hasher: inout Hasher) {
         hasher.combine(identifier)
     }

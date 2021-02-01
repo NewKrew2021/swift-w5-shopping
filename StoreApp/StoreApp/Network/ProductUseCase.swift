@@ -10,7 +10,7 @@ import Foundation
 struct ProductUseCase {
     static func getBest(with manager: NetworkManable, completed: @escaping ([ProductElement]?) -> Void) {
         try? manager.getResource(from: "/best.json") {
-            (data, _) in
+            (data, error) in
             if let tvData = data {
                 let tvModels = try? JSONDecoder().decode([ProductElement].self, from: tvData)
                 completed(tvModels)
@@ -19,7 +19,7 @@ struct ProductUseCase {
     }
     static func getMask(with manager: NetworkManable, completed: @escaping ([ProductElement]?) -> Void) {
         try? manager.getResource(from: "/mask.json") {
-            (data, _) in
+            (data, error) in
             if let tvData = data {
                 let tvModels = try? JSONDecoder().decode([ProductElement].self, from: tvData)
                 completed(tvModels)
@@ -28,7 +28,7 @@ struct ProductUseCase {
     }
     static func getGrocery(with manager: NetworkManable, completed: @escaping ([ProductElement]?) -> Void) {
         try? manager.getResource(from: "/grocery.json") {
-            (data, _) in
+            (data, error) in
             if let tvData = data {
                 let tvModels = try? JSONDecoder().decode([ProductElement].self, from: tvData)
                 completed(tvModels)
@@ -37,7 +37,7 @@ struct ProductUseCase {
     }
     static func getFryingpan(with manager: NetworkManable, completed: @escaping ([ProductElement]?) -> Void) {
         try? manager.getResource(from: "/fryingpan.json") {
-            (data, _) in
+            (data, error) in
             if let tvData = data {
                 let tvModels = try? JSONDecoder().decode([ProductElement].self, from: tvData)
                 completed(tvModels)

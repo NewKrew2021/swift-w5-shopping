@@ -20,6 +20,7 @@
 		5DFAABFA25C7FEB600099D58 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFAABF925C7FEB600099D58 /* Network.swift */; };
 		5DFAAC0025C7FEF900099D58 /* ProductElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFAABFF25C7FEF900099D58 /* ProductElement.swift */; };
 		5DFAAC0425C800FD00099D58 /* ProductUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFAAC0325C800FD00099D58 /* ProductUseCase.swift */; };
+		5DFAAC0925C8404A00099D58 /* ProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFAAC0825C8404A00099D58 /* ProductController.swift */; };
 		8F7402449B7262B17401F3DE /* Pods_StoreApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ABEF0F58604EC0A6891F528 /* Pods_StoreApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		5DFAABF925C7FEB600099D58 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		5DFAABFF25C7FEF900099D58 /* ProductElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductElement.swift; sourceTree = "<group>"; };
 		5DFAAC0325C800FD00099D58 /* ProductUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductUseCase.swift; sourceTree = "<group>"; };
+		5DFAAC0825C8404A00099D58 /* ProductController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductController.swift; sourceTree = "<group>"; };
 		8ABEF0F58604EC0A6891F528 /* Pods_StoreApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StoreApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE979BC34B5AE3DDDAE95C26 /* Pods-StoreApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreApp.debug.xcconfig"; path = "Target Support Files/Pods-StoreApp/Pods-StoreApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,18 +89,16 @@
 		5D50EE9F25C791ED0049034B /* StoreApp */ = {
 			isa = PBXGroup;
 			children = (
+				5DFAAC0625C8402500099D58 /* ProductList */,
 				5DFAABFE25C7FEE200099D58 /* Model */,
 				5DFAABFD25C7FEBD00099D58 /* Network */,
 				5D50EEA025C791ED0049034B /* AppDelegate.swift */,
 				5D50EEA225C791ED0049034B /* SceneDelegate.swift */,
-				5D50EEA425C791ED0049034B /* ViewController.swift */,
 				5D50EEA625C791ED0049034B /* Main.storyboard */,
 				5D50EEAC25C791EE0049034B /* Assets.xcassets */,
 				5D50EEAE25C791EE0049034B /* LaunchScreen.storyboard */,
 				5D50EEB125C791EE0049034B /* Info.plist */,
 				5D50EEA925C791ED0049034B /* StoreApp.xcdatamodeld */,
-				5DFAABEF25C7F01400099D58 /* ProductCell.swift */,
-				5DFAABF025C7F01400099D58 /* ProductCell.xib */,
 			);
 			path = StoreApp;
 			sourceTree = "<group>";
@@ -118,6 +118,25 @@
 				5DFAABFF25C7FEF900099D58 /* ProductElement.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		5DFAAC0625C8402500099D58 /* ProductList */ = {
+			isa = PBXGroup;
+			children = (
+				5DFAAC0725C8403C00099D58 /* View */,
+				5D50EEA425C791ED0049034B /* ViewController.swift */,
+				5DFAAC0825C8404A00099D58 /* ProductController.swift */,
+			);
+			path = ProductList;
+			sourceTree = "<group>";
+		};
+		5DFAAC0725C8403C00099D58 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5DFAABEF25C7F01400099D58 /* ProductCell.swift */,
+				5DFAABF025C7F01400099D58 /* ProductCell.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		95C4DE6CD40A17D38267843C /* Frameworks */ = {
@@ -263,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D50EEA525C791ED0049034B /* ViewController.swift in Sources */,
+				5DFAAC0925C8404A00099D58 /* ProductController.swift in Sources */,
 				5DFAAC0425C800FD00099D58 /* ProductUseCase.swift in Sources */,
 				5D50EEA125C791ED0049034B /* AppDelegate.swift in Sources */,
 				5DFAABFA25C7FEB600099D58 /* Network.swift in Sources */,
