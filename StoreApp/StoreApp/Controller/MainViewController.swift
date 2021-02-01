@@ -10,26 +10,13 @@ import UIKit
 class MainViewController: UIViewController {
 
     @IBOutlet weak var shoppingCollectionView: UICollectionView!
-    var collectionView: ProductCollcetionView = ProductCollcetionView()
+    var productCollectionView: ProductCollcetionView = ProductCollcetionView()
     override func viewDidLoad() {
         super.viewDidLoad()
-        shoppingCollectionView.delegate = collectionView
-        shoppingCollectionView.dataSource = collectionView
+        productCollectionView.calculateSize(width: nil)
+        shoppingCollectionView.delegate = productCollectionView
+        shoppingCollectionView.dataSource = productCollectionView
     }
 
 
 }
-
-//extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return 3
-//    }
-//    
-//    collce
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        <#code#>
-//    }
-//    
-//    
-//}
