@@ -46,14 +46,6 @@ class StoreItems {
             }.resume()
         }
     }
-    
-    private func decode(_ data : Data) -> [Item]? {
-        do {
-            return try JSONDecoder().decode([Item].self, from : data)
-        } catch {
-            return nil
-        }
-    }
 }
 
 
