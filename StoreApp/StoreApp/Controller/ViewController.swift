@@ -9,10 +9,10 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-//        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        let view = UICollectionView.init(frame: .init(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: layout)
+    private let request = Request()
+    
+    private let collectionView: UICollectionView = {
+        let view = UICollectionView.init(frame: .init(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: UICollectionViewFlowLayout())
         view.register(UINib(nibName: "ShoppingCollectionViewCell", bundle: .main), forCellWithReuseIdentifier: "ShoppingCollectionViewCell")
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .gray
@@ -25,6 +25,8 @@ class ViewController: UIViewController {
         addCollectionView()
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        request.request(productType: .best)
     }
     
     func addCollectionView() {
