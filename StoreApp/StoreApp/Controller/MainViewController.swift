@@ -8,15 +8,12 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
-    @IBOutlet weak var shoppingCollectionView: UICollectionView!
-    var productCollectionView: ProductCollcetionView = ProductCollcetionView()
+    @IBOutlet var shoppingCollectionView: UICollectionView!
+    var productCollectionView = ProductCollcetionView()
     override func viewDidLoad() {
         super.viewDidLoad()
         productCollectionView.calculateSize(width: nil)
         shoppingCollectionView.delegate = productCollectionView
         shoppingCollectionView.dataSource = productCollectionView
     }
-
-
 }

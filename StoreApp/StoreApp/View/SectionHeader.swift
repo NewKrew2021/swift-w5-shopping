@@ -8,8 +8,8 @@
 import UIKit
 
 class SectionHeader: UICollectionViewCell {
-    @IBOutlet weak var title: UILabel!
-    
+    @IBOutlet var title: UILabel!
+
     func setTitle(title: String) {
         self.title.text = title
     }

@@ -49,7 +49,7 @@ extension ProductCollcetionView: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
         cell.backgroundColor = .brown
-        
+
         guard let productCell = cell as? ProductCell else { return cell }
         let product = Product(imageUrl: "vod01", title: "title", price: 00, participant: 00)
         productCell.setCell(product: product)

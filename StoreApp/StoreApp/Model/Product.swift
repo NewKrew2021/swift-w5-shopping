@@ -10,9 +10,10 @@ import UIKit
 
 struct Product {
     var imageUrl: String
-    var image: UIImage?{
+    var image: UIImage? {
         return UIImage(named: imageUrl)
     }
+
     var title: String?
     private var _price: Int
     var price: String {
@@ -23,11 +24,11 @@ struct Product {
     var participant: String {
         return "현재 참여중"
     }
-    
+
     init(imageUrl: String, title: String, price: Int, participant: Int) {
         self.imageUrl = imageUrl
         self.title = title
-        self._price = price
-        self._participant = participant
+        _price = price
+        _participant = participant
     }
 }
