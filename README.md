@@ -14,5 +14,6 @@
 6. autolayout 작업중~
 
 <결과 화면>
+
 <img width="300"  src="https://user-images.githubusercontent.com/59315024/106462255-2ff1f900-64d9-11eb-9e5d-fd466e840769.png">
 
