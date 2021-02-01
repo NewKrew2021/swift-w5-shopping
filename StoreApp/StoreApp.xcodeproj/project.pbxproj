@@ -15,6 +15,8 @@
 		3271AF3725C7AE9600682D17 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3271AF3525C7AE9600682D17 /* LaunchScreen.storyboard */; };
 		3271AF4225C7AE9600682D17 /* StoreAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3271AF4125C7AE9600682D17 /* StoreAppTests.swift */; };
 		3271AF4D25C7AE9700682D17 /* StoreAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3271AF4C25C7AE9700682D17 /* StoreAppUITests.swift */; };
+		3271AF6425C7BEDE00682D17 /* ShoppingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3271AF6225C7BEDE00682D17 /* ShoppingCollectionViewCell.swift */; };
+		3271AF6525C7BEDE00682D17 /* ShoppingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3271AF6325C7BEDE00682D17 /* ShoppingCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		3271AF4825C7AE9700682D17 /* StoreAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StoreAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3271AF4C25C7AE9700682D17 /* StoreAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreAppUITests.swift; sourceTree = "<group>"; };
 		3271AF4E25C7AE9700682D17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3271AF6225C7BEDE00682D17 /* ShoppingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCollectionViewCell.swift; sourceTree = "<group>"; };
+		3271AF6325C7BEDE00682D17 /* ShoppingCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShoppingCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,9 +103,10 @@
 		3271AF2925C7AE9600682D17 /* StoreApp */ = {
 			isa = PBXGroup;
 			children = (
+				3271AF5E25C7BB4800682D17 /* View */,
+				3271AF5D25C7BB3C00682D17 /* Controller */,
 				3271AF2A25C7AE9600682D17 /* AppDelegate.swift */,
 				3271AF2C25C7AE9600682D17 /* SceneDelegate.swift */,
-				3271AF2E25C7AE9600682D17 /* ViewController.swift */,
 				3271AF3025C7AE9600682D17 /* Main.storyboard */,
 				3271AF3325C7AE9600682D17 /* Assets.xcassets */,
 				3271AF3525C7AE9600682D17 /* LaunchScreen.storyboard */,
@@ -126,6 +131,23 @@
 				3271AF4E25C7AE9700682D17 /* Info.plist */,
 			);
 			path = StoreAppUITests;
+			sourceTree = "<group>";
+		};
+		3271AF5D25C7BB3C00682D17 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3271AF2E25C7AE9600682D17 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		3271AF5E25C7BB4800682D17 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3271AF6225C7BEDE00682D17 /* ShoppingCollectionViewCell.swift */,
+				3271AF6325C7BEDE00682D17 /* ShoppingCollectionViewCell.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +255,7 @@
 			files = (
 				3271AF3725C7AE9600682D17 /* LaunchScreen.storyboard in Resources */,
 				3271AF3425C7AE9600682D17 /* Assets.xcassets in Resources */,
+				3271AF6525C7BEDE00682D17 /* ShoppingCollectionViewCell.xib in Resources */,
 				3271AF3225C7AE9600682D17 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,6 +281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3271AF6425C7BEDE00682D17 /* ShoppingCollectionViewCell.swift in Sources */,
 				3271AF2F25C7AE9600682D17 /* ViewController.swift in Sources */,
 				3271AF2B25C7AE9600682D17 /* AppDelegate.swift in Sources */,
 				3271AF2D25C7AE9600682D17 /* SceneDelegate.swift in Sources */,
