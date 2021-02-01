@@ -26,6 +26,12 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadItems(notification:)), name: NSNotification.Name("reloadItem"), object: nil)
         
         initNavigationBar()
+        
+        let width = (view.frame.size.width - 20) / 10
+        let layout = myShoppingCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
+        layout?.itemSize = CGSize(width: width, height: width)
+        
+        layout?.sectionHeadersPinToVisibleBounds = true
     }
     
     @objc func reloadItems(notification: Notification) {
@@ -36,7 +42,6 @@ class ViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.topItem?.title = "카카오 쇼핑"
     }
-    
 }
 
 extension ViewController : UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -58,4 +63,19 @@ extension ViewController : UICollectionViewDataSource, UICollectionViewDelegate,
         return CGSize(width: cellwidth, height: cellheight)
     }
     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+            case UICollectionView.elementKindSectionHeader:
+                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "reuseView", for: indexPath) as! myCollectionReusableView
+                headerView.setHeader(indexPath: indexPath)
+                return headerView
+            default:
+                return UICollectionReusableView()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let width: CGFloat = collectionView.frame.width
+        let height: CGFloat = 20
+        return CGSize(width: width, height: height) }
 }
