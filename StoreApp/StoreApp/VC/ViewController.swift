@@ -23,7 +23,6 @@ class ViewController: UIViewController {
         myShoppingCollectionView.delegate = self
         myShoppingCollectionView.dataSource = self
         
-        myShoppingCollectionView.register(myCollectionViewCell.self, forCellWithReuseIdentifier: "myCollectionViewCell")
         NotificationCenter.default.addObserver(self, selector: #selector(reloadItems(notification:)), name: NSNotification.Name("reloadItem"), object: nil)
     }
     
