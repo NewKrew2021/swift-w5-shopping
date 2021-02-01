@@ -10,9 +10,12 @@ import UIKit
 class ViewController: UIViewController {
     
     let collectionView: UICollectionView = {
-        let view = UICollectionView.init(frame: .init(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: UICollectionViewFlowLayout())
-        view.register(UINib(nibName: "ShoppingCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "shoppingCollectionViewCell")
+        let layout = UICollectionViewFlowLayout()
+//        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        let view = UICollectionView.init(frame: .init(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: layout)
+        view.register(UINib(nibName: "ShoppingCollectionViewCell", bundle: .main), forCellWithReuseIdentifier: "ShoppingCollectionViewCell")
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .gray
         return view
     }()
 
@@ -33,14 +36,21 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource {
+extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return 1
-        }
+        return 5
+    }
 
-        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "shoppingCollectionViewCell", for: indexPath)
-
-            return cell
-        }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShoppingCollectionViewCell", for: indexPath) as! ShoppingCollectionViewCell
+        
+        cell.backgroundColor = .green
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = self.collectionView.frame.size.width
+        return CGSize(width: width, height: width)
+    }
 }
