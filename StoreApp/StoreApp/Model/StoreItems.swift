@@ -21,7 +21,7 @@ class StoreItems {
     var allItems : [[Item]] = [[]]
     
     var count : Int {
-        return allItems.count
+        return allItems.count - 1
     }
     
     subscript(index : Int) -> [Item] {
@@ -37,8 +37,11 @@ class StoreItems {
                     do {
                         if let decodeData = try? JSONDecoder().decode([Item].self, from : data){
                             self.allItems.append(decodeData)
+                            NotificationCenter.default.post(name: NSNotification.Name("reloadItem"), object: self, userInfo: nil)
                         }
-                    } catch {}
+                    } catch {
+//                        print(error)
+                    }
                 }
             }.resume()
         }
