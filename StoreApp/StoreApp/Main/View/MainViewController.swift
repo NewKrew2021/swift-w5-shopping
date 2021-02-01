@@ -7,18 +7,32 @@
 
 import UIKit
 
-// MARK: - ViewController
+// MARK: - MainViewController
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
     // MARK: Internal
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setCollectionView()
+        addObserver()
+        Request.shared.requestItem(type: "best")
+    }
+
+    @objc func didReceiveItemsNotification(_ noti: Notification) {
+        guard let items: [Item] = noti.userInfo?["Items"] as? [Item] else {
+            return
+        }
+
+        viewModel.items = items
+        DispatchQueue.main.async{
+            self.collectionView.reloadData()
+        }
     }
 
     // MARK: Private
 
+    private let viewModel = MainViewModel()
     private let key_itemCell = "ItemCollectionViewCell"
     private let key_header = "ItemHeaderView"
     private let request = Request.shared
@@ -31,9 +45,13 @@ class ViewController: UIViewController {
 
         return cv
     }()
+
+    private func addObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveItemsNotification(_:)), name: DidReceiveItemsNotification, object: nil)
+    }
 }
 
-extension ViewController {
+extension MainViewController {
     private func setCollectionView() {
         view.addSubview(collectionView)
         collectionView.register(UINib(nibName: key_itemCell, bundle: nil), forCellWithReuseIdentifier: key_itemCell)
@@ -50,9 +68,9 @@ extension ViewController {
 
 // MARK: UICollectionViewDelegate, UICollectionViewDataSource
 
-extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return section == 2 ? viewModel.items.count : 4
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -62,7 +80,35 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: key_itemCell, for: indexPath) as? ItemCollectionViewCell else { return UICollectionViewCell() }
 
-        cell.updateUI(img: UIImage(systemName: "heart.fill") ?? UIImage(), title: "타이틀", talkDealPrice: 10000, price: 10000, numberOfParticipant: 100)
+        switch ItemType(rawValue: indexPath.section) {
+        case .best:
+            print("best")
+            cell.updateUI(img: UIImage(systemName: "heart.fill") ?? UIImage(), title: "타이틀", talkDealPrice: 10000, price: 10000, numberOfParticipant: 100)
+        case .mask:
+            print("mask")
+            cell.updateUI(img: UIImage(systemName: "heart.fill") ?? UIImage(), title: "타이틀", talkDealPrice: 10000, price: 10000, numberOfParticipant: 100)
+        case .grocery:
+            print("grocery")
+
+            let data = viewModel.items[indexPath.item]
+            DispatchQueue.global().async {
+                guard let image = URL(string: data.imageUrl) else { return }
+                guard let imageData = try? Data(contentsOf: image) else { return }
+
+                DispatchQueue.main.async {
+                    cell.updateUI(img: UIImage(data: imageData)!,
+                                  title: data.name,
+                                  talkDealPrice: data.price ?? 0,
+                                  price: data.originalPrice,
+                                  numberOfParticipant: data.numberOfParticipant ?? 0)
+                }
+            }
+
+        case .fryingpan:
+            cell.updateUI(img: UIImage(systemName: "heart.fill") ?? UIImage(), title: "타이틀", talkDealPrice: 10000, price: 10000, numberOfParticipant: 100)
+        case .none:
+            print("??")
+        }
 
         return cell
     }
@@ -80,7 +126,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 
 // MARK: UICollectionViewDelegateFlowLayout
 
-extension ViewController: UICollectionViewDelegateFlowLayout {
+extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width * 0.7
         let height = width * 10 / 7

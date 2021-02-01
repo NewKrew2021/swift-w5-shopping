@@ -7,12 +7,6 @@
 
 import Foundation
 
-// MARK: - Items
-
-struct Items: Codable {
-    var items: [Item]
-}
-
 // MARK: - Item
 
 struct Item: Codable {
@@ -20,12 +14,13 @@ struct Item: Codable {
         case id = "productId"
         case name = "productName"
         case imageUrl = "productImage"
-        case originalPrice = "originalPrice"
+        case originalPrice
         case price = "groupDiscountedPrice"
         case numberOfParticipant = "groupDiscountUserCount"
-        case storeId = "storeId"
-        case storeName = "storeName"
+        case storeId
+        case storeName
     }
+
     var id: Int
     var name: String
     var imageUrl: String
@@ -35,15 +30,3 @@ struct Item: Codable {
     var storeId: Int
     var storeName: String
 }
-
-// MARK: - Product
-
-struct Product: Codable {}
-
-// MARK: - Group
-
-struct Group: Codable {}
-
-// MARK: - Store
-
-struct Store: Codable {}

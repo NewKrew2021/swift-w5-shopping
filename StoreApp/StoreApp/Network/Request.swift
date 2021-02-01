@@ -7,6 +7,10 @@
 
 import Foundation
 
+let DidReceiveItemsNotification = Notification.Name("DidReceiveFriends")
+
+// MARK: - Request
+
 class Request {
     // MARK: Internal
 
@@ -23,19 +27,17 @@ class Request {
             }
 
             guard let data = data else { return }
-            print(data)
 
             do {
-                let itemData = try JSONDecoder().decode([Item].self, from: data)
-                print(itemData)
-            }
-            catch DecodingError.keyNotFound(let key, let context) {
+                let items = try JSONDecoder().decode([Item].self, from: data)
+                NotificationCenter.default.post(name: DidReceiveItemsNotification, object: nil, userInfo: ["Items": items])
+            } catch let DecodingError.keyNotFound(key, context) {
                 Swift.print("could not find key \(key) in JSON: \(context.debugDescription)")
-            } catch DecodingError.valueNotFound(let type, let context) {
+            } catch let DecodingError.valueNotFound(type, context) {
                 Swift.print("could not find type \(type) in JSON: \(context.debugDescription)")
-            } catch DecodingError.typeMismatch(let type, let context) {
+            } catch let DecodingError.typeMismatch(type, context) {
                 Swift.print("type mismatch for type \(type) in JSON: \(context.debugDescription)")
-            } catch DecodingError.dataCorrupted(let context) {
+            } catch let DecodingError.dataCorrupted(context) {
                 Swift.print("data found to be corrupted in JSON: \(context.debugDescription)")
             } catch let error as NSError {
                 NSLog("Error in read(from:ofType:) domain= \(error.domain), description= \(error.localizedDescription)")
