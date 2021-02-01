@@ -21,6 +21,7 @@ class ViewController: UIViewController {
 
     private let key_itemCell = "ItemCollectionViewCell"
     private let key_header = "ItemHeaderView"
+    private let request = Request.shared
 
     private var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -65,7 +66,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 
         return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
@@ -89,8 +90,8 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let width = collectionView.frame.width
-        let height = CGFloat(20)
-        
+        let height = CGFloat(40)
+
         return CGSize(width: width, height: height)
     }
 }
