@@ -5,6 +5,7 @@
 //  Created by 지현우 on 2021/02/01.
 //
 
+import Toaster
 import UIKit
 
 // MARK: - MainViewController
@@ -78,9 +79,21 @@ extension MainViewController {
     }
 }
 
-// MARK: UICollectionViewDelegate, UICollectionViewDataSource
+// MARK: UICollectionViewDelegate
 
-extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+//
+extension MainViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = viewModel[indexPath.section, indexPath.item]
+        let name = item.name
+        guard let price = item.price else { return }
+        Toast(text: "상품명 : \(name)\n가격 : \(price)원", delay: 0, duration: 1.0).show()
+    }
+}
+
+// MARK: UICollectionViewDataSource
+
+extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.items.count
     }
@@ -119,8 +132,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
         return cell
     }
-
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {}
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {

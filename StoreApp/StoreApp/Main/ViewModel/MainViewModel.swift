@@ -14,4 +14,8 @@ class MainViewModel {
         self.items.append(items)
     }
     
+    subscript(section: Int, item: Int) -> Item{
+        items[section][item]
+    }
+    
 }
