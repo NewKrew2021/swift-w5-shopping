@@ -61,6 +61,8 @@ class MainViewController: UIViewController {
     }
 }
 
+// MARK: MainViewController UI
+
 extension MainViewController {
     private func setCollectionView() {
         view.addSubview(collectionView)
@@ -80,11 +82,11 @@ extension MainViewController {
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 2 ? viewModel.items.count : 4
+        return viewModel.items.count
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 4
+        return viewModel.items.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -94,7 +96,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         if let cacheImage = imageCache.object(forKey: data.imageUrl as NSString) {
             cell.updateImage(img: cacheImage)
             cell.updateUI(title: data.name, talkDealPrice: data.price ?? 0, price: data.originalPrice, numberOfParticipant: data.numberOfParticipant ?? 0)
-            
+
         } else {
             // 캐시된 이미지가 없음
             DispatchQueue.global().async { [weak self] in
@@ -123,7 +125,8 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: key_header, for: indexPath)
+            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: key_header, for: indexPath) as? ItemHeaderView else { return UICollectionReusableView() }
+            header.sectionTitleLabel.text = ItemType(rawValue: indexPath.section)?.getString()
             return header
         default:
             assert(false, "Should implement another case")

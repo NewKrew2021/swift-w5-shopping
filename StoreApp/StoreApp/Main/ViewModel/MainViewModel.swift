@@ -13,4 +13,5 @@ class MainViewModel {
     func addItems(items: [Item]) {
         self.items.append(items)
     }
+    
 }
