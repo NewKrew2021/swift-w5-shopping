@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import Toaster
 
 class ViewController: UIViewController {
     
     @IBOutlet weak var myShoppingCollectionView: UICollectionView!
     
     private var cellwidth = UIScreen.main.bounds.width
-    private var cellheight = UIScreen.main.bounds.height/2
+    private var cellheight = UIScreen.main.bounds.height/3
     var item = StoreItems()
     
     override func viewDidLoad() {
@@ -27,10 +28,7 @@ class ViewController: UIViewController {
         
         initNavigationBar()
         
-        let width = (view.frame.size.width - 20) / 10
         let layout = myShoppingCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
-        layout?.itemSize = CGSize(width: width, height: width)
-        
         layout?.sectionHeadersPinToVisibleBounds = true
     }
     
@@ -46,11 +44,11 @@ class ViewController: UIViewController {
 
 extension ViewController : UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return item[section].count
+        return item.allItems[JsonFileName.jsonFileName[section]]!.count
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return item.allItems.count-1
+        return item.allItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -60,7 +58,7 @@ extension ViewController : UICollectionViewDataSource, UICollectionViewDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: cellwidth, height: cellheight)
+        return CGSize(width: cellwidth*0.7, height: cellwidth*0.8)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -77,5 +75,30 @@ extension ViewController : UICollectionViewDataSource, UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let width: CGFloat = collectionView.frame.width
         let height: CGFloat = 20
-        return CGSize(width: width, height: height) }
+        return CGSize(width: width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath)
+        let title = item.allItems[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].productName
+        var price : String = ""
+        if let dc = item.allItems[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].groupDiscountedPrice {
+           price = String(dc) + "원"
+        }
+        if let dc = item.allItems[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].originalPrice{
+            price = String(dc) + "원"
+        }
+        
+        let toast = Toast(text: item.allItems[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].productName + "\n" + price)
+        ToastView.appearance().font = UIFont.systemFont(ofSize: 13, weight: .bold)
+        toast.show()
+    }
+    
 }
