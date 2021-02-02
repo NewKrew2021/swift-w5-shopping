@@ -35,7 +35,7 @@ extension MainViewController: NetworkHandlerDelegate {
         }
 
         DispatchQueue.main.async {
-            self.shoppingCollectionView.reloadData()
+            self.shoppingCollectionView.reloadSections(IndexSet(integer: productType.rawValue))
         }
     }
 }
