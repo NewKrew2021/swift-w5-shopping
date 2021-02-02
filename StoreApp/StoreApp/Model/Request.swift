@@ -21,7 +21,9 @@ struct Request {
                 }
                 return
             }
-            json.parsing(jsonData: data ?? Data())
+            DispatchQueue.main.async {
+                json.parsing(jsonData: data ?? Data())
+            }
         }.resume()
     }
 }

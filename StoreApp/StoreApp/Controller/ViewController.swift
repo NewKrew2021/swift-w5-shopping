@@ -45,8 +45,7 @@ class ViewController: UIViewController {
     
     @objc func completedJsonParsing(_ notification:Notification) {
         self.products = notification.userInfo?["products"] as! [Product]
-        print(products)
-//        collectionView.reloadData()
+        collectionView.reloadData()
     }
 }
 
@@ -58,7 +57,7 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShoppingCollectionViewCell", for: indexPath) as! ShoppingCollectionViewCell
         
-        cell.backgroundColor = .green
+        cell.setViewData(productName: products[indexPath.row].productName, productImage: products[indexPath.row].productImage, groupDiscountedPrice: products[indexPath.row].groupDiscountedPrice ?? 0, originalPrice: products[indexPath.row].originalPrice, groupDiscountUserCount: products[indexPath.row].groupDiscountUserCount ?? 0)
         
         return cell
     }
