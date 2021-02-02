@@ -37,6 +37,8 @@ class myCollectionReusableView: UICollectionReusableView {
     
     func setHeader(indexPath: IndexPath){
         switch indexPath[0] {
+        case 0 :
+            self.header.text = "best"
         case 1 :
             self.header.text = "mask"
         case 2 :
