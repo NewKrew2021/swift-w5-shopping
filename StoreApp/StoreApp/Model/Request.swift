@@ -9,7 +9,8 @@ import Foundation
 
 struct Request {
     
-    let baseUrl = "http://public.codesquad.kr/jk/kakao-2021/"
+    private let baseUrl = "http://public.codesquad.kr/jk/kakao-2021/"
+    private let json = Json()
     
     func request(productType: ProductType) {
         let url = "\(baseUrl)\(productType)"
@@ -20,9 +21,7 @@ struct Request {
                 }
                 return
             }
-            
-            let resultHTML = String(data: data!, encoding: String.Encoding.utf8)
-            print(resultHTML ?? "????")
+            json.parsing(jsonData: data ?? Data())
         }.resume()
     }
 }

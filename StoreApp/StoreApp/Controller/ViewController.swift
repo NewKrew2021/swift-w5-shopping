@@ -10,6 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     
     private let request = Request()
+    private var products = [Product]()
     
     private let collectionView: UICollectionView = {
         let view = UICollectionView.init(frame: .init(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: UICollectionViewFlowLayout())
@@ -21,6 +22,11 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self,
+                    selector: #selector(completedJsonParsing),
+                    name: NSNotification.Name(rawValue: "jsonParsing"),
+                    object: nil)
         
         addCollectionView()
         collectionView.delegate = self
@@ -36,11 +42,17 @@ class ViewController: UIViewController {
         self.collectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         self.collectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
     }
+    
+    @objc func completedJsonParsing(_ notification:Notification) {
+        self.products = notification.userInfo?["products"] as! [Product]
+        print(products)
+//        collectionView.reloadData()
+    }
 }
 
 extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return self.products.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

@@ -15,11 +15,11 @@ struct Product : Codable {
     let discountPrice : Int
     let discountedPrice : Int
     let discountRate : Int
-    let groupDiscountedPrice : Int
-    let groupDiscountWillClosed : Bool
-    let groupDiscountUserCount : Int
+    let groupDiscountedPrice : Int?
+    let groupDiscountWillClosed : Bool?
+    let groupDiscountUserCount : Int?
     let alarm : Bool
-    let groupDiscountRemainSeconds : Int
+    let groupDiscountRemainSeconds : Int?
     let storeId : Int
     let storeName : String
     let storeDomain : String
