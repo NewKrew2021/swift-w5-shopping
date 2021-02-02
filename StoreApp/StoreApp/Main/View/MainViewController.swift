@@ -149,8 +149,8 @@ extension MainViewController: UICollectionViewDataSource {
 
 extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.frame.width * 0.7
-        let height = width * 10 / 7
+        let width = collectionView.frame.width * 0.8
+        let height = width * 10 / 8
 
         return CGSize(width: width, height: height)
     }
