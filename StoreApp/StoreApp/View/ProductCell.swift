@@ -14,7 +14,7 @@ class ProductCell: UICollectionViewCell {
     @IBOutlet var participant: UILabel!
 
     func setCell(product: Product) {
-        image.image = product.image
+        image.load(url: product.productImage)
         title.text = product.title
         price.text = product.price
         participant.text = product.participant

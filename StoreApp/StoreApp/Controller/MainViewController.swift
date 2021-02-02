@@ -10,12 +10,32 @@ import UIKit
 class MainViewController: UIViewController {
     @IBOutlet var shoppingCollectionView: UICollectionView!
     var productCollectionView = ProductCollcetionView()
+    private let productManager = ProductManager.instance
+
     override func viewDidLoad() {
         super.viewDidLoad()
         productCollectionView.calculateSize(width: nil)
+        productCollectionView.productManager = productManager
         shoppingCollectionView.delegate = productCollectionView
         shoppingCollectionView.dataSource = productCollectionView
 
-        NetworkHandler.getData(productType: .Best)
+        NetworkHandler.delegate = self
+        for type in ProductType.allCases {
+            DispatchQueue.global().async {
+                NetworkHandler.getData(productType: type)
+            }
+        }
+    }
+}
+
+extension MainViewController: NetworkHandlerDelegate {
+    func saveProducts(productType: ProductType, products: [Product]) {
+        DispatchQueue.main.async {
+            self.productManager.setProducts(productType: productType, products: products)
+        }
+
+        DispatchQueue.main.async {
+            self.shoppingCollectionView.reloadData()
+        }
     }
 }

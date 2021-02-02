@@ -9,6 +9,7 @@ import UIKit
 
 class ProductCollcetionView: NSObject {
     var cellSize = CGSize()
+    var productManager: ProductManager?
 
     func calculateSize(width: CGFloat?) {
         var width = (width ?? UIScreen.main.bounds.width) * 0.8
@@ -34,24 +35,25 @@ class ProductCollcetionView: NSObject {
 }
 
 extension ProductCollcetionView: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
-        return 8
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 4
+    }
+    
+    func collectionView(_: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return productManager?.getCount(productType: ProductType(rawValue: section) ?? .Best) ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind _: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header", for: indexPath)
         guard let header = headerView as? SectionHeader else { return headerView }
-        header.backgroundColor = .blue
-        header.setTitle(title: "베스트")
+        let title = ["베스트", "마스크", "식료품", "프라이팬"]
+        header.setTitle(title: title[indexPath.section])
         return header
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-        cell.backgroundColor = .brown
-
-        guard let productCell = cell as? ProductCell else { return cell }
-        let product = Product(imageUrl: "vod01", title: "title", price: 00, participant: 00)
+        guard let productCell = cell as? ProductCell, let product = productManager?.getProduct(productType: ProductType(rawValue: indexPath.section) ?? .Best, at: indexPath.item) else { return cell }
         productCell.setCell(product: product)
         return productCell
     }
