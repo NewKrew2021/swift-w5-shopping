@@ -15,8 +15,4 @@ class StoreItems {
     var grocerys = [StoreItem]()
     var fryingpans = [StoreItem]()
     
-    init() {
-        var network = Network()
-    }
-    
 }
