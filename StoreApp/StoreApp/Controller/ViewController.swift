@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toaster
 
 class ViewController: UIViewController {
     
@@ -48,7 +49,7 @@ class ViewController: UIViewController {
     
     @objc func completedJsonParsing(_ notification:Notification) {
         self.products[(notification.userInfo?["productType"] as! ProductType).rawValue] = notification.userInfo?["products"] as! [Product]
-        collectionView.reloadData()
+        self.collectionView.reloadData()
     }
 }
 
@@ -60,7 +61,7 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShoppingCollectionViewCell", for: indexPath) as! ShoppingCollectionViewCell
         
-        cell.setViewData(productName: products[indexPath.section][indexPath.row].productName, productImage: products[indexPath.section][indexPath.row].productImage, groupDiscountedPrice: products[indexPath.section][indexPath.row].groupDiscountedPrice ?? -1, originalPrice: products[indexPath.section][indexPath.row].originalPrice, groupDiscountUserCount: products[indexPath.section][indexPath.row].groupDiscountUserCount ?? -1)
+        cell.setViewData(productName: products[indexPath.section][indexPath.row].productName, productImage: self.products[indexPath.section][indexPath.row].productImage, groupDiscountedPrice: self.products[indexPath.section][indexPath.row].groupDiscountedPrice ?? -1, originalPrice: self.products[indexPath.section][indexPath.row].originalPrice, groupDiscountUserCount: self.products[indexPath.section][indexPath.row].groupDiscountUserCount ?? -1)
         
         return cell
     }
@@ -88,5 +89,11 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let width: CGFloat = collectionView.frame.width
         return CGSize(width: width, height: 30)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let product = products[indexPath.section][indexPath.row]
+        let toast = Toast(text: "\(product.productName) \(product.groupDiscountedPrice ?? product.originalPrice)원")
+        toast.show()
     }
 }
