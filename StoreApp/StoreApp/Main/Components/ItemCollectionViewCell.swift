@@ -8,24 +8,34 @@
 import UIKit
 
 class ItemCollectionViewCell: UICollectionViewCell {
+    @IBOutlet var imgView: UIImageView!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var talkDealPriceLabel: UILabel!
+    @IBOutlet var priceLabel: UILabel!
+    @IBOutlet var participantOfDealLabel: UILabel!
 
-    @IBOutlet weak var imgView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var talkDealPriceLabel: UILabel!
-    @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var participantOfDealLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         imgView.sizeToFit()
-        self.backgroundColor = .white
+        backgroundColor = .white
     }
     
-    func updateUI(img: UIImage, title: String, talkDealPrice: Int, price: Int, numberOfParticipant: Int){
+    func updateImage(img: UIImage) {
         imgView.image = img
-        titleLabel.text = title
-        talkDealPriceLabel.text = "톡딜가 \(talkDealPrice)원"
-        priceLabel.text = "\(price)원"
-        participantOfDealLabel.text = "현재 \(numberOfParticipant)명 딜 참여중"
     }
 
+    func updateUI(title: String, talkDealPrice: Int?, price: Int, numberOfParticipant: Int?) {
+        titleLabel.text = title
+        priceLabel.text = "\(price)원"
+        if let talkDealPrice = talkDealPrice {
+            talkDealPriceLabel.text = "톡딜가 \(talkDealPrice)원"
+        } else {
+            talkDealPriceLabel.text = ""
+        }
+        if let numberOfParticipant = numberOfParticipant {
+            participantOfDealLabel.text = "현재 \(numberOfParticipant)명 딜 참여중"
+        } else {
+            participantOfDealLabel.text = ""
+        }
+    }
 }

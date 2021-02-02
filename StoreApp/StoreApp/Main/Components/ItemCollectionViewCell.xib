@@ -24,30 +24,33 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqd-hc-GPB">
-                        <rect key="frame" x="16.5" y="349" width="41.5" height="20.5"/>
+                        <rect key="frame" x="16.5" y="349" width="300" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="nVT-fX-ifs">
-                        <rect key="frame" x="16.5" y="377.5" width="97" height="20.5"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="214" translatesAutoresizingMaskIntoConstraints="NO" id="nVT-fX-ifs">
+                        <rect key="frame" x="16.5" y="377.5" width="300" height="20.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bse-Fp-6iL">
-                                <rect key="frame" x="0.0" y="0.0" width="41.5" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bse-Fp-6iL">
+                                <rect key="frame" x="0.0" y="0.0" width="44.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztj-mA-K5Q">
-                                <rect key="frame" x="55.5" y="0.0" width="41.5" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztj-mA-K5Q">
+                                <rect key="frame" x="258.5" y="0.0" width="41.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="ztj-mA-K5Q" firstAttribute="leading" secondItem="bse-Fp-6iL" secondAttribute="trailing" constant="10" id="sI6-eH-Snp"/>
+                        </constraints>
                     </stackView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2jh-AR-7zM">
-                        <rect key="frame" x="16.5" y="403" width="41.5" height="20.5"/>
+                        <rect key="frame" x="16.5" y="403" width="300" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -56,10 +59,13 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
+                <constraint firstItem="nVT-fX-ifs" firstAttribute="trailing" secondItem="cqd-hc-GPB" secondAttribute="trailing" id="0mW-qN-vWe"/>
                 <constraint firstItem="ZTg-uK-7eu" firstAttribute="top" secondItem="L3T-Mz-X9Z" secondAttribute="top" id="9UW-t1-hu7"/>
                 <constraint firstItem="L3T-Mz-X9Z" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="A9y-zJ-aId"/>
                 <constraint firstItem="cqd-hc-GPB" firstAttribute="top" secondItem="L3T-Mz-X9Z" secondAttribute="bottom" constant="5" id="Cke-S7-Pb4"/>
                 <constraint firstItem="nVT-fX-ifs" firstAttribute="leading" secondItem="cqd-hc-GPB" secondAttribute="leading" id="O1g-wM-shm"/>
+                <constraint firstItem="2jh-AR-7zM" firstAttribute="trailing" secondItem="cqd-hc-GPB" secondAttribute="trailing" id="WCH-uz-Hlv"/>
+                <constraint firstItem="cqd-hc-GPB" firstAttribute="trailing" secondItem="L3T-Mz-X9Z" secondAttribute="trailing" id="XE7-Wn-i38"/>
                 <constraint firstItem="2jh-AR-7zM" firstAttribute="top" secondItem="nVT-fX-ifs" secondAttribute="bottom" constant="5" id="cLh-Fz-LDX"/>
                 <constraint firstItem="nVT-fX-ifs" firstAttribute="top" secondItem="cqd-hc-GPB" secondAttribute="bottom" constant="8" id="fFm-8b-YHb"/>
                 <constraint firstItem="2jh-AR-7zM" firstAttribute="leading" secondItem="nVT-fX-ifs" secondAttribute="leading" id="l94-vg-Kkv"/>
