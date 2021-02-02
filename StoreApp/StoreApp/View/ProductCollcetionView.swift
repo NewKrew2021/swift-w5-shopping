@@ -16,7 +16,7 @@ class ProductCollcetionView: NSObject {
     }
 
     func calculateSize(width: CGFloat?) {
-        var width = (width ?? UIScreen.main.bounds.width) * 0.8
+        var width = (width ?? UIScreen.main.bounds.width) * 1
         var height: CGFloat
         if isPhone() {
             if UIDevice.current.orientation.isLandscape {
@@ -29,7 +29,7 @@ class ProductCollcetionView: NSObject {
                 width /= 2
             }
         }
-        height = width * 1.2
+        height = width * 1
         cellSize = CGSize(width: width, height: height)
     }
 

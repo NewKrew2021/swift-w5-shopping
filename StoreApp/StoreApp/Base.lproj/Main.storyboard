@@ -17,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KIh-d1-MV0">
-                                <rect key="frame" x="39" y="88" width="315.66666666666669" height="722"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KIh-d1-MV0">
+                                <rect key="frame" x="0.0" y="88" width="390" height="722"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="KWn-je-N2l">
                                     <size key="itemSize" width="390" height="361"/>
@@ -28,38 +28,38 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="ea6-kH-48H" customClass="ProductCell" customModule="StoreApp" customModuleProvider="target">
-                                        <rect key="frame" x="-37" y="50" width="390" height="361"/>
+                                        <rect key="frame" x="0.0" y="50" width="390" height="361"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="17d-hS-sEl">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="361"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Yim-sy-R6R">
-                                                    <rect key="frame" x="0.0" y="0.0" width="390" height="361"/>
+                                                    <rect key="frame" x="39" y="0.0" width="315.66666666666669" height="361"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vod01" translatesAutoresizingMaskIntoConstraints="NO" id="EKI-Ni-wLK">
-                                                            <rect key="frame" x="0.0" y="0.0" width="390" height="361"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="315.66666666666669" height="315.66666666666669"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="EKI-Ni-wLK" secondAttribute="height" multiplier="1:1" id="wya-zV-xc8"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="jcg-Rd-j0e">
-                                                            <rect key="frame" x="0.0" y="361" width="390" height="0.0"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="jcg-Rd-j0e">
+                                                            <rect key="frame" x="0.0" y="315.66666666666669" width="315.66666666666669" height="45.333333333333314"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Mp-Es-Ov7">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="390" height="0.0"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Mp-Es-Ov7">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="29.666666666666668" height="11.333333333333334"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="가격" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRG-zw-kOO">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="390" height="0.0"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="가격" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRG-zw-kOO">
+                                                                    <rect key="frame" x="0.0" y="11.333333333333314" width="24.333333333333332" height="17"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="딜 참여 인원" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xva-O0-rwz">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="390" height="0.0"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="딜 참여 인원" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xva-O0-rwz">
+                                                                    <rect key="frame" x="0.0" y="28.333333333333314" width="68.333333333333329" height="17"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -73,8 +73,8 @@
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="Yim-sy-R6R" secondAttribute="trailing" id="Fsb-CZ-quA"/>
-                                                <constraint firstItem="Yim-sy-R6R" firstAttribute="leading" secondItem="17d-hS-sEl" secondAttribute="leading" id="Zl3-RX-Suh"/>
+                                                <constraint firstAttribute="trailing" secondItem="Yim-sy-R6R" secondAttribute="trailing" multiplier="1.1" id="Fsb-CZ-quA"/>
+                                                <constraint firstItem="Yim-sy-R6R" firstAttribute="leading" secondItem="17d-hS-sEl" secondAttribute="trailing" multiplier="0.1" id="Zl3-RX-Suh"/>
                                                 <constraint firstItem="Yim-sy-R6R" firstAttribute="top" secondItem="17d-hS-sEl" secondAttribute="top" id="ep4-gT-9tg"/>
                                                 <constraint firstAttribute="bottom" secondItem="Yim-sy-R6R" secondAttribute="bottom" id="g3R-vD-YuN"/>
                                             </constraints>
@@ -89,11 +89,11 @@
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="header" id="z2u-9v-yeh" customClass="SectionHeader" customModule="StoreApp" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="315.66666666666669" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ehd-zY-l6X">
-                                            <rect key="frame" x="8" y="14.999999999999998" width="299.66666666666669" height="20.333333333333329"/>
+                                            <rect key="frame" x="8" y="14.999999999999998" width="374" height="20.333333333333329"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -116,8 +116,8 @@
                         <constraints>
                             <constraint firstItem="KIh-d1-MV0" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="CUj-L0-V1a"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="KIh-d1-MV0" secondAttribute="bottom" id="MOj-1f-2w0"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KIh-d1-MV0" secondAttribute="trailing" multiplier="1.1" id="Uf0-qr-NyG"/>
-                            <constraint firstItem="KIh-d1-MV0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="trailing" multiplier="0.1" id="x3P-YH-eox"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KIh-d1-MV0" secondAttribute="trailing" id="Uf0-qr-NyG"/>
+                            <constraint firstItem="KIh-d1-MV0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="x3P-YH-eox"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="카카오 쇼핑" id="rjn-Nd-se9"/>
