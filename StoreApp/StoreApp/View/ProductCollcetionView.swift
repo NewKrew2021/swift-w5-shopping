@@ -9,7 +9,11 @@ import UIKit
 
 class ProductCollcetionView: NSObject {
     var cellSize = CGSize()
-    var productManager: ProductManager?
+    var productManager: ProductManager
+
+    init(productManager: ProductManager) {
+        self.productManager = productManager
+    }
 
     func calculateSize(width: CGFloat?) {
         var width = (width ?? UIScreen.main.bounds.width) * 0.8
@@ -35,25 +39,26 @@ class ProductCollcetionView: NSObject {
 }
 
 extension ProductCollcetionView: UICollectionViewDelegate, UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in _: UICollectionView) -> Int {
         return 4
     }
-    
+
     func collectionView(_: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return productManager?.getCount(productType: ProductType(rawValue: section) ?? .Best) ?? 0
+        return productManager.getCount(productType: ProductType(rawValue: section) ?? .Best)
     }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind _: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header", for: indexPath)
         guard let header = headerView as? SectionHeader else { return headerView }
-        let title = ["베스트", "마스크", "식료품", "프라이팬"]
+        let title = ["베스트", "마스크", "잡화", "프라이팬"]
         header.setTitle(title: title[indexPath.section])
         return header
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-        guard let productCell = cell as? ProductCell, let product = productManager?.getProduct(productType: ProductType(rawValue: indexPath.section) ?? .Best, at: indexPath.item) else { return cell }
+        guard let productType = ProductType(rawValue: indexPath.section) else { return cell }
+        guard let productCell = cell as? ProductCell, let product = productManager.getProduct(productType: productType, at: indexPath.item) else { return cell }
         productCell.setCell(product: product)
         return productCell
     }

@@ -20,12 +20,12 @@ class ProductManager {
         print(self.products)
         self.products[productType] = products
     }
-    
+
     func getProduct(productType: ProductType, at: Int) -> Product? {
         guard let product = products[productType]?[at] else { return nil }
         return product
     }
-    
+
     func getCount(productType: ProductType) -> Int {
         return products[productType]?.count ?? 0
     }

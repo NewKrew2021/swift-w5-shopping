@@ -8,11 +8,9 @@
 import Foundation
 
 class NetworkHandler {
-
     private static let baseURL: String = "http://public.codesquad.kr/jk/kakao-2021"
-    private static let productURLs: [String] = ["/best.json","/mask.json","/grocery.json","/fryingpan.json"]
+    private static let productURLs: [String] = ["/best.json", "/mask.json", "/grocery.json", "/fryingpan.json"]
     static var delegate: NetworkHandlerDelegate?
-
 
     class func getData(productType: ProductType) {
         // 세션 생성, 환경설정
@@ -41,7 +39,6 @@ class NetworkHandler {
             let decoder = JsonDecoder()
             let products = decoder.parseData(data: data)
             delegate?.saveProducts(productType: productType, products: products)
-            // 원하는 작업
         }
         dataTask.resume()
     }
