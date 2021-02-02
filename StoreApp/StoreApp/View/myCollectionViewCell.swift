@@ -30,7 +30,9 @@ class myCollectionViewCell: UICollectionViewCell {
         initGroupDiscountedPrice()
         initOriginalPrice()
         initGroupDiscountUserCount()
-        
+        contentView.sizeToFit()
+        contentView.layer.borderColor = UIColor.red.cgColor
+        contentView.layer.borderWidth = 1
     }
     func initProductImage() {
         contentView.addSubview(productImage)
@@ -47,7 +49,7 @@ class myCollectionViewCell: UICollectionViewCell {
     
     func initProduntName() {
         contentView.addSubview(productName)
-        productName.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        productName.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         productName.preferredMaxLayoutWidth = frame.width
         productName.lineBreakMode = .byTruncatingTail
         productName.numberOfLines = 2
@@ -61,7 +63,7 @@ class myCollectionViewCell: UICollectionViewCell {
     
     func initGroupDiscountedPrice() {
         contentView.addSubview(groupDiscountedPrice)
-        groupDiscountedPrice.font = UIFont.systemFont(ofSize: 15)
+        groupDiscountedPrice.font = UIFont.systemFont(ofSize: 13)
         groupDiscountedPrice.translatesAutoresizingMaskIntoConstraints = false
         groupDiscountedPrice.topAnchor.constraint(equalTo: productName.bottomAnchor, constant: 1).isActive = true
         groupDiscountedPrice.leadingAnchor.constraint(equalTo: productName.leadingAnchor, constant: 1).isActive = true
@@ -70,7 +72,7 @@ class myCollectionViewCell: UICollectionViewCell {
     
     func initOriginalPrice() {
         contentView.addSubview(originalPrice)
-        originalPrice.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
+        originalPrice.font = UIFont.systemFont(ofSize: 13, weight: .ultraLight)
         originalPrice.translatesAutoresizingMaskIntoConstraints = false
         originalPrice.topAnchor.constraint(equalTo: groupDiscountedPrice.topAnchor, constant: 1).isActive = true
         originalPrice.leadingAnchor.constraint(equalTo: groupDiscountedPrice.trailingAnchor, constant: 1).isActive = true
@@ -79,7 +81,7 @@ class myCollectionViewCell: UICollectionViewCell {
     
     func initGroupDiscountUserCount() {
         contentView.addSubview(groupDiscountUserCount)
-        groupDiscountUserCount.font = UIFont.systemFont(ofSize: 15)
+        groupDiscountUserCount.font = UIFont.systemFont(ofSize: 13)
         groupDiscountUserCount.translatesAutoresizingMaskIntoConstraints = false
         groupDiscountUserCount.topAnchor.constraint(equalTo: groupDiscountedPrice.bottomAnchor, constant: 1).isActive = true
         groupDiscountUserCount.leadingAnchor.constraint(equalTo: productName.leadingAnchor, constant: 1).isActive = true
