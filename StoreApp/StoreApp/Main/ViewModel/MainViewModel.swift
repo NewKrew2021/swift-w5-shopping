@@ -7,8 +7,10 @@
 
 import Foundation
 
-class MainViewModel{
-    
-    var items: [Item] = []
-    
+class MainViewModel {
+    var items: [[Item]] = []
+
+    func addItems(items: [Item]) {
+        self.items.append(items)
+    }
 }

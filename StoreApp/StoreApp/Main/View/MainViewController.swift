@@ -16,21 +16,25 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         setCollectionView()
         addObserver()
-        Request.shared.requestItem(type: "best")
+        getItems()
     }
 
     @objc func didReceiveItemsNotification(_ noti: Notification) {
         guard let items: [Item] = noti.userInfo?["Items"] as? [Item] else {
             return
         }
+        print(items)
+        viewModel.addItems(items: items)
 
-        viewModel.items = items
-        DispatchQueue.main.async{
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.collectionView.reloadData()
         }
     }
 
     // MARK: Private
+
+    private let imageCache = NSCache<NSString, UIImage>()
 
     private let viewModel = MainViewModel()
     private let key_itemCell = "ItemCollectionViewCell"
@@ -45,6 +49,12 @@ class MainViewController: UIViewController {
 
         return cv
     }()
+
+    private func getItems() {
+        for type in ItemType.allCases {
+            Request.shared.requestItem(type: type.getString())
+        }
+    }
 
     private func addObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveItemsNotification(_:)), name: DidReceiveItemsNotification, object: nil)
@@ -80,38 +90,35 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: key_itemCell, for: indexPath) as? ItemCollectionViewCell else { return UICollectionViewCell() }
 
-        switch ItemType(rawValue: indexPath.section) {
-        case .best:
-            print("best")
-            cell.updateUI(img: UIImage(systemName: "heart.fill") ?? UIImage(), title: "타이틀", talkDealPrice: 10000, price: 10000, numberOfParticipant: 100)
-        case .mask:
-            print("mask")
-            cell.updateUI(img: UIImage(systemName: "heart.fill") ?? UIImage(), title: "타이틀", talkDealPrice: 10000, price: 10000, numberOfParticipant: 100)
-        case .grocery:
-            print("grocery")
-
-            let data = viewModel.items[indexPath.item]
-            DispatchQueue.global().async {
-                guard let image = URL(string: data.imageUrl) else { return }
-                guard let imageData = try? Data(contentsOf: image) else { return }
+        let data = viewModel.items[indexPath.section][indexPath.item]
+        if let cacheImage = imageCache.object(forKey: data.imageUrl as NSString) {
+            cell.updateImage(img: cacheImage)
+            cell.updateUI(title: data.name, talkDealPrice: data.price ?? 0, price: data.originalPrice, numberOfParticipant: data.numberOfParticipant ?? 0)
+            
+        } else {
+            // 캐시된 이미지가 없음
+            DispatchQueue.global().async { [weak self] in
+                guard let self = self else { return }
+                guard let imageUrl = URL(string: data.imageUrl) else { return }
+                guard let imageData = try? Data(contentsOf: imageUrl) else { return }
+                let image = UIImage(data: imageData) ?? UIImage()
+                self.imageCache.setObject(image, forKey: data.imageUrl as NSString)
 
                 DispatchQueue.main.async {
-                    cell.updateUI(img: UIImage(data: imageData)!,
-                                  title: data.name,
-                                  talkDealPrice: data.price ?? 0,
-                                  price: data.originalPrice,
-                                  numberOfParticipant: data.numberOfParticipant ?? 0)
+                    cell.updateImage(img: image)
+                    cell.updateUI(
+                        title: data.name,
+                        talkDealPrice: data.price ?? 0,
+                        price: data.originalPrice,
+                        numberOfParticipant: data.numberOfParticipant ?? 0)
                 }
             }
-
-        case .fryingpan:
-            cell.updateUI(img: UIImage(systemName: "heart.fill") ?? UIImage(), title: "타이틀", talkDealPrice: 10000, price: 10000, numberOfParticipant: 100)
-        case .none:
-            print("??")
         }
 
         return cell
     }
+
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {}
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
