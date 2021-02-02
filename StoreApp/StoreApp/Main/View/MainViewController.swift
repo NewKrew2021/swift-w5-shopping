@@ -17,14 +17,13 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         setCollectionView()
         addObserver()
-        getItems()
+        getItems(index: 0)
     }
 
     @objc func didReceiveItemsNotification(_ noti: Notification) {
         guard let items: [Item] = noti.userInfo?["Items"] as? [Item] else {
             return
         }
-        print(items)
         viewModel.addItems(items: items)
 
         DispatchQueue.main.async { [weak self] in
@@ -51,10 +50,10 @@ class MainViewController: UIViewController {
         return cv
     }()
 
-    private func getItems() {
-        for type in ItemType.allCases {
-            Request.shared.requestItem(type: type.getString())
-        }
+    private func getItems(index: Int) {
+        guard let type = ItemType(rawValue: index)?.getString() else {return}
+        Request.shared.requestItem(type: type)
+        viewModel.flags[index] = true
     }
 
     private func addObserver() {
@@ -95,7 +94,7 @@ extension MainViewController: UICollectionViewDelegate {
 
 extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.items.count
+        return viewModel.items[section].count
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -108,7 +107,10 @@ extension MainViewController: UICollectionViewDataSource {
         let data = viewModel.items[indexPath.section][indexPath.item]
         if let cacheImage = imageCache.object(forKey: data.imageUrl as NSString) {
             cell.updateImage(img: cacheImage)
-            cell.updateUI(title: data.name, talkDealPrice: data.price ?? 0, price: data.originalPrice, numberOfParticipant: data.numberOfParticipant ?? 0)
+            cell.updateUI(title: data.name,
+                          talkDealPrice: data.price,
+                          price: data.originalPrice,
+                          numberOfParticipant: data.numberOfParticipant)
 
         } else {
             // 캐시된 이미지가 없음
@@ -123,9 +125,9 @@ extension MainViewController: UICollectionViewDataSource {
                     cell.updateImage(img: image)
                     cell.updateUI(
                         title: data.name,
-                        talkDealPrice: data.price ?? 0,
+                        talkDealPrice: data.price,
                         price: data.originalPrice,
-                        numberOfParticipant: data.numberOfParticipant ?? 0)
+                        numberOfParticipant: data.numberOfParticipant)
                 }
             }
         }
@@ -160,5 +162,24 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
         let height = CGFloat(40)
 
         return CGSize(width: width, height: height)
+    }
+}
+
+extension MainViewController: UIScrollViewDelegate{
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        //컬렉션뷰 높이
+        let height = collectionView.frame.size.height
+        //컬렉션뷰 현재 Y
+        let offset_Y = collectionView.contentOffset.y
+        //현재높이 - Y
+        let distanceFromBottom = collectionView.contentSize.height - offset_Y
+        if distanceFromBottom < height{
+            for typeIndex in 0..<viewModel.flags.count{
+                if !viewModel.flags[typeIndex]{
+                    self.getItems(index: typeIndex)
+                    break;
+                }
+            }
+        }
     }
 }

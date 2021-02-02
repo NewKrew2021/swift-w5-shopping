@@ -10,12 +10,13 @@ import Foundation
 class MainViewModel {
     var items: [[Item]] = []
 
+    var flags: [Bool] = [false, false, false, false]
+
     func addItems(items: [Item]) {
         self.items.append(items)
     }
-    
-    subscript(section: Int, item: Int) -> Item{
+
+    subscript(section: Int, item: Int) -> Item {
         items[section][item]
     }
-    
 }

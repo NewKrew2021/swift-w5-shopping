@@ -19,15 +19,23 @@ class ItemCollectionViewCell: UICollectionViewCell {
         imgView.sizeToFit()
         backgroundColor = .white
     }
-
+    
     func updateImage(img: UIImage) {
         imgView.image = img
     }
 
-    func updateUI(title: String, talkDealPrice: Int, price: Int, numberOfParticipant: Int) {
+    func updateUI(title: String, talkDealPrice: Int?, price: Int, numberOfParticipant: Int?) {
         titleLabel.text = title
-        talkDealPriceLabel.text = "톡딜가 \(talkDealPrice)원"
         priceLabel.text = "\(price)원"
-        participantOfDealLabel.text = "현재 \(numberOfParticipant)명 딜 참여중"
+        if let talkDealPrice = talkDealPrice {
+            talkDealPriceLabel.text = "톡딜가 \(talkDealPrice)원"
+        } else {
+            talkDealPriceLabel.text = ""
+        }
+        if let numberOfParticipant = numberOfParticipant {
+            participantOfDealLabel.text = "현재 \(numberOfParticipant)명 딜 참여중"
+        } else {
+            participantOfDealLabel.text = ""
+        }
     }
 }
