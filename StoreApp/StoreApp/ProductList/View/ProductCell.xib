@@ -56,6 +56,10 @@
                 <constraint firstItem="0OT-a5-niM" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="fXC-7L-2Gp"/>
             </constraints>
             <size key="customSize" width="346" height="207"/>
+            <connections>
+                <outlet property="name" destination="pwp-8A-Lzg" id="19p-o9-xwQ"/>
+                <outlet property="thumbnail" destination="ziR-EZ-icE" id="Dsi-a8-fWu"/>
+            </connections>
             <point key="canvasLocation" x="-166.66666666666669" y="136.94196428571428"/>
         </collectionViewCell>
     </objects>

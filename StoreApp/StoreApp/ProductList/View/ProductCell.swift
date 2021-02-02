@@ -6,12 +6,34 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class ProductCell: UICollectionViewCell {
-
+    @IBOutlet var thumbnail: UIImageView!
+    @IBOutlet var name: UILabel!
+    private let disposeBag = DisposeBag()
+    private var productViewModel: ProductCellViewModel?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
+    func config(viewModel: ProductCellViewModel) {
+        productViewModel = viewModel
+        name.text = viewModel.productName
+        viewModel.productImage
+            .bind(to: thumbnail.rx.image)
+            .disposed(by: disposeBag)
+    }
+    
+    
 }

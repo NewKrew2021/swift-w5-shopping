@@ -1,16 +1,30 @@
 PODS:
+  - RxCocoa (6.0.0):
+    - RxRelay (= 6.0.0)
+    - RxSwift (= 6.0.0)
+  - RxRelay (6.0.0):
+    - RxSwift (= 6.0.0)
+  - RxSwift (6.0.0)
   - Toaster (2.3.0)
 
 DEPENDENCIES:
+  - RxCocoa (= 6.0.0)
+  - RxSwift (= 6.0.0)
   - Toaster
 
 SPEC REPOS:
   trunk:
+    - RxCocoa
+    - RxRelay
+    - RxSwift
     - Toaster
 
 SPEC CHECKSUMS:
+  RxCocoa: 3f79328fafa3645b34600f37c31e64c73ae3a80e
+  RxRelay: 8d593be109c06ea850df027351beba614b012ffb
+  RxSwift: c14e798c59b9f6e9a2df8fd235602e85cc044295
   Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: 272b69aba05a9a1e4115b4824d3eef637c7859f1
+PODFILE CHECKSUM: 50268507c8e26fdcb3eec4198ad5687f98b194ef
 
 COCOAPODS: 1.10.1

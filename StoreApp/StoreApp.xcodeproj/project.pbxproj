@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D48D39225C8F489008C6F7A /* ViewControllerBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D48D39125C8F489008C6F7A /* ViewControllerBinding.swift */; };
+		5D48D3A925C916C1008C6F7A /* ProductCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D48D3A825C916C1008C6F7A /* ProductCellViewModel.swift */; };
 		5D50EEA125C791ED0049034B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D50EEA025C791ED0049034B /* AppDelegate.swift */; };
 		5D50EEA325C791ED0049034B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D50EEA225C791ED0049034B /* SceneDelegate.swift */; };
 		5D50EEA525C791ED0049034B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D50EEA425C791ED0049034B /* ViewController.swift */; };
@@ -26,6 +28,8 @@
 
 /* Begin PBXFileReference section */
 		314528FE3C965C5A71080AC1 /* Pods-StoreApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreApp.release.xcconfig"; path = "Target Support Files/Pods-StoreApp/Pods-StoreApp.release.xcconfig"; sourceTree = "<group>"; };
+		5D48D39125C8F489008C6F7A /* ViewControllerBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerBinding.swift; sourceTree = "<group>"; };
+		5D48D3A825C916C1008C6F7A /* ProductCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellViewModel.swift; sourceTree = "<group>"; };
 		5D50EE9D25C791ED0049034B /* StoreApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StoreApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D50EEA025C791ED0049034B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5D50EEA225C791ED0049034B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +69,14 @@
 				314528FE3C965C5A71080AC1 /* Pods-StoreApp.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		5D48D3A725C916B9008C6F7A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5D48D3A825C916C1008C6F7A /* ProductCellViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		5D50EE9425C791ED0049034B = {
@@ -123,9 +135,11 @@
 		5DFAAC0625C8402500099D58 /* ProductList */ = {
 			isa = PBXGroup;
 			children = (
+				5D48D3A725C916B9008C6F7A /* ViewModel */,
 				5DFAAC0725C8403C00099D58 /* View */,
 				5D50EEA425C791ED0049034B /* ViewController.swift */,
 				5DFAAC0825C8404A00099D58 /* ProductController.swift */,
+				5D48D39125C8F489008C6F7A /* ViewControllerBinding.swift */,
 			);
 			path = ProductList;
 			sourceTree = "<group>";
@@ -287,8 +301,10 @@
 				5D50EEA125C791ED0049034B /* AppDelegate.swift in Sources */,
 				5DFAABFA25C7FEB600099D58 /* Network.swift in Sources */,
 				5DFAABF125C7F01400099D58 /* ProductCell.swift in Sources */,
+				5D48D39225C8F489008C6F7A /* ViewControllerBinding.swift in Sources */,
 				5D50EEA325C791ED0049034B /* SceneDelegate.swift in Sources */,
 				5D50EEAB25C791ED0049034B /* StoreApp.xcdatamodeld in Sources */,
+				5D48D3A925C916C1008C6F7A /* ProductCellViewModel.swift in Sources */,
 				5DFAAC0025C7FEF900099D58 /* ProductElement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
