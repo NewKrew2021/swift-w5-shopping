@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ProductType : Int, CustomStringConvertible {
+enum ProductType : Int, CustomStringConvertible, CaseIterable {
     case best, mask, grocery, fryingpan
     
     var description: String {

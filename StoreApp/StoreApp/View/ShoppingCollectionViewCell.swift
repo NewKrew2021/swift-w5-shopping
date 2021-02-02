@@ -32,9 +32,9 @@ class ShoppingCollectionViewCell: UICollectionViewCell {
             self.originalPriceLabel.text = "\(originalPrice)원"
         }
         if groupDiscountUserCount != -1 {
-            participationLabel.text = "현재 \(groupDiscountUserCount)명 딜 참여중"
+            self.participationLabel.text = "현재 \(groupDiscountUserCount)명 딜 참여중"
         } else {
-            participationLabel.text = ""
+            self.participationLabel.text = ""
         }
     }
 }
