@@ -8,11 +8,15 @@
 import Foundation
 
 class NetworkHandler {
-    class func getData(resource: String) {
+    private static let baseURL: String = "http://public.codesquad.kr/jk/kakao-2021"
+    private static let productURLs: [String] = ["/best.json", "/mask.json", "/grocery.json", "/fryingpan.json"]
+    static var delegate: NetworkHandlerDelegate?
+
+    class func getData(productType: ProductType) {
         // 세션 생성, 환경설정
         let defaultSession = URLSession(configuration: .default)
 
-        guard let url = URL(string: "\(resource)") else {
+        guard let url = URL(string: "\(baseURL)\(productURLs[productType.rawValue])") else {
             print("URL is nil")
             return
         }
@@ -33,8 +37,8 @@ class NetworkHandler {
             }
 
             let decoder = JsonDecoder()
-            let jsonArray = decoder.parseData(data: data)
-            // 원하는 작업
+            let products = decoder.parseData(data: data)
+            delegate?.saveProducts(productType: productType, products: products)
         }
         dataTask.resume()
     }

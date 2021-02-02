@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toaster
 
 class ProductCell: UICollectionViewCell {
     @IBOutlet var image: UIImageView!
@@ -14,9 +15,13 @@ class ProductCell: UICollectionViewCell {
     @IBOutlet var participant: UILabel!
 
     func setCell(product: Product) {
-        image.image = product.image
+        image.load(url: product.productImage)
         title.text = product.title
         price.text = product.price
         participant.text = product.participant
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        Toast.init(text: "상품명:\(title.text)" ).start()
     }
 }

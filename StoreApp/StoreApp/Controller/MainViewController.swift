@@ -9,15 +9,33 @@ import UIKit
 
 class MainViewController: UIViewController {
     @IBOutlet var shoppingCollectionView: UICollectionView!
-    var productCollectionView = ProductCollcetionView()
+    private let productManager = ProductManager.instance
+    lazy var productCollectionView = ProductCollcetionView(productManager: productManager)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         productCollectionView.calculateSize(width: nil)
+        productCollectionView.productManager = productManager
         shoppingCollectionView.delegate = productCollectionView
         shoppingCollectionView.dataSource = productCollectionView
 
-        let urls = ["http://public.codesquad.kr/jk/kakao-2021/best.json", "http://public.codesquad.kr/jk/kakao-2021/mask.json", "http://public.codesquad.kr/jk/kakao-2021/grocery.json", "http://public.codesquad.kr/jk/kakao-2021/flyingpan.json"]
+        NetworkHandler.delegate = self
+        for type in ProductType.allCases {
+            DispatchQueue.global().async {
+                NetworkHandler.getData(productType: type)
+            }
+        }
+    }
+}
 
-        NetworkHandler.getData(resource: urls[0])
+extension MainViewController: NetworkHandlerDelegate {
+    func saveProducts(productType: ProductType, products: [Product]) {
+        DispatchQueue.main.async {
+            self.productManager.setProducts(productType: productType, products: products)
+        }
+
+        DispatchQueue.main.async {
+            self.shoppingCollectionView.reloadSections(IndexSet(integer: productType.rawValue))
+        }
     }
 }
