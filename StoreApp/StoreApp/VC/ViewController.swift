@@ -19,17 +19,23 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let flowLayout = UICollectionViewFlowLayout()
-        myShoppingCollectionView.collectionViewLayout = flowLayout
+        
         myShoppingCollectionView.delegate = self
         myShoppingCollectionView.dataSource = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadItems(notification:)), name: NSNotification.Name("reloadItem"), object: nil)
         
+        setLayout()
         initNavigationBar()
+    }
+    
+    func setLayout(){
+        let flowLayout = UICollectionViewFlowLayout()
+        myShoppingCollectionView.collectionViewLayout = flowLayout
         
         let layout = myShoppingCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.sectionHeadersPinToVisibleBounds = true
+        
     }
     
     @objc func reloadItems(notification: Notification) {
@@ -63,12 +69,12 @@ extension ViewController : UICollectionViewDataSource, UICollectionViewDelegate,
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
-            case UICollectionView.elementKindSectionHeader:
-                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "reuseView", for: indexPath) as! myCollectionReusableView
-                headerView.setHeader(indexPath: indexPath)
-                return headerView
-            default:
-                return UICollectionReusableView()
+        case UICollectionView.elementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "reuseView", for: indexPath) as! myCollectionReusableView
+            headerView.setHeader(indexPath: indexPath)
+            return headerView
+        default:
+            return UICollectionReusableView()
         }
     }
     
@@ -81,16 +87,15 @@ extension ViewController : UICollectionViewDataSource, UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 1
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
         let title = item.allItems[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].productName
         var price : String = ""
         if let dc = item.allItems[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].groupDiscountedPrice {
-           price = String(dc) + "원"
+            price = String(dc) + "원"
         }
         if let dc = item.allItems[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].originalPrice{
             price = String(dc) + "원"
