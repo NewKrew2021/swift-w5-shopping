@@ -22,6 +22,7 @@ class myCollectionViewCell: UICollectionViewCell {
         initGroupDiscountedPrice()
         initOriginalPrice()
         initGroupDiscountUserCount()
+        
     }
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -33,6 +34,7 @@ class myCollectionViewCell: UICollectionViewCell {
         contentView.sizeToFit()
         contentView.layer.borderColor = UIColor.red.cgColor
         contentView.layer.borderWidth = 1
+        
     }
     func initProductImage() {
         contentView.addSubview(productImage)
@@ -88,16 +90,47 @@ class myCollectionViewCell: UICollectionViewCell {
         groupDiscountUserCount.sizeToFit()
     }
     
+    func loadImage(from urlString: String) {
+        
+    }
+    
+    private func presentGraySpace() {
+        let emptyView = UIView(frame: CGRect.zero)
+        emptyView.widthAnchor.constraint(equalToConstant: 100)
+        emptyView.heightAnchor.constraint(equalTo: emptyView.widthAnchor, multiplier: 1)
+        emptyView.backgroundColor = .white
+        emptyView.setNeedsLayout()
+        let renderer = UIGraphicsImageRenderer(size: emptyView.frame.size)
+        let emptyImage = renderer.image(actions: { _ in
+            emptyView.drawHierarchy(in: emptyView.bounds, afterScreenUpdates: true)
+        })
+        self.productImage.image = emptyImage
+    }
+    
+    
     func setSubViews(indexPath: IndexPath, data: [JsonFileName: [Item]]) {
         
-        let url = URL(string: data[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].productImage)
-        DispatchQueue.global().async {
-            let data = try? Data(contentsOf: url!)
+        let url = data[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].productImage
+        let name = URL(string: url)!.query!
+        if let cachedData = CacheStorage.retrieve(name) {
             DispatchQueue.main.async {
-                self.productImage.image = UIImage(data: data!)
+                self.productImage.image = UIImage(data: cachedData)
             }
+        } else {
+            Downloader.downloadToGlobalQueue(from: url, qos: .userInteractive, completionHandler: { response in
+                switch response {
+                case .success(let dataTemp):
+                    self.productImage.image = UIImage(data: dataTemp)
+                    try? CacheStorage.save(name, dataTemp)
+
+                case .failure:
+                    DispatchQueue.main.async {
+                        self.presentGraySpace()
+
+                    }
+                }
+            })
         }
-        
         productName.text = data[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].productName
         
         if let dc = data[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].groupDiscountedPrice {
@@ -113,7 +146,7 @@ class myCollectionViewCell: UICollectionViewCell {
         else {
             originalPrice.text = ""
         }
-
+        
         if let dc = data[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].groupDiscountUserCount {
             groupDiscountUserCount.text = "현재 "+String(dc) + "명 딜 참여중"
         }
