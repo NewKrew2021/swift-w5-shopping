@@ -1,6 +1,18 @@
 # swift-w5-shopping
 모바일 5주차 쇼핑 저장소
 
+# 21.02.02
+1. 섹션 헤더 구현
+2. 셀 터치시 정보 Toast 형태로 출력
+3. URL을 통한 이미지 다운로드
+4. 캐시 디렉토리 검색 및 저장 기능
+
+<결과 화면>
+
+
+https://user-images.githubusercontent.com/59315024/106612012-f50cc580-65ab-11eb-9297-8291cf5e151d.mov
+ 
+  
 # 21.02.01
 1. HTTP 프로토콜 GET 요청으로 JSON 데이터 받아오기
   1-1. URLSession 사용

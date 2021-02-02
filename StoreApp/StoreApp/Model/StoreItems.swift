@@ -18,41 +18,44 @@ enum JsonFileName : String {
 }
 
 class StoreItems {
-    var allItems : [[Item]] = [[]]
+    var allItems : [JsonFileName: [Item]] = [JsonFileName.best : []]
     
     var count : Int {
-        return allItems.count - 1
+        return allItems.count 
     }
     
-    subscript(index : Int) -> [Item] {
-        return allItems[index]
+    subscript(type : JsonFileName, index : Int) -> Item {
+        return allItems[type]![index]
     }
     
     init() {
-        for iter in JsonFileName.jsonFileName {
-            guard let url = URL(string: "http://public.codesquad.kr/jk/kakao-2021/"+iter.rawValue+".json") else { return }
-            URLSession.shared.dataTask(with: url) { (data, response, error) in
-                guard let data = data else { return }
-                DispatchQueue.main.async {
-                    do {
-                        if let decodeData = try? JSONDecoder().decode([Item].self, from : data){
-                            self.allItems.append(decodeData)
-                            NotificationCenter.default.post(name: NSNotification.Name("reloadItem"), object: self, userInfo: nil)
-                        }
-                    } catch {
-//                        print(error)
-                    }
-                }
-            }.resume()
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadItems(notification:)), name: NSNotification.Name("saveItem"), object: nil)
+        Request.requestHttp()
     }
     
-    private func decode(_ data : Data) -> [Item]? {
-        do {
-            return try JSONDecoder().decode([Item].self, from : data)
-        } catch {
-            return nil
+    @objc func reloadItems(notification: Notification) {
+        guard let userInfo = notification.userInfo as NSDictionary? as? [String: [Item]] else {return}
+        switch userInfo.keys.first! {
+        case "best":
+            allItems[.best] = userInfo.values.first!
+            NotificationCenter.default.post(name: NSNotification.Name("reloadItem"), object: self, userInfo: nil)
+            
+        case "mask":
+            allItems[.mask] = userInfo.values.first!
+            NotificationCenter.default.post(name: NSNotification.Name("reloadItem"), object: self, userInfo: nil)
+            
+        case "grocery":
+            allItems[.grocery] = userInfo.values.first!
+            NotificationCenter.default.post(name: NSNotification.Name("reloadItem"), object: self, userInfo: nil)
+            
+        case "fryingpan":
+            allItems[.fryingpan] = userInfo.values.first!
+            NotificationCenter.default.post(name: NSNotification.Name("reloadItem"), object: self, userInfo: nil)
+            
+        default:
+            return
         }
+        
     }
 }
 
