@@ -19,6 +19,9 @@ class ViewController: UIViewController {
         view.register(UINib(nibName: "ShoppingCollectionReusableView", bundle: .main), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "ShoppingCollectionReusableView")
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .clear
+        if let collectionViewLayout = view.collectionViewLayout as? UICollectionViewFlowLayout {
+            collectionViewLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        }
         return view
     }()
 
@@ -66,10 +69,10 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource,
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = self.collectionView.frame.size.width
-        return CGSize(width: width, height: width)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let width = self.collectionView.frame.size.width
+//        return CGSize(width: width, height: width)
+//    }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return ProductType.allCases.count
