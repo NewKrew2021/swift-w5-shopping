@@ -20,13 +20,7 @@ class ShoppingCollectionViewCell: UICollectionViewCell {
     }
     
     func setViewData(product: Product) {
-        let imageUrl = URL(string: product.productImage)
-        do {
-            let data = try Data(contentsOf: imageUrl!)
-            self.imageView.image = UIImage(data: data)
-        } catch {
-            return
-        }
+        self.imageView.setImageUrl(product.productImage)
         self.titleLabel.text = product.productName
         if product.groupDiscountedPrice == nil {
             self.discountPriceLabel.text = "\(product.originalPrice)원"
