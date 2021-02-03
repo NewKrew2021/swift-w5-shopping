@@ -29,4 +29,8 @@ struct Item: Codable {
     var numberOfParticipant: Int?
     var storeId: Int
     var storeName: String
+
+    func hasTalkDeal() -> Bool {
+        self.price != nil ? true : false
+    }
 }
