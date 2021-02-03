@@ -1,6 +1,10 @@
 # swift-w5-shopping
 모바일 5주차 쇼핑 저장소
 
+# 21.02.03
+1. 피드백 내용 수정 및 기능 추가
+2. DetailViewController 추가 및 Segue 설정
+
 # 21.02.02
 1. 섹션 헤더 구현
 2. 셀 터치시 정보 Toast 형태로 출력
