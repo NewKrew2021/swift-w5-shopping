@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 
 class ProductCell: UICollectionViewCell {
+    static let identifier: String = "ProductCell"
     @IBOutlet var thumbnail: UIImageView!
     @IBOutlet var name: UILabel!
     private let disposeBag = DisposeBag()

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		5D48D39225C8F489008C6F7A /* ViewControllerBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D48D39125C8F489008C6F7A /* ViewControllerBinding.swift */; };
 		5D48D3A925C916C1008C6F7A /* ProductCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D48D3A825C916C1008C6F7A /* ProductCellViewModel.swift */; };
+		5D48D3C125C99662008C6F7A /* ProductHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D48D3BF25C99662008C6F7A /* ProductHeader.swift */; };
+		5D48D3C225C99662008C6F7A /* ProductHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D48D3C025C99662008C6F7A /* ProductHeader.xib */; };
 		5D50EEA125C791ED0049034B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D50EEA025C791ED0049034B /* AppDelegate.swift */; };
 		5D50EEA325C791ED0049034B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D50EEA225C791ED0049034B /* SceneDelegate.swift */; };
 		5D50EEA525C791ED0049034B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D50EEA425C791ED0049034B /* ViewController.swift */; };
@@ -30,6 +32,8 @@
 		314528FE3C965C5A71080AC1 /* Pods-StoreApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreApp.release.xcconfig"; path = "Target Support Files/Pods-StoreApp/Pods-StoreApp.release.xcconfig"; sourceTree = "<group>"; };
 		5D48D39125C8F489008C6F7A /* ViewControllerBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerBinding.swift; sourceTree = "<group>"; };
 		5D48D3A825C916C1008C6F7A /* ProductCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellViewModel.swift; sourceTree = "<group>"; };
+		5D48D3BF25C99662008C6F7A /* ProductHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductHeader.swift; sourceTree = "<group>"; };
+		5D48D3C025C99662008C6F7A /* ProductHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductHeader.xib; sourceTree = "<group>"; };
 		5D50EE9D25C791ED0049034B /* StoreApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StoreApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D50EEA025C791ED0049034B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5D50EEA225C791ED0049034B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -149,6 +153,8 @@
 			children = (
 				5DFAABEF25C7F01400099D58 /* ProductCell.swift */,
 				5DFAABF025C7F01400099D58 /* ProductCell.xib */,
+				5D48D3BF25C99662008C6F7A /* ProductHeader.swift */,
+				5D48D3C025C99662008C6F7A /* ProductHeader.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -223,6 +229,7 @@
 			files = (
 				5DFAABEA25C7EB9900099D58 /* .swiftlint.yml in Resources */,
 				5D50EEB025C791EE0049034B /* LaunchScreen.storyboard in Resources */,
+				5D48D3C225C99662008C6F7A /* ProductHeader.xib in Resources */,
 				5DFAABF225C7F01400099D58 /* ProductCell.xib in Resources */,
 				5D50EEAD25C791EE0049034B /* Assets.xcassets in Resources */,
 				5D50EEA825C791ED0049034B /* Main.storyboard in Resources */,
@@ -295,6 +302,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D48D3C125C99662008C6F7A /* ProductHeader.swift in Sources */,
 				5D50EEA525C791ED0049034B /* ViewController.swift in Sources */,
 				5DFAAC0925C8404A00099D58 /* ProductController.swift in Sources */,
 				5DFAAC0425C800FD00099D58 /* ProductUseCase.swift in Sources */,

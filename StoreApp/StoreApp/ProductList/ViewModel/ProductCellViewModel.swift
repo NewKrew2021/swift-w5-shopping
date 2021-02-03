@@ -14,7 +14,7 @@ class ProductCellViewModel {
     var groupDiscountedPrice: String? = ""
     var originalPrice: String = ""
     var groupDiscountUserCount: String = ""
-
+    
     init(product: ProductElement) {
         self.productImage = PublishSubject<UIImage?>()
         productName = product.productName
@@ -41,6 +41,7 @@ class ProductCellViewModel {
                 }
             }
         } catch {
+            self.productImage.onNext(UIImage(named: "default"))
         }
     }
 }

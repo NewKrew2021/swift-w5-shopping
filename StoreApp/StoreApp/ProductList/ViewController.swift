@@ -23,13 +23,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         // to-do: will be divided into other class
         collectionView.backgroundColor = .green
         collectionView.register(UINib(nibName: "ProductCell", bundle: nil), forCellWithReuseIdentifier: cellReuseIdentifier)
-
-        let screenWidht = UIScreen.main.bounds.width
-        let screenHeight = UIScreen.main.bounds.height
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 10
-        layout.estimatedItemSize = CGSize(width: screenWidht, height: screenHeight/2.5)
-        collectionView.collectionViewLayout = layout
+        collectionView.register(UINib(nibName: "ProductHeader", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ProductHeader.identifier)
 
         bindDataToCollectionView()
     }

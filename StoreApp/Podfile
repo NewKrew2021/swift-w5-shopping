@@ -6,4 +6,5 @@ target 'StoreApp' do
   pod 'Toaster'
   pod 'RxSwift', '6.0.0'
   pod 'RxCocoa', '6.0.0'
+  pod 'RxDataSources'
 end
