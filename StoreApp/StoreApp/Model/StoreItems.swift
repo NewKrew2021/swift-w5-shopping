@@ -21,12 +21,16 @@ enum JsonFileName : String {
 class StoreItems {
     private var allItems : [JsonFileName: [Item]] = [JsonFileName.best : []]
     
-    var count : Int {
+    var count : Int{
         return allItems.count 
     }
     
-    subscript(type : JsonFileName, index : Int) -> Item {
-        return allItems[type]![index]
+    func count(index : Int) -> Int{
+        return allItems[JsonFileName.jsonFileName[index]]!.count
+    }
+    
+    subscript(indexPath: IndexPath) -> Item {
+        return allItems[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]]
     }
     
     init() {
