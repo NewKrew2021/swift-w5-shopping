@@ -16,7 +16,7 @@ class ItemCollectionViewCell: UICollectionViewCell {
     @IBOutlet var priceLabel: UILabel!
     @IBOutlet var participantOfDealLabel: UILabel!
 
-    lazy var indicator: UIActivityIndicatorView = {
+    private lazy var indicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
         indicator.translatesAutoresizingMaskIntoConstraints = false
         indicator.startAnimating()
