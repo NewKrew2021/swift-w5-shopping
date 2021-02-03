@@ -15,7 +15,7 @@ protocol ProductManager {
     func getCount(productType: ProductType) -> Int
 }
 
-class ProductManagerImpl: ProductManager, NetworkHandlerDelegate {
+class ProductManagerImpl: ProductManager {
     static let instance = ProductManagerImpl()
     let sectionTitle = ["베스트", "마스크", "잡화", "프라이팬"]
     private var products: [ProductType: [Product]] = [:]
@@ -24,27 +24,23 @@ class ProductManagerImpl: ProductManager, NetworkHandlerDelegate {
         for type in ProductType.allCases {
             products[type] = []
         }
-        NetworkHandler.delegate = self
         requestAllData()
     }
 
     func requestAllData() {
         for type in ProductType.allCases {
-            DispatchQueue.global().async {
-                NetworkHandler.getData(productType: type)
+            NetworkHandler.getData(productType: type) {
+                products in
+                DispatchQueue.main.async {
+                    self.products[type] = products
+                    NotificationCenter.default.post(name: NSNotification.Name("reloadSection"), object: nil, userInfo: ["at": type.rawValue])
+                }
             }
         }
     }
 
     func getSectionTitle(at: Int) -> String {
         return sectionTitle[at]
-    }
-
-    func saveProducts(productType: ProductType, products: [Product]) {
-        DispatchQueue.main.async {
-            self.products[productType] = products
-            NotificationCenter.default.post(name: NSNotification.Name("reloadSection"), object: nil, userInfo: ["at": productType.rawValue])
-        }
     }
 
     func setProducts(productType: ProductType, products: [Product]) {

@@ -9,12 +9,11 @@ import Foundation
 import UIKit
 
 class NetworkHandler {
-    private static let fileManager = MyFileManager()
+    private static let fileManager: ImageManaging = MyFileManager()
     private static let baseURL: String = "http://public.codesquad.kr/jk/kakao-2021"
     private static let productURLs: [String] = ["/best.json", "/mask.json", "/grocery.json", "/fryingpan.json"]
-    static var delegate: NetworkHandlerDelegate?
 
-    class func getData(productType: ProductType) {
+    class func getData(productType: ProductType, completionHandler: @escaping ([Product]) -> ()) {
         // 세션 생성, 환경설정
         let defaultSession = URLSession(configuration: .default)
 
@@ -40,8 +39,7 @@ class NetworkHandler {
 
             let decoder = JsonDecoder()
             let products = decoder.parseData(data: data)
-            delegate?.saveProducts(productType: productType, products: products)
-//            print(products)
+            completionHandler(products)
         }
         dataTask.resume()
     }
@@ -69,8 +67,4 @@ class NetworkHandler {
         }
         downloadTask.resume()
     }
-}
-
-protocol NetworkHandlerDelegate: class {
-    func saveProducts(productType: ProductType, products: [Product])
 }
