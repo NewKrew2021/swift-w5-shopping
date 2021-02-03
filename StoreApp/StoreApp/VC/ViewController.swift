@@ -52,16 +52,16 @@ class ViewController: UIViewController {
 
 extension ViewController : UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return item.allItems[JsonFileName.jsonFileName[section]]!.count
+        return item.count(index: section)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return item.allItems.count
+        return item.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCollectionViewCell", for: indexPath) as! myCollectionViewCell
-        cell.setSubViews(indexPath: indexPath, data: item.allItems)
+        cell.setSubViews(indexPath: indexPath, data: item)
         return cell
     }
     
@@ -94,16 +94,16 @@ extension ViewController : UICollectionViewDataSource, UICollectionViewDelegate,
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let title = item.allItems[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].productName
+        let title = item[indexPath].productName
         var price : String = ""
-        if let dc = item.allItems[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].groupDiscountedPrice {
+        if let dc = item[indexPath].groupDiscountedPrice {
             price = String(dc) + "원"
         }
-        if let dc = item.allItems[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].originalPrice{
+        if let dc = item[indexPath].originalPrice{
             price = String(dc) + "원"
         }
         
-        let toast = Toast(text: item.allItems[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].productName + "\n" + price)
+        let toast = Toast(text: item[indexPath].productName + "\n" + price)
         ToastView.appearance().font = UIFont.systemFont(ofSize: 13, weight: .bold)
         toast.show()
     }
