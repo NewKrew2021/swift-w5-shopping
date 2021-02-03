@@ -37,24 +37,16 @@ class StoreItems {
         switch userInfo.keys.first! {
         case "best":
             allItems[.best] = userInfo.values.first!
-            NotificationCenter.default.post(name: NSNotification.Name("reloadItem"), object: self, userInfo: nil)
-            
         case "mask":
             allItems[.mask] = userInfo.values.first!
-            NotificationCenter.default.post(name: NSNotification.Name("reloadItem"), object: self, userInfo: nil)
-            
         case "grocery":
             allItems[.grocery] = userInfo.values.first!
-            NotificationCenter.default.post(name: NSNotification.Name("reloadItem"), object: self, userInfo: nil)
-            
         case "fryingpan":
             allItems[.fryingpan] = userInfo.values.first!
-            NotificationCenter.default.post(name: NSNotification.Name("reloadItem"), object: self, userInfo: nil)
-            
         default:
             return
         }
-        
+        NotificationCenter.default.post(name: NSNotification.Name("reloadItem"), object: self, userInfo: nil)
     }
 }
 
