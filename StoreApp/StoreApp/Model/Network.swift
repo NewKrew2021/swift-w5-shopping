@@ -9,7 +9,6 @@ import Foundation
 
 struct Network {
     private let request = Request()
-    
     func getData() {
         for productType in ProductType.allCases {
             request.request(productType: productType)

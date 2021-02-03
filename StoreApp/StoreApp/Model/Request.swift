@@ -7,10 +7,17 @@
 
 import Foundation
 
-struct Request {
+class Request {
     
     private let baseUrl = "http://public.codesquad.kr/jk/kakao-2021/"
     private let json = Json()
+    
+    init() {
+        NotificationCenter.default.addObserver(self,
+                    selector: #selector(errorHandling),
+                    name: NSNotification.Name(rawValue: "jsonErrorHandling"),
+                    object: nil)
+    }
     
     func request(productType: ProductType) {
         let url = "\(baseUrl)\(productType)"
@@ -22,8 +29,12 @@ struct Request {
                 return
             }
             DispatchQueue.main.async {
-                json.parsing(jsonData: data ?? Data(), productType: productType)
+                self.json.parsing(jsonData: data ?? Data(), productType: productType)
             }
         }.resume()
+    }
+    
+    @objc func errorHandling(_ notification:Notification) {
+        print(notification.userInfo?["error"] ?? "error")
     }
 }

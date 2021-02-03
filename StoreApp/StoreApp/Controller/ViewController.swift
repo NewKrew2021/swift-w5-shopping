@@ -64,15 +64,10 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShoppingCollectionViewCell", for: indexPath) as! ShoppingCollectionViewCell
         
-        cell.setViewData(productName: products[indexPath.section][indexPath.row].productName, productImage: self.products[indexPath.section][indexPath.row].productImage, groupDiscountedPrice: self.products[indexPath.section][indexPath.row].groupDiscountedPrice ?? -1, originalPrice: self.products[indexPath.section][indexPath.row].originalPrice, groupDiscountUserCount: self.products[indexPath.section][indexPath.row].groupDiscountUserCount ?? -1)
+        cell.setViewData(product: self.products[indexPath.section][indexPath.row])
         
         return cell
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let width = self.collectionView.frame.size.width
-//        return CGSize(width: width, height: width)
-//    }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return ProductType.allCases.count
