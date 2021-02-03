@@ -20,7 +20,7 @@ class Request {
     }
     
     func request(productType: ProductType) {
-        let url = "\(baseUrl)\(productType)"
+        let url = "\(baseUrl)\(productType.info.description).json"
         URLSession.shared.dataTask(with: URL(string: url)!) { (data,response,error) in
             guard error == nil && data != nil else {
                 if let err = error {
