@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProductCollcetionView: NSObject {
+class ProductCollcetionViewUsecase: NSObject {
     var cellSize = CGSize()
     var productManager: ProductManager
 
@@ -38,7 +38,7 @@ class ProductCollcetionView: NSObject {
     }
 }
 
-extension ProductCollcetionView: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ProductCollcetionViewUsecase: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in _: UICollectionView) -> Int {
         return 4
     }
@@ -50,8 +50,7 @@ extension ProductCollcetionView: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind _: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header", for: indexPath)
         guard let header = headerView as? SectionHeader else { return headerView }
-        let title = ["베스트", "마스크", "잡화", "프라이팬"]
-        header.setTitle(title: title[indexPath.section])
+        header.setTitle(title: productManager.getSectionTitle(at: indexPath.section))
         return header
     }
 
@@ -60,11 +59,16 @@ extension ProductCollcetionView: UICollectionViewDelegate, UICollectionViewDataS
         guard let productType = ProductType(rawValue: indexPath.section) else { return cell }
         guard let productCell = cell as? ProductCell, let product = productManager.getProduct(productType: productType, at: indexPath.item) else { return cell }
         productCell.setCell(product: product)
+        NetworkHandler.getImage(url: product.productImage, title: product.title) { imageData in
+            DispatchQueue.main.async {
+                productCell.setImage(image: UIImage(data: imageData))
+            }
+        }
         return productCell
     }
 }
 
-extension ProductCollcetionView: UICollectionViewDelegateFlowLayout {
+extension ProductCollcetionViewUsecase: UICollectionViewDelegateFlowLayout {
     func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, minimumLineSpacingForSectionAt _: Int) -> CGFloat {
         return 5
     }

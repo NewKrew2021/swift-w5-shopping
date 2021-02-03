@@ -9,8 +9,8 @@ import UIKit
 
 class MainViewController: UIViewController {
     @IBOutlet var shoppingCollectionView: UICollectionView!
-    private let productManager = ProductManager.instance
-    lazy var productCollectionView = ProductCollcetionView(productManager: productManager)
+    private let productManager = ProductManagerImpl.instance
+    lazy var productCollectionView = ProductCollcetionViewUsecase(productManager: productManager)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,23 +19,11 @@ class MainViewController: UIViewController {
         shoppingCollectionView.delegate = productCollectionView
         shoppingCollectionView.dataSource = productCollectionView
 
-        NetworkHandler.delegate = self
-        for type in ProductType.allCases {
-            DispatchQueue.global().async {
-                NetworkHandler.getData(productType: type)
-            }
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadSection(_:)), name: NSNotification.Name("reloadSection"), object: nil)
     }
-}
 
-extension MainViewController: NetworkHandlerDelegate {
-    func saveProducts(productType: ProductType, products: [Product]) {
-        DispatchQueue.main.async {
-            self.productManager.setProducts(productType: productType, products: products)
-        }
-
-        DispatchQueue.main.async {
-            self.shoppingCollectionView.reloadSections(IndexSet(integer: productType.rawValue))
-        }
+    @objc func reloadSection(_ noticiation: Notification) {
+        guard let index = noticiation.userInfo?["at"] as? Int else { return }
+        shoppingCollectionView.reloadSections(IndexSet(integer: index))
     }
 }
