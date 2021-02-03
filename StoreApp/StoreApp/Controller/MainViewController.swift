@@ -19,19 +19,14 @@ class MainViewController: UIViewController {
         shoppingCollectionView.delegate = productCollectionView
         shoppingCollectionView.dataSource = productCollectionView
 
-        NetworkHandler.delegate = self
-        productManager.requestAllData()
+        let fm = FileManager()
+        print(fm.currentDirectoryPath)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadSection(_:)), name: NSNotification.Name("reloadSection"), object: nil)
     }
-}
 
-extension MainViewController: NetworkHandlerDelegate {
-    func saveProducts(productType: ProductType, products: [Product]) {
-        DispatchQueue.main.async {
-            self.productManager.setProducts(productType: productType, products: products)
-        }
-
-        DispatchQueue.main.async {
-            self.shoppingCollectionView.reloadSections(IndexSet(integer: productType.rawValue))
-        }
+    @objc func reloadSection(_ noticiation: Notification) {
+        guard let index = noticiation.userInfo?["at"] as? Int else { return }
+        shoppingCollectionView.reloadSections(IndexSet(integer: index))
     }
 }

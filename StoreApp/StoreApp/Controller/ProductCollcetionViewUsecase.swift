@@ -59,6 +59,9 @@ extension ProductCollcetionViewUsecase: UICollectionViewDelegate, UICollectionVi
         guard let productType = ProductType(rawValue: indexPath.section) else { return cell }
         guard let productCell = cell as? ProductCell, let product = productManager.getProduct(productType: productType, at: indexPath.item) else { return cell }
         productCell.setCell(product: product)
+//        DispatchQueue.global().async {
+//            let image = UIImage.
+//        }
         return productCell
     }
 }

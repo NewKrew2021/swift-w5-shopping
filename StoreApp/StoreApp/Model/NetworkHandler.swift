@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class NetworkHandler {
     private static let baseURL: String = "http://public.codesquad.kr/jk/kakao-2021"
@@ -42,6 +43,24 @@ class NetworkHandler {
         }
         dataTask.resume()
     }
+    
+//    class func downloadImage(url: URL, image: UIImage) {
+//        let defaultSession = URLSession(configuration: .default)
+//        // dataTask
+//        let downloadTask = defaultSession.downloadTask(with: url) { (localURL, response, error) in
+//            guard error == nil else {
+//                print("Error occur: \(String(describing: error))")
+//                return
+//            }
+//
+//            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+//                return
+//            }
+//            
+//            image =
+//        }
+//        downloadTask.resume()
+//    }
 }
 
 protocol NetworkHandlerDelegate:class {
