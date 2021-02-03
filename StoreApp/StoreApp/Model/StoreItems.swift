@@ -26,7 +26,10 @@ class StoreItems {
     }
     
     func count(index : Int) -> Int {
-        return allItems[JsonFileName.jsonFileName[index]]!.count
+        if let arr = allItems[JsonFileName.jsonFileName[index]] {
+            return arr.count
+        }
+        return 0
     }
     
     subscript(indexPath: IndexPath) -> Item {
