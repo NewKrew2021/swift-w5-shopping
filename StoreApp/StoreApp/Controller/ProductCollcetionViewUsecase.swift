@@ -59,11 +59,9 @@ extension ProductCollcetionViewUsecase: UICollectionViewDelegate, UICollectionVi
         guard let productType = ProductType(rawValue: indexPath.section) else { return cell }
         guard let productCell = cell as? ProductCell, let product = productManager.getProduct(productType: productType, at: indexPath.item) else { return cell }
         productCell.setCell(product: product)
-        DispatchQueue.global().async {
-            NetworkHandler.getImage(url: product.productImage, title: product.title) { imageData in
-                DispatchQueue.main.async {
-                    productCell.setImage(image: UIImage(data: imageData))
-                }
+        NetworkHandler.getImage(url: product.productImage, title: product.title) { imageData in
+            DispatchQueue.main.async {
+                productCell.setImage(image: UIImage(data: imageData))
             }
         }
         return productCell
