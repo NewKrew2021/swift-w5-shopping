@@ -60,7 +60,7 @@ class Request {
         }
     }
 
-    func download(
+    private func download(
         url: URL,
         toFile file: URL,
         completion: @escaping (Error?) -> Void

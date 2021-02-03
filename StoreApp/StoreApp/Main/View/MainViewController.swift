@@ -114,12 +114,13 @@ extension MainViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: key_itemCell, for: indexPath) as? ItemCollectionViewCell else { return UICollectionViewCell() }
 
         let item = viewModel[indexPath.section, indexPath.item]
-        //url을 통해 캐시를 확인한 후에 이미지 불러오기
-        Request.shared.loadImage(url: URL(string: item.imageUrl)!) { image, _ in
-            DispatchQueue.main.async {
-                cell.update(img: image ?? UIImage())
+        if let url = URL(string: item.imageUrl) {
+            // url을 통해 캐시를 확인한 후에 이미지 불러오기
+            Request.shared.loadImage(url: url) { image, _ in
+                DispatchQueue.main.async {
+                    cell.update(img: image ?? UIImage())
+                }
             }
-            
         }
 
         if item.hasTalkDeal() {
