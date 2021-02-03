@@ -21,11 +21,11 @@ enum JsonFileName : String {
 class StoreItems {
     private var allItems : [JsonFileName: [Item]] = [JsonFileName.best : []]
     
-    var count : Int{
+    var count : Int {
         return allItems.count 
     }
     
-    func count(index : Int) -> Int{
+    func count(index : Int) -> Int {
         return allItems[JsonFileName.jsonFileName[index]]!.count
     }
     
@@ -72,13 +72,15 @@ class StoreItems {
         let url = self[indexPath].productImage
         let name = URL(string: url)!.query!
         if let cachedData = CacheStorage().retrieve(name) {
-            tempImage = UIImage(data: cachedData)!
+                tempImage = UIImage(data: cachedData)!
         } else {
             Downloader.downloadWithDataTask(from: url, completionHandler: { response in
                 switch response {
                 case .success(let dataTemp):
                     tempImage = UIImage(data: dataTemp)!
-                    try? CacheStorage().save(name, dataTemp)
+                    DispatchQueue.main.async {
+                        try? CacheStorage().save(name, dataTemp)
+                    }
                 case .failure:
                     DispatchQueue.main.async {
                         tempImage = self.presentGraySpace()

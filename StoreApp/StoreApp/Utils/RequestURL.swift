@@ -9,8 +9,8 @@
 import Foundation
 import Toaster
 
-class Request {
-    static func requestHttp(){
+class RequestURL {
+    func requestHttp(){
         for iter in JsonFileName.jsonFileName {
             guard let url = URL(string: "http://public.codesquad.kr/jk/kakao-2021/\(iter.rawValue).json") else { return }
 
@@ -19,10 +19,7 @@ class Request {
                 guard let data = data else { return }
                 DispatchQueue.main.async {
                     do {
-                        if let decodeData = try? JSONDecoder().decode([Item].self, from : data){
-                            let userInfo: [AnyHashable: Any] = [iter.rawValue:decodeData]
-                            NotificationCenter.default.post(name: NSNotification.Name("saveItem"), object: self, userInfo: userInfo)
-                        }
+                        self.decodingJsonData(iter: iter, data: data)
                     } catch {
                         let toast = Toast(text: iter.rawValue + "json 을 읽어올 수 없습니다.")
                         ToastView.appearance().font = UIFont.systemFont(ofSize: 13, weight: .bold)
@@ -30,6 +27,13 @@ class Request {
                     }
                 }
             }.resume()
+        }
+    }
+    
+    func decodingJsonData(iter: JsonFileName, data: Data) {
+        if let decodeData = try? JSONDecoder().decode([Item].self, from : data){
+            let userInfo: [AnyHashable: Any] = [iter.rawValue:decodeData]
+            NotificationCenter.default.post(name: NSNotification.Name("saveItem"), object: self, userInfo: userInfo)
         }
     }
 }
