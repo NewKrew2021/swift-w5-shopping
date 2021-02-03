@@ -53,6 +53,67 @@ class StoreItems {
         }
         NotificationCenter.default.post(name: NSNotification.Name("reloadItem"), object: self, userInfo: nil)
     }
+    
+    private func presentGraySpace() -> UIImage{
+        let emptyView = UIView(frame: CGRect.zero)
+        emptyView.widthAnchor.constraint(equalToConstant: 100)
+        emptyView.heightAnchor.constraint(equalTo: emptyView.widthAnchor, multiplier: 1)
+        emptyView.backgroundColor = .white
+        emptyView.setNeedsLayout()
+        let renderer = UIGraphicsImageRenderer(size: emptyView.frame.size)
+        let emptyImage = renderer.image(actions: { _ in
+            emptyView.drawHierarchy(in: emptyView.bounds, afterScreenUpdates: true)
+        })
+        return emptyImage
+    }
+    
+    func getProductImage(indexPath: IndexPath) -> UIImage {
+        var tempImage : UIImage = UIImage()
+        let url = self[indexPath].productImage
+        let name = URL(string: url)!.query!
+        if let cachedData = CacheStorage().retrieve(name) {
+            tempImage = UIImage(data: cachedData)!
+        } else {
+            Downloader.downloadWithDataTask(from: url, completionHandler: { response in
+                switch response {
+                case .success(let dataTemp):
+                    tempImage = UIImage(data: dataTemp)!
+                    try? CacheStorage().save(name, dataTemp)
+                case .failure:
+                    DispatchQueue.main.async {
+                        tempImage = self.presentGraySpace()
+                    }
+                }
+            })
+        }
+        return tempImage
+    }
+    
+    func getProductName(indexPath: IndexPath) -> String {
+        return self[indexPath].productName
+    }
+    
+    func getGroupDiscountedPrice(indexPath: IndexPath) -> String {
+        if let dc = self[indexPath].groupDiscountedPrice {
+            return "톡딜가 : " + String(dc) + "원"
+        }
+        return ""
+    }
+    
+    func getOriginalPrice(indexPath: IndexPath) -> String {
+        if let dc = self[indexPath].originalPrice {
+            return String(dc) + "원"
+        }
+        return ""
+    }
+    
+    func getGroupDiscountUserCount(indexPath: IndexPath) -> String {
+        if let dc = self[indexPath].groupDiscountUserCount {
+            return "현재 "+String(dc) + "명 딜 참여중"
+        }
+        return ""
+        
+    }
 }
 
 

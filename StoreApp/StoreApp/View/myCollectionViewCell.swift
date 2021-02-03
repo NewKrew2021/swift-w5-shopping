@@ -22,8 +22,8 @@ class myCollectionViewCell: UICollectionViewCell {
         initGroupDiscountedPrice()
         initOriginalPrice()
         initGroupDiscountUserCount()
-        
     }
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         initProductImage()
@@ -32,10 +32,8 @@ class myCollectionViewCell: UICollectionViewCell {
         initOriginalPrice()
         initGroupDiscountUserCount()
         contentView.sizeToFit()
-        contentView.layer.borderColor = UIColor.red.cgColor
-        contentView.layer.borderWidth = 1
-        
     }
+    
     func initProductImage() {
         contentView.addSubview(productImage)
         productImage.clipsToBounds = true
@@ -61,7 +59,6 @@ class myCollectionViewCell: UICollectionViewCell {
         productName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
         productName.sizeToFit()
     }
-    
     
     func initGroupDiscountedPrice() {
         contentView.addSubview(groupDiscountedPrice)
@@ -90,68 +87,12 @@ class myCollectionViewCell: UICollectionViewCell {
         groupDiscountUserCount.sizeToFit()
     }
     
-    func loadImage(from urlString: String) {
+    func setSubViews(indexPath: IndexPath, data: StoreItems) {
+        productImage.image = data.getProductImage(indexPath: indexPath)
+        productName.text = data.getProductName(indexPath: indexPath)
+        groupDiscountedPrice.text = data.getGroupDiscountedPrice(indexPath: indexPath)
+        originalPrice.text = data.getOriginalPrice(indexPath: indexPath)
+        groupDiscountUserCount.text = data.getGroupDiscountUserCount(indexPath: indexPath)
         
-    }
-    
-    private func presentGraySpace() {
-        let emptyView = UIView(frame: CGRect.zero)
-        emptyView.widthAnchor.constraint(equalToConstant: 100)
-        emptyView.heightAnchor.constraint(equalTo: emptyView.widthAnchor, multiplier: 1)
-        emptyView.backgroundColor = .white
-        emptyView.setNeedsLayout()
-        let renderer = UIGraphicsImageRenderer(size: emptyView.frame.size)
-        let emptyImage = renderer.image(actions: { _ in
-            emptyView.drawHierarchy(in: emptyView.bounds, afterScreenUpdates: true)
-        })
-        self.productImage.image = emptyImage
-    }
-    
-    
-    func setSubViews(indexPath: IndexPath, data: [JsonFileName: [Item]]) {
-        
-        let url = data[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].productImage
-        let name = URL(string: url)!.query!
-        if let cachedData = CacheStorage.retrieve(name) {
-            DispatchQueue.main.async {
-                self.productImage.image = UIImage(data: cachedData)
-            }
-        } else {
-            Downloader.downloadToGlobalQueue(from: url, qos: .userInteractive, completionHandler: { response in
-                switch response {
-                case .success(let dataTemp):
-                    self.productImage.image = UIImage(data: dataTemp)
-                    try? CacheStorage.save(name, dataTemp)
-
-                case .failure:
-                    DispatchQueue.main.async {
-                        self.presentGraySpace()
-
-                    }
-                }
-            })
-        }
-        productName.text = data[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].productName
-        
-        if let dc = data[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].groupDiscountedPrice {
-            groupDiscountedPrice.text = "톡딜가 : " + String(dc) + "원"
-        }
-        else {
-            groupDiscountedPrice.text = ""
-        }
-        
-        if let dc = data[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].originalPrice {
-            originalPrice.text = String(dc) + "원"
-        }
-        else {
-            originalPrice.text = ""
-        }
-        
-        if let dc = data[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].groupDiscountUserCount {
-            groupDiscountUserCount.text = "현재 "+String(dc) + "명 딜 참여중"
-        }
-        else {
-            groupDiscountUserCount.text = ""
-        }
     }
 }
