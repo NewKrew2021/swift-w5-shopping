@@ -20,11 +20,7 @@ class MainViewController: UIViewController {
         shoppingCollectionView.dataSource = productCollectionView
 
         NetworkHandler.delegate = self
-        for type in ProductType.allCases {
-            DispatchQueue.global().async {
-                NetworkHandler.getData(productType: type)
-            }
-        }
+        productManager.requestAllData()
     }
 }
 

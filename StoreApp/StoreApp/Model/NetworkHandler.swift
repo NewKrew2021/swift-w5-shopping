@@ -43,3 +43,7 @@ class NetworkHandler {
         dataTask.resume()
     }
 }
+
+protocol NetworkHandlerDelegate:class {
+    func saveProducts(productType: ProductType, products: [Product])
+}

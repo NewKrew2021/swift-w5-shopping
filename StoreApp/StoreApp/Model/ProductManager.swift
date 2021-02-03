@@ -15,6 +15,14 @@ class ProductManager {
     private init() {
         products = [:]
     }
+    
+    func requestAllData() {
+        for type in ProductType.allCases {
+            DispatchQueue.global().async {
+                NetworkHandler.getData(productType: type)
+            }
+        }
+    }
 
     func setProducts(productType: ProductType, products: [Product]) {
         print(self.products)
