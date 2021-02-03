@@ -15,6 +15,10 @@ class MainViewModel {
     func addItems(items: [Item]) {
         self.items.append(items)
     }
+    
+    func hasItems(at section: Int) -> Bool{
+        flags[section]
+    }
 
     subscript(section: Int, item: Int) -> Item {
         items[section][item]

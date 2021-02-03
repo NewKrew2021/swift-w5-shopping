@@ -51,7 +51,7 @@ class MainViewController: UIViewController {
     }()
 
     private func getItems(index: Int) {
-        guard let type = ItemType(rawValue: index)?.getString() else {return}
+        guard let type = ItemType(rawValue: index)?.getString() else { return }
         Request.shared.requestItem(type: type)
         viewModel.flags[index] = true
     }
@@ -106,11 +106,16 @@ extension MainViewController: UICollectionViewDataSource {
 
         let data = viewModel.items[indexPath.section][indexPath.item]
         if let cacheImage = imageCache.object(forKey: data.imageUrl as NSString) {
-            cell.updateImage(img: cacheImage)
-            cell.updateUI(title: data.name,
-                          talkDealPrice: data.price,
-                          price: data.originalPrice,
-                          numberOfParticipant: data.numberOfParticipant)
+            cell.update(img: cacheImage)
+            if data.hasTalkDeal() {
+                cell.update(title: data.name,
+                            price: data.originalPrice,
+                            talkDealPrice: data.price ?? 0,
+                            numberOfParticipant: data.numberOfParticipant ?? 0)
+            } else {
+                cell.update(title: data.name,
+                            price: data.originalPrice)
+            }
 
         } else {
             // 캐시된 이미지가 없음
@@ -122,12 +127,16 @@ extension MainViewController: UICollectionViewDataSource {
                 self.imageCache.setObject(image, forKey: data.imageUrl as NSString)
 
                 DispatchQueue.main.async {
-                    cell.updateImage(img: image)
-                    cell.updateUI(
-                        title: data.name,
-                        talkDealPrice: data.price,
-                        price: data.originalPrice,
-                        numberOfParticipant: data.numberOfParticipant)
+                    cell.update(img: image)
+                    if data.hasTalkDeal() {
+                        cell.update(title: data.name,
+                                    price: data.originalPrice,
+                                    talkDealPrice: data.price ?? 0,
+                                    numberOfParticipant: data.numberOfParticipant ?? 0)
+                    } else {
+                        cell.update(title: data.name,
+                                    price: data.originalPrice)
+                    }
                 }
             }
         }
@@ -165,19 +174,23 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension MainViewController: UIScrollViewDelegate{
+// MARK: UIScrollViewDelegate
+
+extension MainViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        //컬렉션뷰 높이
+        // 컬렉션뷰 높이
         let height = collectionView.frame.size.height
-        //컬렉션뷰 현재 Y
+        // 컬렉션뷰 현재 Y
         let offset_Y = collectionView.contentOffset.y
-        //현재높이 - Y
+        // 현재높이 - Y
         let distanceFromBottom = collectionView.contentSize.height - offset_Y
-        if distanceFromBottom < height{
-            for typeIndex in 0..<viewModel.flags.count{
-                if !viewModel.flags[typeIndex]{
-                    self.getItems(index: typeIndex)
-                    break;
+        
+        if distanceFromBottom < height {
+            //
+            for section in 0 ..< viewModel.flags.count {
+                if !viewModel.hasItems(at: section) {
+                    getItems(index: section)
+                    break
                 }
             }
         }
