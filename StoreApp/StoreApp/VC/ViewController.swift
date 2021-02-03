@@ -20,12 +20,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Request.requestHttp()
+        RequestURL().requestHttp()
         
         myShoppingCollectionView.delegate = self
         myShoppingCollectionView.dataSource = self
         
+        
         NotificationCenter.default.addObserver(self, selector: #selector(reloadItems(notification:)), name: NSNotification.Name("reloadItem"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showToast(notification:)), name: NSNotification.Name("showToast"), object: nil)
         
         setLayout()
         initNavigationBar()
@@ -38,6 +40,19 @@ class ViewController: UIViewController {
         let layout = myShoppingCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.sectionHeadersPinToVisibleBounds = true
         
+    }
+    
+    @objc func showToast(notification: Notification){
+        guard let userInfo = notification.userInfo as NSDictionary? as? [String: String] else {return}
+        let toast = Toast(text: userInfo.values.first!)
+        ToastView.appearance().font = UIFont.systemFont(ofSize: 13, weight: .bold)
+        toast.show()
+    }
+    
+    func showToast(text : String){
+         let toast = Toast(text: text)
+        ToastView.appearance().font = UIFont.systemFont(ofSize: 13, weight: .bold)
+        toast.show()
     }
     
     @objc func reloadItems(notification: Notification) {
@@ -102,10 +117,7 @@ extension ViewController : UICollectionViewDataSource, UICollectionViewDelegate,
         else if let dc = item[indexPath].originalPrice{
             price = "\(dc)원"
         }
-        
-        let toast = Toast(text: "\(item[indexPath].productName)\n\(price)")
-        ToastView.appearance().font = UIFont.systemFont(ofSize: 13, weight: .bold)
-        toast.show()
+        self.showToast(text: "\(item[indexPath].productName)\n\(price)")
     }
     
 }
