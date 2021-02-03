@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum JsonFileName : String {
     case best = "best"
@@ -18,7 +19,7 @@ enum JsonFileName : String {
 }
 
 class StoreItems {
-    var allItems : [JsonFileName: [Item]] = [JsonFileName.best : []]
+    private var allItems : [JsonFileName: [Item]] = [JsonFileName.best : []]
     
     var count : Int {
         return allItems.count 
