@@ -13,6 +13,8 @@ class Request {
     static func requestHttp(){
         for iter in JsonFileName.jsonFileName {
             guard let url = URL(string: "http://public.codesquad.kr/jk/kakao-2021/"+iter.rawValue+".json") else { return }
+
+            SectionHeader.headerTitle.append(iter.rawValue)
             URLSession.shared.dataTask(with: url) { (data, response, error) in
                 guard let data = data else { return }
                 DispatchQueue.main.async {
