@@ -14,11 +14,9 @@ class ShoppingCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var discountPriceLabel: UILabel!
     @IBOutlet weak var originalPriceLabel: UILabel!
     @IBOutlet weak var participationLabel: UILabel!
-    @IBOutlet weak var mainCellView: UIView!
     
     override func awakeFromNib() {
-        self.mainCellView.translatesAutoresizingMaskIntoConstraints = false
-        self.mainCellView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.width).isActive = true
+        self.contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.width).isActive = true
     }
     
     func setViewData(productName: String, productImage: String, groupDiscountedPrice: Int, originalPrice: Int, groupDiscountUserCount: Int) {

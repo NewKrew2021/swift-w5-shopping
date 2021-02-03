@@ -10,7 +10,7 @@ import Toaster
 
 class ViewController: UIViewController {
     
-    private let request = Request()
+    private let network = Network()
     private var products: [[Product]] = Array(repeating: [Product](), count: 4)
     
     private let collectionView: UICollectionView = {
@@ -37,9 +37,7 @@ class ViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        for productType in ProductType.allCases {
-            request.request(productType: productType)
-        }
+        network.getData()
     }
     
     func addCollectionView() {
