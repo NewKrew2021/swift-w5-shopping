@@ -16,18 +16,29 @@ extension ViewController {
         let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, ProductElement>>(
             configureCell: { (_, collectionView, indexPath, element) in
                 if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCell.identifier, for: indexPath) as? ProductCell {
-                    cell.backgroundColor = .cyan
-                    cell.config(viewModel: ProductCellViewModel(product: element))
+                    cell.configure(viewModel: ProductCellViewModel(product: element))
                     return cell
                 }
                 return ProductCell()
             },
             configureSupplementaryView: { (dataSource, collectionView, kind, indexPath) -> UICollectionReusableView in
                 if let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ProductHeader.identifier, for: indexPath) as? ProductHeader {
+                    header.configure(title: dataSource[indexPath.section].model)
                     return header
                 }
                 return UICollectionReusableView()
             })
+        
+        collectionView.rx
+            .itemSelected
+            .map { indexPath in
+                return (indexPath, dataSource[indexPath])
+            }
+            .subscribe(onNext: { pair in
+                // to-do: handle click item
+                print(pair)
+            })
+            .disposed(by: disposeBag)
         
         productController.items
             .bind(to: collectionView.rx.items(dataSource: dataSource))

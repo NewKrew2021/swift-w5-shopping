@@ -13,6 +13,9 @@ class ProductCell: UICollectionViewCell {
     static let identifier: String = "ProductCell"
     @IBOutlet var thumbnail: UIImageView!
     @IBOutlet var name: UILabel!
+    @IBOutlet var originalPrice: UILabel!
+    @IBOutlet var groupDiscountedPrice: UILabel!
+    @IBOutlet var groupDiscountUserCount: UILabel!
     private let disposeBag = DisposeBag()
     private var productViewModel: ProductCellViewModel?
     
@@ -28,9 +31,14 @@ class ProductCell: UICollectionViewCell {
         super.awakeFromNib()
     }
 
-    func config(viewModel: ProductCellViewModel) {
+    func configure(viewModel: ProductCellViewModel) {
         productViewModel = viewModel
         name.text = viewModel.productName
+        originalPrice.text = "톡딜가 \(viewModel.originalPrice)원"
+        if let groupDiscountedPrice = viewModel.groupDiscountedPrice {
+            self.groupDiscountedPrice.text = "\(groupDiscountedPrice)원"
+        }
+        groupDiscountUserCount.text = "현재 \(viewModel.groupDiscountUserCount)명 딜 참여중"
         viewModel.productImage
             .bind(to: thumbnail.rx.image)
             .disposed(by: disposeBag)

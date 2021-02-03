@@ -9,6 +9,7 @@ import UIKit
 
 class ProductHeader: UICollectionReusableView {
     
+    @IBOutlet var title: UILabel!
     static let identifier = "ProductReusableView"
     
     override init(frame: CGRect) {
@@ -23,4 +24,7 @@ class ProductHeader: UICollectionReusableView {
         super.awakeFromNib()
     }
     
+    func configure(title: String) {
+        self.title.text = title
+    }
 }
