@@ -50,8 +50,7 @@ extension ProductCollcetionViewUsecase: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind _: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header", for: indexPath)
         guard let header = headerView as? SectionHeader else { return headerView }
-        let title = ["베스트", "마스크", "잡화", "프라이팬"]
-        header.setTitle(title: title[indexPath.section])
+        header.setTitle(title: productManager.getSectionTitle(at: indexPath.section))
         return header
     }
 

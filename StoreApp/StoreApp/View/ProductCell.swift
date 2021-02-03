@@ -18,13 +18,14 @@ class ProductCell: UICollectionViewCell {
     func setCell(product: Product) {
         image.load(url: product.productImage)
         title.text = product.title
-        price.text = "가격"
+        price.text = "톡딜가"
         discountedPrice.text = product.discountedPrice
         originalPrice.text = String(product.originalPrice)
         participant.text = product.participant
     }
 
-    override func touchesBegan(_: Set<UITouch>, with _: UIEvent?) {
-        Toast(text: "상품명:\(title.text)").start()
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        Toast(text: "상품명:\(title.text ?? "") \n가격:\(originalPrice.text ?? "")").start()
     }
 }
