@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        RequestURL().requestHttp()
+        RequestURL().requestDownloadURL()
         
         myShoppingCollectionView.delegate = self
         myShoppingCollectionView.dataSource = self

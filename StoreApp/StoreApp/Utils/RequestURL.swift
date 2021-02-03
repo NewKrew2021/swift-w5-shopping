@@ -10,7 +10,7 @@ import Foundation
 import Toaster
 
 class RequestURL {
-    func requestHttp(){
+    func requestDownloadURL(){
         for iter in JsonFileName.jsonFileName {
             guard let url = URL(string: "http://public.codesquad.kr/jk/kakao-2021/\(iter.rawValue).json") else { return }
             
