@@ -17,8 +17,6 @@
 		F704D07725C7FFE300E82AB5 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = F704D07625C7FFE300E82AB5 /* Product.swift */; };
 		F704D07B25C8023A00E82AB5 /* JsonDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F704D07A25C8023A00E82AB5 /* JsonDecoder.swift */; };
 		F704D0A025C919FB00E82AB5 /* ProductManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F704D09F25C919FB00E82AB5 /* ProductManagerImpl.swift */; };
-		F704D0B425C9357400E82AB5 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F704D0B325C9357400E82AB5 /* UIImageView+.swift */; };
-		F704D0CE25CA5CF000E82AB5 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = F704D0CD25CA5CF000E82AB5 /* Type.swift */; };
 		F704D0D225CA630300E82AB5 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F704D0D125CA630300E82AB5 /* FileManager.swift */; };
 		F71FD48A25C7905500E826A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71FD48925C7905500E826A5 /* AppDelegate.swift */; };
 		F71FD48C25C7905500E826A5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71FD48B25C7905500E826A5 /* SceneDelegate.swift */; };
@@ -55,8 +53,6 @@
 		F704D07625C7FFE300E82AB5 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		F704D07A25C8023A00E82AB5 /* JsonDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDecoder.swift; sourceTree = "<group>"; };
 		F704D09F25C919FB00E82AB5 /* ProductManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductManagerImpl.swift; sourceTree = "<group>"; };
-		F704D0B325C9357400E82AB5 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
-		F704D0CD25CA5CF000E82AB5 /* Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 		F704D0D125CA630300E82AB5 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		F71FD48625C7905500E826A5 /* StoreApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StoreApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F71FD48925C7905500E826A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -146,14 +142,6 @@
 			path = StoreAppTests;
 			sourceTree = "<group>";
 		};
-		F704D0B225C9356500E82AB5 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				F704D0B325C9357400E82AB5 /* UIImageView+.swift */,
-			);
-			path = Extension;
-			sourceTree = "<group>";
-		};
 		F704D0C425CA369300E82AB5 /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,7 +174,6 @@
 			isa = PBXGroup;
 			children = (
 				F704D0C425CA369300E82AB5 /* Util */,
-				F704D0B225C9356500E82AB5 /* Extension */,
 				F704D04625C7954F00E82AB5 /* Controller */,
 				F704D04525C7954A00E82AB5 /* View */,
 				F704D04325C7953800E82AB5 /* Model */,
@@ -196,7 +183,6 @@
 				F71FD49225C7905600E826A5 /* Assets.xcassets */,
 				F71FD49425C7905600E826A5 /* LaunchScreen.storyboard */,
 				F71FD49725C7905600E826A5 /* Info.plist */,
-				F704D0CD25CA5CF000E82AB5 /* Type.swift */,
 			);
 			path = StoreApp;
 			sourceTree = "<group>";
@@ -376,7 +362,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F704D0B425C9357400E82AB5 /* UIImageView+.swift in Sources */,
 				F704D07725C7FFE300E82AB5 /* Product.swift in Sources */,
 				F704D0A025C919FB00E82AB5 /* ProductManagerImpl.swift in Sources */,
 				F71FD48E25C7905500E826A5 /* MainViewController.swift in Sources */,
@@ -388,7 +373,6 @@
 				F704D07B25C8023A00E82AB5 /* JsonDecoder.swift in Sources */,
 				F71FD48C25C7905500E826A5 /* SceneDelegate.swift in Sources */,
 				F704D06F25C7FCB500E82AB5 /* NetworkHandler.swift in Sources */,
-				F704D0CE25CA5CF000E82AB5 /* Type.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
