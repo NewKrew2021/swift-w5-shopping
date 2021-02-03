@@ -5,10 +5,11 @@
 //  Created by 지현우 on 2021/02/01.
 //
 
-import Foundation
+import UIKit
 
 class MainViewModel {
     var items: [[Item]] = []
+//    var images: [[UIImage]] = []
 
     var flags: [Bool] = [false, false, false, false]
 
@@ -23,4 +24,5 @@ class MainViewModel {
     subscript(section: Int, item: Int) -> Item {
         items[section][item]
     }
+    
 }

@@ -27,6 +27,7 @@
 		C27894FD25C7F548001319BE /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27894FC25C7F548001319BE /* MainViewModel.swift */; };
 		C278950225C7F8E8001319BE /* ItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C278950125C7F8E8001319BE /* ItemType.swift */; };
 		C278952325C90F75001319BE /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C278952225C90F75001319BE /* Decoder.swift */; };
+		C278956525CA60B9001319BE /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C278956425CA60B9001319BE /* CacheManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		C27894FC25C7F548001319BE /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		C278950125C7F8E8001319BE /* ItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemType.swift; sourceTree = "<group>"; };
 		C278952225C90F75001319BE /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
+		C278956425CA60B9001319BE /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		D1D08137CE5E048C083AEFA1 /* Pods_StoreApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StoreApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC179637F58C319F04FF5CD2 /* Pods-StoreApp-StoreAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreApp-StoreAppUITests.release.xcconfig"; path = "Target Support Files/Pods-StoreApp-StoreAppUITests/Pods-StoreApp-StoreAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E044E80FB808CEA1B8D0228C /* Pods-StoreApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreApp.debug.xcconfig"; path = "Target Support Files/Pods-StoreApp/Pods-StoreApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 			children = (
 				C27894E425C7E725001319BE /* Request.swift */,
 				C278952225C90F75001319BE /* Decoder.swift */,
+				C278956425CA60B9001319BE /* CacheManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				C278950225C7F8E8001319BE /* ItemType.swift in Sources */,
 				C27894BD25C7AF5F001319BE /* ItemCollectionViewCell.swift in Sources */,
 				C278948125C798CC001319BE /* AppDelegate.swift in Sources */,
+				C278956525CA60B9001319BE /* CacheManager.swift in Sources */,
 				C27894E525C7E725001319BE /* Request.swift in Sources */,
 				C27894DF25C7BACD001319BE /* Item.swift in Sources */,
 				C278948325C798CC001319BE /* SceneDelegate.swift in Sources */,

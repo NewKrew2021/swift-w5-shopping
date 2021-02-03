@@ -34,5 +34,7 @@ class ItemCollectionViewCell: UICollectionViewCell {
     func update(title: String, price: Int) {
         titleLabel.text = title
         priceLabel.text = "\(price)원"
+        talkDealPriceLabel.isHidden = true
+        participantOfDealLabel.isHidden = true
     }
 }

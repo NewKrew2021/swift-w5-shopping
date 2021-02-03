@@ -32,6 +32,13 @@ class MainViewController: UIViewController {
         }
     }
 
+    @objc func didReceiveImageNotification(_ noti: Notification) {
+        guard let image: UIImage = noti.userInfo?["Image"] as? UIImage else {
+            return
+        }
+        print(image)
+    }
+
     // MARK: Private
 
     private let imageCache = NSCache<NSString, UIImage>()
@@ -58,6 +65,8 @@ class MainViewController: UIViewController {
 
     private func addObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveItemsNotification(_:)), name: DidReceiveItemsNotification, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveImageNotification(_:)), name: DidReceiveImageNotification, object: nil)
     }
 }
 
@@ -104,41 +113,23 @@ extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: key_itemCell, for: indexPath) as? ItemCollectionViewCell else { return UICollectionViewCell() }
 
-        let data = viewModel.items[indexPath.section][indexPath.item]
-        if let cacheImage = imageCache.object(forKey: data.imageUrl as NSString) {
-            cell.update(img: cacheImage)
-            if data.hasTalkDeal() {
-                cell.update(title: data.name,
-                            price: data.originalPrice,
-                            talkDealPrice: data.price ?? 0,
-                            numberOfParticipant: data.numberOfParticipant ?? 0)
-            } else {
-                cell.update(title: data.name,
-                            price: data.originalPrice)
+        let item = viewModel[indexPath.section, indexPath.item]
+        //url을 통해 캐시를 확인한 후에 이미지 불러오기
+        Request.shared.loadImage(url: URL(string: item.imageUrl)!) { image, _ in
+            DispatchQueue.main.async {
+                cell.update(img: image ?? UIImage())
             }
+            
+        }
 
+        if item.hasTalkDeal() {
+            cell.update(title: item.name,
+                        price: item.originalPrice,
+                        talkDealPrice: item.price ?? 0,
+                        numberOfParticipant: item.numberOfParticipant ?? 0)
         } else {
-            // 캐시된 이미지가 없음
-            DispatchQueue.global().async { [weak self] in
-                guard let self = self else { return }
-                guard let imageUrl = URL(string: data.imageUrl) else { return }
-                guard let imageData = try? Data(contentsOf: imageUrl) else { return }
-                let image = UIImage(data: imageData) ?? UIImage()
-                self.imageCache.setObject(image, forKey: data.imageUrl as NSString)
-
-                DispatchQueue.main.async {
-                    cell.update(img: image)
-                    if data.hasTalkDeal() {
-                        cell.update(title: data.name,
-                                    price: data.originalPrice,
-                                    talkDealPrice: data.price ?? 0,
-                                    numberOfParticipant: data.numberOfParticipant ?? 0)
-                    } else {
-                        cell.update(title: data.name,
-                                    price: data.originalPrice)
-                    }
-                }
-            }
+            cell.update(title: item.name,
+                        price: item.originalPrice)
         }
 
         return cell
@@ -184,7 +175,7 @@ extension MainViewController: UIScrollViewDelegate {
         let offset_Y = collectionView.contentOffset.y
         // 현재높이 - Y
         let distanceFromBottom = collectionView.contentSize.height - offset_Y
-        
+
         if distanceFromBottom < height {
             //
             for section in 0 ..< viewModel.flags.count {
