@@ -1,16 +1,40 @@
 PODS:
+  - Differentiator (5.0.0)
+  - RxCocoa (6.0.0):
+    - RxRelay (= 6.0.0)
+    - RxSwift (= 6.0.0)
+  - RxDataSources (5.0.0):
+    - Differentiator (~> 5.0)
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
+  - RxRelay (6.0.0):
+    - RxSwift (= 6.0.0)
+  - RxSwift (6.0.0)
   - Toaster (2.3.0)
 
 DEPENDENCIES:
+  - RxCocoa (= 6.0.0)
+  - RxDataSources
+  - RxSwift (= 6.0.0)
   - Toaster
 
 SPEC REPOS:
   trunk:
+    - Differentiator
+    - RxCocoa
+    - RxDataSources
+    - RxRelay
+    - RxSwift
     - Toaster
 
 SPEC CHECKSUMS:
+  Differentiator: e8497ceab83c1b10ca233716d547b9af21b9344d
+  RxCocoa: 3f79328fafa3645b34600f37c31e64c73ae3a80e
+  RxDataSources: aa47cc1ed6c500fa0dfecac5c979b723542d79cf
+  RxRelay: 8d593be109c06ea850df027351beba614b012ffb
+  RxSwift: c14e798c59b9f6e9a2df8fd235602e85cc044295
   Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: 272b69aba05a9a1e4115b4824d3eef637c7859f1
+PODFILE CHECKSUM: a6f4d271c41558c2be1253e3119fbcae6ebbb6e8
 
 COCOAPODS: 1.10.1

@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - ProductElement
+// MARK: - ProductElement from Network
 struct ProductElement: Codable, Hashable {
     enum ProductType: String, Codable {
         case BEST, MASK, GROCERY, FRYINGPAN

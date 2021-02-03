@@ -6,71 +6,48 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
+import RxDataSources
 
 class ProductController {
-    private var productList: [ProductElement] = [ProductElement]()
+    typealias Handler = ([ProductElement]) -> Void
+    var items: BehaviorRelay<[SectionModel<String, ProductElement>]>
     private let networkManager: NetworkManable = NetworkManager()
 
     init() {
-        getBest()
-        getGrocery()
-        getFryingpan()
-        getMask()
+        items = BehaviorRelay<[SectionModel<String, ProductElement>]>(value: [])
+        getBest(completed: nil)
+        getGrocery(completed: nil)
+        getFryingpan(completed: nil)
+        getMask(completed: nil)
     }
 
-    private func getBest() {
+    private func getBest(completed: Handler?) {
         ProductUseCase.getBest(with: networkManager) {
             (productList) in
-            self.productList += productList ?? []
+            self.items.accept(self.items.value+[SectionModel(model: "BEST", items: productList ?? [])])
         }
     }
 
-    private func getGrocery() {
+    private func getGrocery(completed: Handler?) {
         ProductUseCase.getGrocery(with: networkManager) {
             (productList) in
-            self.productList += productList ?? []
+            self.items.accept(self.items.value+[SectionModel(model: "GROCERY", items: productList ?? [])])
         }
     }
 
-    private func getFryingpan() {
+    private func getFryingpan(completed: Handler?) {
         ProductUseCase.getFryingpan(with: networkManager) {
             (productList) in
-            self.productList += productList ?? []
+            self.items.accept(self.items.value+[SectionModel(model: "FRYINGPAN", items: productList ?? [])])
         }
     }
 
-    private func getMask() {
+    private func getMask(completed: Handler?) {
         ProductUseCase.getMask(with: networkManager) {
             (productList) in
-            self.productList += productList ?? []
-        }
-    }
-
-    func findById(id: Int) -> ProductElement? {
-        let filtered = productList.filter { $0.productId == id }
-        guard filtered.count > 0 else { return nil }
-        return filtered[0]
-    }
-
-    func get(index: Int) -> ProductElement {
-        return productList[index]
-    }
-
-    func filteredProductList(with filter: String?=nil, limit: Int?=nil) -> [ProductElement] {
-        let filtered = productList.filter { $0.contains(filter) }
-        if let limit = limit {
-            return Array(filtered.prefix(through: limit))
-        } else {
-            return filtered
-        }
-    }
-
-    func filteredTvList(with filter: ProductElement.ProductType?=nil, limit: Int?=nil) -> [ProductElement] {
-        let filtered = productList.filter { $0.type == (filter) }
-        if let limit = limit {
-            return Array(filtered.prefix(through: limit))
-        } else {
-            return filtered
+            self.items.accept(self.items.value+[SectionModel(model: "MASK", items: productList ?? [])])
         }
     }
 

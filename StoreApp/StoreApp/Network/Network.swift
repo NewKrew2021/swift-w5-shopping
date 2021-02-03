@@ -8,7 +8,7 @@
 import Foundation
 
 protocol NetworkManable {
-    func getResource(from: String, completion: @escaping (Data?, Error?) -> Void) throws
+    func getResource(endPoint: EndPoint?, from: String, completion: @escaping (Data?, Error?) -> Void) throws
 }
 
 enum NetworkErrorCase: Error {
@@ -16,18 +16,25 @@ enum NetworkErrorCase: Error {
     case serverError
 }
 
+enum EndPoint: String {
+    case baseUrl =  "https://public.codesquad.kr/jk/kakao-2021"
+}
+
 class NetworkManager: NetworkManable {
+    typealias EndPointType = EndPoint
 
     enum Method: String {
         case GET, POST, PUT, DELETE
     }
-    
-    enum EndPoints {
-        static let baseUrl =  "https://public.codesquad.kr/jk/kakao-2021"
-    }
 
     func getResource(from: String, completion: @escaping (Data?, Error?) -> Void) throws {
-        guard let url = URL(string: EndPoints.baseUrl+from) else { throw NetworkErrorCase.invalidURL }
+        try self.getResource(endPoint: nil, from: from, completion: completion)
+    }
+
+    func getResource(endPoint: EndPoint?, from: String, completion: @escaping (Data?, Error?) -> Void) throws {
+        var _from: String = from
+        if let endPoint = endPoint { _from = endPoint.rawValue + _from }
+        guard let url = URL(string: _from) else { throw NetworkErrorCase.invalidURL }
         var request = URLRequest(url: url)
         request.httpMethod = Method.GET.rawValue
         URLSession.shared.dataTask(with: request) {

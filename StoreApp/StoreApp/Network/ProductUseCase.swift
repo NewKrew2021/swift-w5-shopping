@@ -9,38 +9,38 @@ import Foundation
 
 struct ProductUseCase {
     static func getBest(with manager: NetworkManable, completed: @escaping ([ProductElement]?) -> Void) {
-        try? manager.getResource(from: "/best.json") {
-            (data, error) in
-            if let tvData = data {
-                let tvModels = try? JSONDecoder().decode([ProductElement].self, from: tvData)
-                completed(tvModels)
+        try? manager.getResource(endPoint: EndPoint.baseUrl, from: "/best.json") {
+            (data, _) in
+            if let data = data {
+                let product = try? JSONDecoder().decode([ProductElement].self, from: data)
+                completed(product)
             }
         }
     }
     static func getMask(with manager: NetworkManable, completed: @escaping ([ProductElement]?) -> Void) {
-        try? manager.getResource(from: "/mask.json") {
-            (data, error) in
-            if let tvData = data {
-                let tvModels = try? JSONDecoder().decode([ProductElement].self, from: tvData)
-                completed(tvModels)
+        try? manager.getResource(endPoint: EndPoint.baseUrl, from: "/mask.json") {
+            (data, _) in
+            if let data = data {
+                let product = try? JSONDecoder().decode([ProductElement].self, from: data)
+                completed(product)
             }
         }
     }
     static func getGrocery(with manager: NetworkManable, completed: @escaping ([ProductElement]?) -> Void) {
-        try? manager.getResource(from: "/grocery.json") {
-            (data, error) in
-            if let tvData = data {
-                let tvModels = try? JSONDecoder().decode([ProductElement].self, from: tvData)
-                completed(tvModels)
+        try? manager.getResource(endPoint: EndPoint.baseUrl, from: "/grocery.json") {
+            (data, _) in
+            if let data = data {
+                let product = try? JSONDecoder().decode([ProductElement].self, from: data)
+                completed(product)
             }
         }
     }
     static func getFryingpan(with manager: NetworkManable, completed: @escaping ([ProductElement]?) -> Void) {
-        try? manager.getResource(from: "/fryingpan.json") {
-            (data, error) in
-            if let tvData = data {
-                let tvModels = try? JSONDecoder().decode([ProductElement].self, from: tvData)
-                completed(tvModels)
+        try? manager.getResource(endPoint: EndPoint.baseUrl, from: "/fryingpan.json") {
+            (data, _) in
+            if let data = data {
+                let product = try? JSONDecoder().decode([ProductElement].self, from: data)
+                completed(product)
             }
         }
     }
