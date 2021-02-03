@@ -43,23 +43,40 @@
                                                                 <constraint firstAttribute="width" secondItem="EKI-Ni-wLK" secondAttribute="height" multiplier="1:1" id="wya-zV-xc8"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="jcg-Rd-j0e">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jcg-Rd-j0e">
                                                             <rect key="frame" x="0.0" y="315.66666666666669" width="315.66666666666669" height="45.333333333333314"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Mp-Es-Ov7">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="29.666666666666668" height="11.333333333333334"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="29.666666666666668" height="0.0"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="가격" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRG-zw-kOO">
-                                                                    <rect key="frame" x="0.0" y="11.333333333333314" width="24.333333333333332" height="17"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ArE-Wm-qFm">
+                                                                    <rect key="frame" x="0.0" y="5" width="315.66666666666669" height="20.333333333333332"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="가격" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRG-zw-kOO">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="60.333333333333336" height="20.333333333333332"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7oU-R0-5og">
+                                                                            <rect key="frame" x="70.333333333333314" y="0.0" width="102.66666666666669" height="20.333333333333332"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S8B-8T-dG3">
+                                                                            <rect key="frame" x="183" y="0.0" width="132.66666666666663" height="20.333333333333332"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                </stackView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="딜 참여 인원" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xva-O0-rwz">
-                                                                    <rect key="frame" x="0.0" y="28.333333333333314" width="68.333333333333329" height="17"/>
+                                                                    <rect key="frame" x="0.0" y="30.333333333333314" width="68.333333333333329" height="15"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -81,7 +98,9 @@
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="390" height="361"/>
                                         <connections>
+                                            <outlet property="discountedPrice" destination="7oU-R0-5og" id="Lml-DG-krF"/>
                                             <outlet property="image" destination="EKI-Ni-wLK" id="V2u-KQ-mgB"/>
+                                            <outlet property="originalPrice" destination="S8B-8T-dG3" id="B4P-08-kgN"/>
                                             <outlet property="participant" destination="Xva-O0-rwz" id="QJW-5x-lMc"/>
                                             <outlet property="price" destination="IRG-zw-kOO" id="S0w-V8-iyO"/>
                                             <outlet property="title" destination="1Mp-Es-Ov7" id="aYp-1L-K0Y"/>

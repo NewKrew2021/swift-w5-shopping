@@ -10,7 +10,7 @@ import UIKit
 class MainViewController: UIViewController {
     @IBOutlet var shoppingCollectionView: UICollectionView!
     private let productManager = ProductManager.instance
-    lazy var productCollectionView = ProductCollcetionView(productManager: productManager)
+    lazy var productCollectionView = ProductCollcetionViewUsecase(productManager: productManager)
 
     override func viewDidLoad() {
         super.viewDidLoad()

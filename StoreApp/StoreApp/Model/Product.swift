@@ -19,13 +19,9 @@ struct Product: Decodable {
         return productName
     }
 
-    var price: String {
-        var price = "톡딜가"
-        if let discountedPrice = groupDiscountedPrice {
-            price += " \(discountedPrice)"
-        }
-        price += " \(originalPrice)"
-        return price
+    var discountedPrice: String {
+        guard let discountedPrice = groupDiscountedPrice else { return "" }
+        return String(discountedPrice)
     }
 
     var participant: String {

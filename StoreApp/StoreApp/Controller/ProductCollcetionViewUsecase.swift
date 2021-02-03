@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProductCollcetionView: NSObject {
+class ProductCollcetionViewUsecase: NSObject {
     var cellSize = CGSize()
     var productManager: ProductManager
 
@@ -38,7 +38,7 @@ class ProductCollcetionView: NSObject {
     }
 }
 
-extension ProductCollcetionView: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ProductCollcetionViewUsecase: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in _: UICollectionView) -> Int {
         return 4
     }
@@ -64,7 +64,7 @@ extension ProductCollcetionView: UICollectionViewDelegate, UICollectionViewDataS
     }
 }
 
-extension ProductCollcetionView: UICollectionViewDelegateFlowLayout {
+extension ProductCollcetionViewUsecase: UICollectionViewDelegateFlowLayout {
     func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, minimumLineSpacingForSectionAt _: Int) -> CGFloat {
         return 5
     }
