@@ -9,10 +9,12 @@
 import Foundation
 import Toaster
 
-class Request {
-    static func requestHttp(){
+class RequestURL {
+    func requestHttp(){
         for iter in JsonFileName.jsonFileName {
-            guard let url = URL(string: "http://public.codesquad.kr/jk/kakao-2021/"+iter.rawValue+".json") else { return }
+            guard let url = URL(string: "http://public.codesquad.kr/jk/kakao-2021/\(iter.rawValue).json") else { return }
+            
+            SectionHeader.headerTitle.append(iter.rawValue)
             URLSession.shared.dataTask(with: url) { (data, response, error) in
                 guard let data = data else { return }
                 DispatchQueue.main.async {
@@ -22,9 +24,9 @@ class Request {
                             NotificationCenter.default.post(name: NSNotification.Name("saveItem"), object: self, userInfo: userInfo)
                         }
                     } catch {
-                        let toast = Toast(text: iter.rawValue + "json 을 읽어올 수 없습니다.")
-                        ToastView.appearance().font = UIFont.systemFont(ofSize: 13, weight: .bold)
-                        toast.show()
+                        let str = "\(iter.rawValue).json 을 읽어올 수 없습니다."
+                        let userInfo: [AnyHashable: Any] = [iter.rawValue:str]
+                        NotificationCenter.default.post(name: NSNotification.Name("showToast"), object: self, userInfo: userInfo)
                     }
                 }
             }.resume()

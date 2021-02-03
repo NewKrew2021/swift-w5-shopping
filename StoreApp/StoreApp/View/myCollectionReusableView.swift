@@ -8,6 +8,10 @@
 
 import UIKit
 
+class SectionHeader {
+    static var headerTitle : [String] = []
+}
+
 class myCollectionReusableView: UICollectionReusableView {
     var header = UILabel()
     
@@ -36,17 +40,6 @@ class myCollectionReusableView: UICollectionReusableView {
     }
     
     func setHeader(indexPath: IndexPath){
-        switch indexPath[0] {
-        case 0 :
-            self.header.text = "best"
-        case 1 :
-            self.header.text = "mask"
-        case 2 :
-            self.header.text = "grocery"
-        case 3 :
-            self.header.text = "fryingpan"
-        default :
-            self.header.text = ""
-        }
+        self.header.text = SectionHeader.headerTitle[indexPath[0]]
     }
 }

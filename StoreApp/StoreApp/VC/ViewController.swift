@@ -20,10 +20,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        RequestURL().requestHttp()
+        
         myShoppingCollectionView.delegate = self
         myShoppingCollectionView.dataSource = self
         
+        
         NotificationCenter.default.addObserver(self, selector: #selector(reloadItems(notification:)), name: NSNotification.Name("reloadItem"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showToast(notification:)), name: NSNotification.Name("showToast"), object: nil)
         
         setLayout()
         initNavigationBar()
@@ -38,6 +42,19 @@ class ViewController: UIViewController {
         
     }
     
+    @objc func showToast(notification: Notification){
+        guard let userInfo = notification.userInfo as NSDictionary? as? [String: String] else {return}
+        let toast = Toast(text: userInfo.values.first!)
+        ToastView.appearance().font = UIFont.systemFont(ofSize: 13, weight: .bold)
+        toast.show()
+    }
+    
+    func showToast(text : String){
+         let toast = Toast(text: text)
+        ToastView.appearance().font = UIFont.systemFont(ofSize: 13, weight: .bold)
+        toast.show()
+    }
+    
     @objc func reloadItems(notification: Notification) {
         myShoppingCollectionView.reloadData()
     }
@@ -50,16 +67,16 @@ class ViewController: UIViewController {
 
 extension ViewController : UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return item.allItems[JsonFileName.jsonFileName[section]]!.count
+        return item.count(index: section)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return item.allItems.count
+        return item.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCollectionViewCell", for: indexPath) as! myCollectionViewCell
-        cell.setSubViews(indexPath: indexPath, data: item.allItems)
+        cell.setSubViews(indexPath: indexPath, data: item)
         return cell
     }
     
@@ -92,18 +109,15 @@ extension ViewController : UICollectionViewDataSource, UICollectionViewDelegate,
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let title = item.allItems[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].productName
+        let title = item[indexPath].productName
         var price : String = ""
-        if let dc = item.allItems[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].groupDiscountedPrice {
-            price = String(dc) + "원"
+        if let dc = item[indexPath].groupDiscountedPrice {
+            price = "\(dc)원"
         }
-        if let dc = item.allItems[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].originalPrice{
-            price = String(dc) + "원"
+        else if let dc = item[indexPath].originalPrice{
+            price = "\(dc)원"
         }
-        
-        let toast = Toast(text: item.allItems[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]].productName + "\n" + price)
-        ToastView.appearance().font = UIFont.systemFont(ofSize: 13, weight: .bold)
-        toast.show()
+        self.showToast(text: "\(item[indexPath].productName)\n\(price)")
     }
     
 }
