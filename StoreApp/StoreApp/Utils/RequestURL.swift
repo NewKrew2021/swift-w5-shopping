@@ -13,27 +13,23 @@ class RequestURL {
     func requestHttp(){
         for iter in JsonFileName.jsonFileName {
             guard let url = URL(string: "http://public.codesquad.kr/jk/kakao-2021/\(iter.rawValue).json") else { return }
-
+            
             SectionHeader.headerTitle.append(iter.rawValue)
             URLSession.shared.dataTask(with: url) { (data, response, error) in
                 guard let data = data else { return }
                 DispatchQueue.main.async {
                     do {
-                        self.decodingJsonData(iter: iter, data: data)
+                        if let decodeData = try? JSONDecoder().decode([Item].self, from : data){
+                            let userInfo: [AnyHashable: Any] = [iter.rawValue:decodeData]
+                            NotificationCenter.default.post(name: NSNotification.Name("saveItem"), object: self, userInfo: userInfo)
+                        }
                     } catch {
-                        let toast = Toast(text: iter.rawValue + "json 을 읽어올 수 없습니다.")
-                        ToastView.appearance().font = UIFont.systemFont(ofSize: 13, weight: .bold)
-                        toast.show()
+                        let str = "\(iter.rawValue).json 을 읽어올 수 없습니다."
+                        let userInfo: [AnyHashable: Any] = [iter.rawValue:str]
+                        NotificationCenter.default.post(name: NSNotification.Name("showToast"), object: self, userInfo: userInfo)
                     }
                 }
             }.resume()
-        }
-    }
-    
-    func decodingJsonData(iter: JsonFileName, data: Data) {
-        if let decodeData = try? JSONDecoder().decode([Item].self, from : data){
-            let userInfo: [AnyHashable: Any] = [iter.rawValue:decodeData]
-            NotificationCenter.default.post(name: NSNotification.Name("saveItem"), object: self, userInfo: userInfo)
         }
     }
 }
