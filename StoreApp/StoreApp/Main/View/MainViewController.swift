@@ -178,7 +178,6 @@ extension MainViewController: UIScrollViewDelegate {
         let distanceFromBottom = collectionView.contentSize.height - offset_Y
 
         if distanceFromBottom < height {
-            //
             for section in 0 ..< viewModel.flags.count {
                 if !viewModel.hasItems(at: section) {
                     getItems(index: section)

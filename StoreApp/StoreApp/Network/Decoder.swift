@@ -13,7 +13,6 @@ class Decoder{
         var items: [Item] = []
         do {
             items = try JSONDecoder().decode([Item].self, from: data)
-            
         } catch let DecodingError.keyNotFound(key, context) {
             Swift.print("could not find key \(key) in JSON: \(context.debugDescription)")
         } catch let DecodingError.valueNotFound(type, context) {

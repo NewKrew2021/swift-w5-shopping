@@ -9,7 +9,6 @@ import UIKit
 
 class MainViewModel {
     var items: [[Item]] = []
-//    var images: [[UIImage]] = []
 
     var flags: [Bool] = [false, false, false, false]
 
