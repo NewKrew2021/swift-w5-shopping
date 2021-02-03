@@ -19,3 +19,14 @@
 
 <div>
 <img width: 200 src = "https://user-images.githubusercontent.com/45382324/106583546-8f5b1200-6588-11eb-9ef9-c251917ead2c.png"></div>
+
+### 2021.02.03
+
+1. 데이터 관리 객체가 프로토콜을 상속받도록 처리
+2. 이미지를 비동기적으로 다운로드 처리
+3. 다운로드한 이미지 캐싱
+4. 이미지가 캐싱되어 있는 경우 새로 다운로드 하지 않도록 처리
+5. 이미지 갱신 비동기적으로 처리
+
+<div>
+<img width: 200 src = "https://user-images.githubusercontent.com/45382324/106583546-8f5b1200-6588-11eb-9ef9-c251917ead2c.png"></div>
