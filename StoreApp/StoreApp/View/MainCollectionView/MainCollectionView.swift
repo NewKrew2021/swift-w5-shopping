@@ -11,24 +11,12 @@ import UIKit
 class MainCollectionView: UICollectionView {
     
     var storeItems = StoreItems()
-    let networkManager = NetworkManager()
     
     func initView() {
         
-        getData()
         self.delegate = self
         self.dataSource = self
         setLayout()
-        NotificationCenter.default.addObserver(self, selector: #selector(addItemData), name: Notification.Name("getItemData"), object: nil)
-        
-    }
-    
-    func getData() {
-        
-        networkManager.getItemData(category: "best")
-        networkManager.getItemData(category: "mask")
-        networkManager.getItemData(category: "grocery")
-        networkManager.getItemData(category: "fryingpan")
         
     }
     
@@ -49,38 +37,11 @@ class MainCollectionView: UICollectionView {
         
     }
     
-    @objc func addItemData(_ notification: Notification) {
-        
-        let jsonData = notification.object as! JsonData
-        switch jsonData.category {
-        case "best":
-            for storeItem in jsonData.storeItems {
-                self.storeItems.bests.append(storeItem)
-            }
-        case "mask":
-            for storeItem in jsonData.storeItems {
-                self.storeItems.masks.append(storeItem)
-            }
-        case "grocery":
-            for storeItem in jsonData.storeItems {
-                self.storeItems.grocerys.append(storeItem)
-            }
-        case "fryingpan":
-            for storeItem in jsonData.storeItems {
-                self.storeItems.fryingpans.append(storeItem)
-            }
-        default:
-            self.reloadData()
-        }
-        self.reloadData()
-    }
-    
 }
 
 extension MainCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        print("HI")
         return 4
     }
     
@@ -124,7 +85,6 @@ extension MainCollectionView: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         let header = self.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "MainCollectionHeaderCell", for: indexPath) as! MainCollectionHeaderCell
-        print("god")
         guard kind == UICollectionView.elementKindSectionHeader else {return header}
         switch indexPath.section {
         case 0:

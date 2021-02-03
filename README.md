@@ -27,3 +27,8 @@
 - parsed data와 collectionView 연결
 - section은 아직 미구현
 ![Simulator Screen Shot - iPhone SE (2nd generation) - 2021-02-02 at 22 12 29](https://user-images.githubusercontent.com/28801805/106605067-d0145480-65a3-11eb-8639-b8d34bc3b629.png)
+
+
+7. resparate of view roles
+- MainCollectionView, MainViewController 역할 재분배
+- 접근제어제 재설정
