@@ -30,7 +30,6 @@ class StoreItems {
     
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadItems(notification:)), name: NSNotification.Name("saveItem"), object: nil)
-        Request.requestHttp()
     }
     
     @objc func reloadItems(notification: Notification) {
