@@ -21,7 +21,6 @@
 		436EF8E025C9245300CE0677 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436EF8DF25C9245300CE0677 /* MainCollectionViewCell.swift */; };
 		436EF8E325C9302500CE0677 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436EF8E225C9302500CE0677 /* NetworkManager.swift */; };
 		436EF8E525C9438400CE0677 /* MainCollectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436EF8E425C9438400CE0677 /* MainCollectionHeaderCell.swift */; };
-		436EF8E725C94DB200CE0677 /* JsonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436EF8E625C94DB200CE0677 /* JsonData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +61,6 @@
 		436EF8DF25C9245300CE0677 /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 		436EF8E225C9302500CE0677 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		436EF8E425C9438400CE0677 /* MainCollectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionHeaderCell.swift; sourceTree = "<group>"; };
-		436EF8E625C94DB200CE0677 /* JsonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,7 +155,6 @@
 			children = (
 				436EF8D425C8CEC400CE0677 /* StoreItem.swift */,
 				436EF8D625C8CF7E00CE0677 /* StoreItems.swift */,
-				436EF8E625C94DB200CE0677 /* JsonData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -329,7 +326,6 @@
 				436EF89225C7986F00CE0677 /* SceneDelegate.swift in Sources */,
 				436EF8D725C8CF7E00CE0677 /* StoreItems.swift in Sources */,
 				436EF8D525C8CEC400CE0677 /* StoreItem.swift in Sources */,
-				436EF8E725C94DB200CE0677 /* JsonData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

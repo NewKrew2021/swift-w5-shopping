@@ -34,11 +34,11 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="book" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="v7U-Ou-aKV">
-                                                    <rect key="frame" x="10" y="11.5" width="367" height="377.5"/>
+                                                    <rect key="frame" x="10" y="11.5" width="367" height="381.5"/>
                                                     <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hti-9P-M33">
-                                                    <rect key="frame" x="10" y="400.5" width="367" height="20.5"/>
+                                                    <rect key="frame" x="10" y="404.5" width="367" height="20.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20.5" id="hqj-vt-X3A"/>
                                                     </constraints>
@@ -51,19 +51,19 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="DhP-MU-zqy"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mxg-mt-Yrn">
-                                                    <rect key="frame" x="10" y="431" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="10" y="435" width="35.5" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fzc-Ah-Wi9">
-                                                    <rect key="frame" x="82" y="431" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="75.5" y="435" width="35.5" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
