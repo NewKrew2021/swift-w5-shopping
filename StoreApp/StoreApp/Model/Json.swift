@@ -14,7 +14,7 @@ struct Json {
 
         do {
             products = try jsonDecoder.decode([Product].self, from: jsonData)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "jsonParsing"),object: nil, userInfo: ["products" : products, "productType" : productType])
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "jsonParsing"),object: nil, userInfo: ["products" : products, "productTypeValue" : productType.rawValue])
         } catch let error {
             print("error: ", error)
         }

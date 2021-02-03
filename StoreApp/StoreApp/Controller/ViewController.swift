@@ -49,8 +49,10 @@ class ViewController: UIViewController {
     }
     
     @objc func completedJsonParsing(_ notification:Notification) {
-        self.products[(notification.userInfo?["productType"] as! ProductType).rawValue] = notification.userInfo?["products"] as! [Product]
-        self.collectionView.reloadData()
+        DispatchQueue.main.async {
+            self.products[notification.userInfo?["productTypeValue"] as! Int] = notification.userInfo?["products"] as! [Product]
+            self.collectionView.reloadData()
+        }
     }
 }
 
