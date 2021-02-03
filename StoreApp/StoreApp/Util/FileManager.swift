@@ -7,8 +7,27 @@
 
 import Foundation
 
-extension FileManager {
-    
-//    func getImage
-    
+class MyFileManager: FileManager {
+    func getImageFromCache(imageUrl: URL) -> Data? {
+        guard let localURL = urls(for: .cachesDirectory, in: .userDomainMask).first else { return nil }
+        var filePath = URL(fileURLWithPath: localURL.path)
+        filePath.appendPathComponent(imageUrl.lastPathComponent)
+        guard fileExists(atPath: filePath.path) else {
+            return nil
+        }
+        return try? Data(contentsOf: imageUrl)
+    }
+
+    func saveImageAtCahe(imageUrl: URL, fileName: String) {
+        guard let localURL = urls(for: .cachesDirectory, in: .userDomainMask).first else { return }
+        var filePath = URL(fileURLWithPath: localURL.path)
+        filePath.appendPathComponent(imageUrl.lastPathComponent)
+        do {
+//            localURL.appendPathComponent(imageUrl.absoluteString)
+            try copyItem(at: imageUrl, to: filePath)
+        } catch {
+            print("error writing file \(imageUrl)")
+        }
+    }
+
 }

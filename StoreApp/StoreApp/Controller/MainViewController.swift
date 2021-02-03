@@ -19,9 +19,6 @@ class MainViewController: UIViewController {
         shoppingCollectionView.delegate = productCollectionView
         shoppingCollectionView.dataSource = productCollectionView
 
-        let fm = FileManager()
-        print(fm.currentDirectoryPath)
-
         NotificationCenter.default.addObserver(self, selector: #selector(reloadSection(_:)), name: NSNotification.Name("reloadSection"), object: nil)
     }
 

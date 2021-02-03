@@ -24,7 +24,7 @@ class ProductCell: UICollectionViewCell {
         participant.text = product.participant
     }
     
-    func setImage(image: UIImage){
+    func setImage(image: UIImage?){
         self.image.image = image
     }
 
