@@ -97,13 +97,13 @@ extension ViewController : UICollectionViewDataSource, UICollectionViewDelegate,
         let title = item[indexPath].productName
         var price : String = ""
         if let dc = item[indexPath].groupDiscountedPrice {
-            price = String(dc) + "원"
+            price = "\(dc)원"
         }
-        if let dc = item[indexPath].originalPrice{
-            price = String(dc) + "원"
+        else if let dc = item[indexPath].originalPrice{
+            price = "\(dc)원"
         }
         
-        let toast = Toast(text: item[indexPath].productName + "\n" + price)
+        let toast = Toast(text: "\(item[indexPath].productName)\n\(price)")
         ToastView.appearance().font = UIFont.systemFont(ofSize: 13, weight: .bold)
         toast.show()
     }

@@ -95,21 +95,21 @@ class StoreItems {
     
     func getGroupDiscountedPrice(indexPath: IndexPath) -> String {
         if let dc = self[indexPath].groupDiscountedPrice {
-            return "톡딜가 : " + String(dc) + "원"
+            return "톡딜가 : \(String(dc))원"
         }
         return ""
     }
     
     func getOriginalPrice(indexPath: IndexPath) -> String {
         if let dc = self[indexPath].originalPrice {
-            return String(dc) + "원"
+            return "\(String(dc))원"
         }
         return ""
     }
     
     func getGroupDiscountUserCount(indexPath: IndexPath) -> String {
         if let dc = self[indexPath].groupDiscountUserCount {
-            return "현재 "+String(dc) + "명 딜 참여중"
+            return "현재 \(String(dc))명 딜 참여중"
         }
         return ""
         
