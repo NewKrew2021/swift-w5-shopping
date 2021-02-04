@@ -33,9 +33,9 @@ class ShoppingItemCell: UICollectionViewCell {
             }
         }
         productName.text = item.productName
-        groupDiscountedPrice.text = StringMaker.makeGroupDiscountedPriceString(price: item.groupDiscountedPrice)
-        originalPrice.text = StringMaker.makeOriginalPriceString(price: item.originalPrice)
-        groupDiscountUserCount.text = StringMaker.makeGroudDiscountUserCountString(count: item.groupDiscountUserCount)
+        groupDiscountedPrice.text = ShoppingItemCellStringMaker.makeGroupDiscountedPriceString(price: item.groupDiscountedPrice)
+        originalPrice.text = ShoppingItemCellStringMaker.makeOriginalPriceString(price: item.originalPrice)
+        groupDiscountUserCount.text = ShoppingItemCellStringMaker.makeGroudDiscountUserCountString(count: item.groupDiscountUserCount)
         storeDomain = item.storeDomain
         productId = item.productId
     }
@@ -104,7 +104,7 @@ class ShoppingItemCell: UICollectionViewCell {
     }
     
     @objc func cellTouched() {
-        NotificationCenter.default.post(name: .cellTouched, object: nil, userInfo: ["productName" : productName.text!, "productId" : productId, "storeDomain" : storeDomain])
+        NotificationCenter.default.post(name: .cellTouched, object: nil, userInfo: ["productId" : productId, "storeDomain" : storeDomain])
     }
 }
 

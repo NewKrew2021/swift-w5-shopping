@@ -114,3 +114,44 @@
 - DetailView 추가
 - Detail 페이지 파싱하는 코드 추가
 
+### Json Model 수정 0204 10:00
+
+- Notice struct 추가
+- notice를 [JSONAny]가 아닌 [Notice]로 수정
+- TalkDeal struct 추가
+- DataClass에 talkDeal 속성 추가
+
+### DetailView 화면 구성
+
+- 스토리보드 수정
+- StringMaker에서 ViewHelper로 파일 이름 변경 후 ShoppingItemCellStringMaker, DetailViewStringMaker, DetailViewLogicHelper로 클래스 분할
+- 뷰에서 정보를 얻어서 가공하는 역할을 하는 메소드 추가
+- 뷰 오토레이이아웃 설정
+- 웹 뷰 가져와서 띄우기
+
+### Json Model 분리 0204 20:50
+
+- StoreItem과 DetailItem으로 분리
+
+### StoreItemManager 변경
+
+- StoreItemManagerProtocol 생성
+- StoreItemManager가 프로토콜 채택 후 메소드 static에서 일반 메소드로 변경
+- StoreItemManager의 static method를 사용하던 부분에서 StoreItemManagerProtocol을 참조하도록 수정
+
+### DetailViewController observer 등록 시기 변경
+
+- viewDidLoad에서 observer를 등록하던 기존의 코드의 문제점(처음 저장되는 데이터를 View가 받아들이지 못하는 문제)을 해결하기 위해 MainViewController에서 DetailViewController 인스턴스를 생성할 때 observer를 등록하는 코드로 수정
+
+### Get 메소드들을 computed property로 변경
+
+- DetailItemManagetProtocol의 get method들을 only gettable property로 변경
+- DetailItemManager의 get method들을 computed property로 변경
+- get method를 사용하던 코드 수정
+
+### HTTPRequestManager 메소드 수정
+
+- URLSession을 통해 받아온 data를 바로 JsonDecoder를 통해 가공하는 형식이 아니라 받아온 data를 넘겨주고 completionHandler에서 data를 가공할 수 있도록 수정
+
+
+

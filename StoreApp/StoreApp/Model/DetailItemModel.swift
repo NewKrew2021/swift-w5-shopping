@@ -1,182 +1,89 @@
 //
-//  JsonModels.swift
+//  DetailItemModel.swift
 //  StoreApp
 //
-//  Created by Hochang Lee on 2021/02/01.
+//  Created by Hochang Lee on 2021/02/04.
 //
 
 import Foundation
 
-class ItemManager {
-    enum ItemType : String, CaseIterable, CustomStringConvertible {
-        case best
-        case mask
-        case grocery
-        case fryingpan
-        
-        var description: String {
-            switch self {
-            case .best : return "베스트"
-            case .mask : return "마스크"
-            case .grocery : return "잡화"
-            case .fryingpan : return "프래이팬"
-            }
-        }
-    }
-
-    static var bestItems : [StoreItem] = []
-    static var maskItems : [StoreItem] = []
-    static var groceryItems : [StoreItem] = []
-    static var fryingpanItems : [StoreItem] = []
+class DetailItemManager : DetailItemManagerProtocol{
+    private var detailItem : DetailItem!
     
-    static func setAllTypeOfItems() {
-        for itemType in ItemType.allCases {
-            setItems(itemType: itemType) {
-                NotificationCenter.default.post(name: .FinishedItemSet, object: self, userInfo: ["itemType" : itemType])
-            }
-        }
-    }
-    
-    static func setItems(itemType : ItemType, completionHandler : @escaping () -> Void) {
-        switch itemType {
-        case .best:
-            HTTPRequestManager.getJsonData(itemType: itemType) {
-                (itemArray) in
-                bestItems = itemArray
-                completionHandler()
-            }
-            return
-        case .fryingpan:
-            HTTPRequestManager.getJsonData(itemType: itemType) {
-                (itemArray) in
-                fryingpanItems = itemArray
-                completionHandler()
-            }
-            return
-        case .grocery:
-            HTTPRequestManager.getJsonData(itemType: itemType) {
-                (itemArray) in
-                groceryItems = itemArray
-                completionHandler()
-            }
-            return
-        case .mask:
-            HTTPRequestManager.getJsonData(itemType: itemType) {
-                (itemArray) in
-                maskItems = itemArray
-                completionHandler()
-            }
-            return
-        }
-    }
-    
-    static func getItems(itemType : ItemType) -> [StoreItem] {
-        switch itemType {
-        case .best:
-            return bestItems
-        case .fryingpan:
-            return fryingpanItems
-        case .grocery:
-            return groceryItems
-        case .mask:
-            return maskItems
-        }
-    }
-    
-    static func getCount(itemType : ItemType) -> Int {
-        switch itemType {
-        case .best:
-            return bestItems.count
-        case .fryingpan:
-            return fryingpanItems.count
-        case .grocery:
-            return groceryItems.count
-        case .mask:
-            return maskItems.count
-        }
-    }
-    
-    static func subccript(itemType : ItemType, index : Int) -> StoreItem {
-        switch itemType {
-        case .best:
-            return bestItems[index]
-        case .fryingpan:
-            return fryingpanItems[index]
-        case .grocery:
-            return groceryItems[index]
-        case .mask:
-            return maskItems[index]
-        }
-    }
-}
-
-struct StoreItem: Codable, Hashable {
-    let identifier = UUID()
-    let productName: String
-    let productImage: String
-    let groupDiscountedPrice: Int?
-    let originalPrice: Int
-    let groupDiscountUserCount: Int?
-    let storeDomain : String
-    let productId : Int
-
-    enum CodingKeys: String, CodingKey {
-        case productName, productImage, originalPrice, groupDiscountedPrice, groupDiscountUserCount, storeDomain, productId
-    }
-    
-}
-
-class DetailItemManager : DetailManagerProtocol{
-    static private var detailItem : DetailItem!
-    static func setItem(storeDomain : String, productId : String) {
+    func setItem(storeDomain : String, productId : String) {
         HTTPRequestManager.getJsonDataOfDetail(storeDomain: storeDomain, productId: productId) {
-            (item) in
-            detailItem = item
+            (data) in
+            guard let result = JsonHandler.shared.parse(data: data, toType: DetailItem.self) else { return }
+            self.detailItem = result
+            NotificationCenter.default.post(name: .DetailViewDataIsReady, object: nil)
         }
     }
     
-    func getPreviewImages() -> [String] {
-        return DetailItemManager.detailItem.data.previewImages
+    var previewImages : [String] {
+        return detailItem.data.previewImages
     }
     
-    func getTotalProductStarRating() -> Double {
-        return DetailItemManager.detailItem.data.review.totalProductStarRating
+    var totalProductStarRating : Double {
+        return detailItem.data.review.totalProductStarRating
     }
     
-    func getReviewCount() -> Int {
-        return DetailItemManager.detailItem.data.review.reviewCount
+    var reviewCount : Int {
+        return detailItem.data.review.reviewCount
     }
     
-    func getStatus() -> String {
-        return DetailItemManager.detailItem.data.status
+    var standardPrice: Int {
+        return detailItem.data.price.standardPrice
     }
     
-    func getDiscountedPrice() -> Int {
-        return DetailItemManager.detailItem.data.price.discountedPrice
+    var status : String {
+        guard let talkDeal = detailItem.data.talkDeal else { return "" }
+        return talkDeal.status
     }
     
-    func getStoreName() -> String {
-        return DetailItemManager.detailItem.data.store.name
+    var discountedPrice : Int {
+        guard let talkDeal = detailItem.data.talkDeal else { return 0 }
+        return talkDeal.discountPrice
     }
     
-    func getDeliveryFeeType() -> String {
-        return DetailItemManager.detailItem.data.delivery.deliveryFeeType
+    var storeName : String {
+        return detailItem.data.store.name
     }
     
-    func getDeliveryFee() -> Int {
-        return DetailItemManager.detailItem.data.delivery.deliveryFee
+    var productName : String {
+        return detailItem.data.name
     }
     
-    func getNoticeTitle() -> String? {
-//        return DetailItemManager.detailItem.data.notices
+    var deliveryFeeType : String {
+        return detailItem.data.delivery.deliveryFeeType
+    }
+    
+    var deliveryFee : Int {
+        return detailItem.data.delivery.deliveryFee
+    }
+    
+    var noticeCount : Int {
+        return detailItem.data.notices.count
+    }
+    
+    var noticeTitle : String? {
+        let notices = detailItem.data.notices
+        if notices.count > 0 {
+            return notices[0].title
+        }
         return nil
     }
     
-    func getNoticeProduceAt() -> String? {
+    var noticeCreatedAt : String? {
+        let notices = detailItem.data.notices
+        if notices.count > 0 {
+            return notices[0].createdAt
+        }
         return nil
     }
     
-
+    var description : String {
+        return detailItem.data.description
+    }
 }
 
 struct DetailItem: Codable {
@@ -191,11 +98,14 @@ struct DataClass: Codable {
     let review: Review
     let delivery: Delivery
     let store: Store
-    let notices: [JSONAny]
+    let name : String
+    let talkDeal : TalkDeal?
+    let notices: [Notice]
     let status: String
+    let description : String
 
     enum CodingKeys: String, CodingKey {
-        case previewImages, price, review, delivery, store, notices, status
+        case previewImages, price, review, delivery, store, name, talkDeal, notices, status, description
     }
 }
 
@@ -207,7 +117,7 @@ struct Delivery: Codable {
 
 // MARK: - Price
 struct Price: Codable {
-    let discountedPrice: Int
+    let standardPrice: Int
 }
 
 // MARK: - Review
@@ -219,6 +129,18 @@ struct Review: Codable {
 // MARK: - Store
 struct Store: Codable {
     let name: String
+}
+
+// MARK: - TalkDeal
+struct TalkDeal: Codable {
+    let status: String
+    let discountPrice : Int
+}
+
+// MARK: - Notice
+struct Notice: Codable {
+    let title: String
+    let createdAt : String
 }
 
 // MARK: - Encode/decode helpers
