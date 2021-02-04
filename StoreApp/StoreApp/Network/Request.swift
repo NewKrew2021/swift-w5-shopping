@@ -57,6 +57,28 @@ class Request {
         url: URL,
         completion: @escaping (UIImage?, Error?) -> Void
     ) {
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data else {
+                print("data")
+                completion(nil, nil)
+                return
+            }
+            
+            if let image = UIImage(data: data){
+                print("success")
+                completion(image, nil)
+                return
+            }
+            print("error")
+            completion(nil, error)
+            
+        }.resume()
+    }
+
+    func loadImageByCache(
+        url: URL,
+        completion: @escaping (UIImage?, Error?) -> Void
+    ) {
         guard let query = url.query else {
             completion(nil, nil)
             return

@@ -95,12 +95,15 @@ extension MainViewController: UICollectionViewDelegate {
         let name = item.name
         guard let price = item.price else { return }
         let detailVC = DetailViewController()
+        detailVC.title = item.storeName
         request.requestDetail(storeDomain: item.storeDomain, productId: item.id) { detail, _ in
-            print(detail)
             detailVC.viewModel.detail = detail
+            
+            DispatchQueue.main.async {[weak self] in
+                Toast(text: "상품명 : \(name)\n가격 : \(price)원", delay: 0, duration: 1.0).show()
+                self?.navigationController?.pushViewController(detailVC, animated: true)
+            }
         }
-        Toast(text: "상품명 : \(name)\n가격 : \(price)원", delay: 0, duration: 1.0).show()
-        self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 
@@ -121,7 +124,7 @@ extension MainViewController: UICollectionViewDataSource {
         let item = viewModel[indexPath.section, indexPath.item]
         if let url = URL(string: item.imageUrl) {
             // url을 통해 캐시를 확인한 후에 이미지 불러오기
-            Request.shared.loadImage(url: url) { image, _ in
+            Request.shared.loadImageByCache(url: url) { image, _ in
                 DispatchQueue.main.async {
                     cell.update(img: image ?? UIImage())
                 }
