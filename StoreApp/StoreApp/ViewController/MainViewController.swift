@@ -24,6 +24,7 @@ class MainViewController: UIViewController {
         mainCollectionView.initView()
         mainCollectionView.storeItems = self.storeItems
         NotificationCenter.default.addObserver(self, selector: #selector(addItemData), name: Notification.Name("getItemData"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(delieverSelectedData), name: Notification.Name("delieverSelectedData"), object: nil)
     }
     
     func getData() {
@@ -45,6 +46,15 @@ class MainViewController: UIViewController {
         
         self.storeItems.addData(category: category, items: results)
         NotificationCenter.default.post(name: Notification.Name(rawValue: "reloadCollectionView"), object: nil)
+        
+    }
+    
+    @objc func delieverSelectedData(_ notification: Notification) {
+        
+        let storeItem = notification.object as? StoreItem
+        guard let detailViewController = self.storyboard?.instantiateViewController(identifier: "DetailViewController") as? DetailViewController else { return }
+        detailViewController.storeItem = storeItem
+        navigationController?.pushViewController(detailViewController, animated: true)
         
     }
 
