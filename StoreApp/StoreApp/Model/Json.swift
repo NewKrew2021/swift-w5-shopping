@@ -8,16 +8,16 @@
 import UIKit
 
 struct Json {
-    
-    func parsing(jsonData : Data, productType : ProductType) {
+    func parsing(jsonData : Data) -> Request.Result<[Product], Error> {
         var products : [Product] = []
         let jsonDecoder: JSONDecoder = JSONDecoder()
 
         do {
             products = try jsonDecoder.decode([Product].self, from: jsonData)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "jsonParsing"),object: nil, userInfo: ["products" : products, "productTypeValue" : productType.rawValue])
+            
+            return .success(products)
         } catch let error {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "jsonErrorHandling"),object: nil, userInfo: ["error" : error])
+            return .failure(error)
         }
     }
 }

@@ -9,15 +9,13 @@ import Foundation
 
 class Request {
     
+    enum Result<Success, Failure: Error> {
+        case success(Success)
+        case failure(Failure)
+    }
+    
     private let baseUrl = "http://public.codesquad.kr/jk/kakao-2021/"
     private let json = Json()
-    
-    init() {
-        NotificationCenter.default.addObserver(self,
-                    selector: #selector(errorHandling),
-                    name: NSNotification.Name(rawValue: "jsonErrorHandling"),
-                    object: nil)
-    }
     
     func request(productType: ProductType) {
         let url = "\(baseUrl)\(productType.info.description).json"
@@ -28,13 +26,16 @@ class Request {
                 }
                 return
             }
+            
             DispatchQueue.main.async {
-                self.json.parsing(jsonData: data ?? Data(), productType: productType)
+                let result = self.json.parsing(jsonData: data ?? Data())
+                switch result {
+                case .success(let resultData):
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "jsonParsing"),object: nil, userInfo: ["products" : resultData, "productTypeValue" : productType.rawValue])
+                case .failure(let error):
+                    print(error)
+                }
             }
         }.resume()
-    }
-    
-    @objc func errorHandling(_ notification:Notification) {
-        print(notification.userInfo?["error"] ?? "error")
     }
 }
