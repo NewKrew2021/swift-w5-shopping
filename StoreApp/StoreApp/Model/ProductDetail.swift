@@ -7,43 +7,54 @@
 
 import Foundation
 
-struct ProductDetail {
+struct ProductDetailJson: Decodable {
+    var result: Bool
+    var data: ProductDetail
+}
+
+struct ProductDetail: Decodable {
     var previewImages: [URL]
     var description: String
     var review: Review
-    var talkDeal : TalkDeal?
+    var talkDeal: TalkDeal?
     var store: Store
     var delivery: Delivery
-    var notices: Notices
-    
-    struct Review {
-        var totalProductStarRating: Float
+    var price: Price
+    var notices: [Notice]
+
+    struct Review: Decodable {
+        var totalProductStarRating: Double
         var reviewCount: Int
-        
     }
-    
-    struct TalkDeal {
-        var status: String
+
+    struct TalkDeal: Decodable {
+        var status: Status
         var discountPrice: Int
-        enum Status: String {
+        enum Status: String, Decodable {
             case ON_SALE
         }
     }
-    
-    struct Store {
+
+    struct Store: Decodable {
         var name: String
     }
-    
-    struct Delivery {
+
+    struct Price: Decodable {
+        var standardPrice, discountedPrice, minDiscountedPrice, maxDiscountedPrice: Int
+        var discountRate: String
+    }
+
+    struct Delivery: Decodable {
         var deliveryFeeType: DeliveryFeeType
         var deliveryFee: Int
-        
-        enum DeliveryFeeType: String {
-            case Free
+
+        enum DeliveryFeeType: String, Decodable {
+            case FREE
+            case PAID
         }
     }
-    
-    struct Notices {
+
+    struct Notice: Decodable {
         var title: String
         var createAt: String
     }

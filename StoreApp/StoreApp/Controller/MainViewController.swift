@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toaster
 
 class MainViewController: UIViewController {
     @IBOutlet var shoppingCollectionView: UICollectionView!
@@ -18,12 +19,32 @@ class MainViewController: UIViewController {
         productCollectionView.productManager = productManager
         shoppingCollectionView.delegate = productCollectionView
         shoppingCollectionView.dataSource = productCollectionView
-
+        
         NotificationCenter.default.addObserver(self, selector: #selector(reloadSection(_:)), name: NSNotification.Name("reloadSection"), object: nil)
     }
 
     @objc func reloadSection(_ noticiation: Notification) {
         guard let index = noticiation.userInfo?["at"] as? Int else { return }
-        shoppingCollectionView.reloadSections(IndexSet(integer: index))
+        DispatchQueue.main.async {
+            self.shoppingCollectionView.reloadSections(IndexSet(integer: index))
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touchPoint = touches.first?.location(in: shoppingCollectionView) else { return }
+        guard let indexPath = shoppingCollectionView.indexPathForItem(at: touchPoint) else { return }
+        guard let productType = ProductType(rawValue: indexPath.section) else { return }
+        guard let product = productManager.getProduct(productType: productType, at: indexPath.item) else { return }
+        Toast(text: "상품명:\(product.title) \n가격:\(product.originalPrice)").start()
+        
+        guard let detailViewController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") else { return }
+        navigationController?.pushViewController(detailViewController , animated: true)
+        NetworkHandler.getData(storeDomain: product.storeDomain, productId: product.productId){(data) in
+            let decoder = JsonDecoder()
+            guard let detail = decoder.parseDataToDetail(data: data) else { return }
+            print(detail)
+//            detailViewController.test
+        }
+       
     }
 }

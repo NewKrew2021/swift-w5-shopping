@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toaster
 
 class ProductCollcetionViewUsecase: NSObject {
     var cellSize = CGSize()

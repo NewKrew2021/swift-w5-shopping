@@ -5,7 +5,6 @@
 //  Created by 윤준수 on 2021/02/01.
 //
 
-import Toaster
 import UIKit
 
 class ProductCell: UICollectionViewCell {
@@ -26,6 +25,5 @@ class ProductCell: UICollectionViewCell {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        Toast(text: "상품명:\(title.text ?? "") \n가격:\(originalPrice.text ?? "")").start()
     }
 }
