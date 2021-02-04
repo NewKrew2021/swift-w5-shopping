@@ -53,26 +53,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xr0-1c-u4s">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xr0-1c-u4s">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="THm-nF-114">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="822"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="THm-nF-114">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="706"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vGV-Qq-FsR">
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHq-xw-q0S">
                                                 <rect key="frame" x="8" y="8" width="398" height="398"/>
-                                                <color key="backgroundColor" red="0.99652487040000004" green="0.91047090289999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="vGV-Qq-FsR" secondAttribute="height" multiplier="1:1" id="6MQ-Z2-NUU"/>
+                                                    <constraint firstAttribute="width" secondItem="zHq-xw-q0S" secondAttribute="height" multiplier="1:1" id="XsT-EG-ao8"/>
                                                 </constraints>
-                                            </imageView>
+                                                <viewLayoutGuide key="contentLayoutGuide" id="A1X-uS-iaO"/>
+                                                <viewLayoutGuide key="frameLayoutGuide" id="FgS-e1-JGt"/>
+                                            </scrollView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="vGV-Qq-FsR" firstAttribute="leading" secondItem="THm-nF-114" secondAttribute="leading" constant="8" id="JJs-Sq-QqJ"/>
-                                            <constraint firstAttribute="trailing" secondItem="vGV-Qq-FsR" secondAttribute="trailing" constant="8" id="OaP-2E-05Q"/>
+                                            <constraint firstAttribute="bottom" secondItem="zHq-xw-q0S" secondAttribute="bottom" constant="1094" id="EQb-sF-s1X"/>
+                                            <constraint firstItem="zHq-xw-q0S" firstAttribute="leading" secondItem="THm-nF-114" secondAttribute="leading" constant="8" id="Lf1-hK-1lO"/>
+                                            <constraint firstAttribute="bottom" secondItem="zHq-xw-q0S" secondAttribute="bottom" constant="300" id="W4G-K1-7f8"/>
+                                            <constraint firstAttribute="trailing" secondItem="zHq-xw-q0S" secondAttribute="trailing" constant="8" id="YS9-Gq-Dzk"/>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="1500" id="asi-jk-0ae"/>
-                                            <constraint firstItem="vGV-Qq-FsR" firstAttribute="top" secondItem="THm-nF-114" secondAttribute="top" constant="8" id="h3o-Fo-nH8"/>
+                                            <constraint firstItem="zHq-xw-q0S" firstAttribute="top" secondItem="THm-nF-114" secondAttribute="top" constant="8" id="vWo-7R-KMQ"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -99,7 +103,7 @@
                     <navigationItem key="navigationItem" id="Cbf-gR-hLk"/>
                     <connections>
                         <outlet property="contentView" destination="THm-nF-114" id="wvV-sk-xos"/>
-                        <outlet property="image1" destination="vGV-Qq-FsR" id="jmE-0y-Lgn"/>
+                        <outlet property="pagingScrollView" destination="zHq-xw-q0S" id="5G6-ja-YXg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zGl-g2-aKr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

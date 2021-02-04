@@ -12,8 +12,7 @@ class ProductViewController: UIViewController {
     var product : Product?
     private let network = Network()
     @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var image1: UIImageView!
-    @IBOutlet weak var image2: UIImageView!
+    @IBOutlet weak var pagingScrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,5 +33,20 @@ class ProductViewController: UIViewController {
     
     func setViewData(productDetail:ProductDetail) {
         self.navigationItem.title = productDetail.data.store.name
+        setPagingScrollView(imageUrls: productDetail.data.previewImages)
+    }
+    
+    func setPagingScrollView(imageUrls:[String]) {
+        for index in 0..<imageUrls.count {
+            let imageView = UIImageView()
+            imageView.frame = self.pagingScrollView.bounds
+            imageView.frame.origin.x = self.pagingScrollView.bounds.width * CGFloat(index)
+            imageView.setImageUrl(imageUrls[index])
+            imageView.contentMode = .scaleAspectFill
+            self.pagingScrollView.addSubview(imageView)
+        }
+        self.pagingScrollView.isPagingEnabled = true
+        self.pagingScrollView.contentSize = CGSize(width: self.pagingScrollView.bounds.width*CGFloat(imageUrls.count), height: self.pagingScrollView.bounds.width)
+        self.pagingScrollView.alwaysBounceVertical = false
     }
 }
