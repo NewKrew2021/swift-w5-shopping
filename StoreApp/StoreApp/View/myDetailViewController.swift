@@ -6,25 +6,22 @@
 //  Copyright © 2021 이준형. All rights reserved.
 //
 
+import Foundation
 import UIKit
+import Toaster
 
-class myDetailViewController: UIViewController {
+class myDetailViewController:  UIViewController {
 
+    var productId : String = ""
+    var storeDomain = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.navigationController?.title = "손안에 쇼핑"
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setValue(productId : String, storeDomain : String){
+        self.productId = productId
+        self.storeDomain = storeDomain
     }
-    */
-
 }

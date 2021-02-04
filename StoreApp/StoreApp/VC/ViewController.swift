@@ -66,11 +66,14 @@ class ViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touchedContentView = touches.first?.view  else { return }
-        guard let titleLabel = touchedContentView.subviews[1] as? UILabel else { return }
         
+        guard let productIdLabel = touchedContentView.subviews[5] as? UILabel else { return }
+        guard let storeDomainLabel = touchedContentView.subviews[6] as? UILabel else { return }
         
-        guard let mainViewController = self.storyboard?.instantiateViewController(withIdentifier: "myDetailViewController") else { return }
-        self.navigationController?.pushViewController(mainViewController, animated: true)
+        guard let myDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "myDetailViewController") as? myDetailViewController else { return }
+        myDetailVC.setValue(productId: productIdLabel.text!, storeDomain: storeDomainLabel.text!)
+        navigationController?.pushViewController(myDetailVC, animated: true)
+        
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
