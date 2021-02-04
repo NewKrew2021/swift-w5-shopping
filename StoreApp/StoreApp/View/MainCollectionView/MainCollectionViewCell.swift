@@ -18,6 +18,27 @@ class MainCollectionViewCell: UICollectionViewCell {
     
     func makeCell(_ storeItem: StoreItem) {
         
+        var tempImage : UIImage = UIImage()
+        let url = storeItem.productImage!
+        let name = URL(string: url)!.query!
+        if let cachedData = CacheManager.retrieve(name) {
+                tempImage = UIImage(data: cachedData)!
+        } else {
+            DownloadManager.downloadWithDataTask(from: url, completionHandler: { response in
+                switch response {
+                case .success(let dataTemp):
+                    tempImage = UIImage(data: dataTemp)!
+                    DispatchQueue.main.async {
+                        try? CacheManager.save(name, dataTemp)
+                    }
+                case .failure:
+                    DispatchQueue.main.async {
+                    }
+                }
+            })
+        }
+        self.itemImageView.image = tempImage
+        
         self.itemNameLabel.text = storeItem.productName
         self.itemOriginalPriceLabel.text = "\(storeItem.originalPrice!)원"
         if let groupDiscountedPrice = storeItem.groupDiscountedPrice {

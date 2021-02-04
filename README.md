@@ -32,3 +32,9 @@
 7. resparate of view roles
 - MainCollectionView, MainViewController 역할 재분배
 - 접근제어제 재설정
+
+
+8. make CacheManager, DownloadManager class
+- CacheManager, DownloadManager class 생성
+- 캐시 디렉토리에 없는 이미지 파일은 다운로드 후 출력
+- 캐시 디렉토리에 있는 파일은 출력
