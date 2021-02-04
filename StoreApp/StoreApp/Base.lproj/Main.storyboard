@@ -57,7 +57,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="THm-nF-114">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="706"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1500"/>
                                         <subviews>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHq-xw-q0S">
                                                 <rect key="frame" x="8" y="8" width="398" height="398"/>
@@ -73,7 +73,6 @@
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="zHq-xw-q0S" secondAttribute="bottom" constant="1094" id="EQb-sF-s1X"/>
                                             <constraint firstItem="zHq-xw-q0S" firstAttribute="leading" secondItem="THm-nF-114" secondAttribute="leading" constant="8" id="Lf1-hK-1lO"/>
-                                            <constraint firstAttribute="bottom" secondItem="zHq-xw-q0S" secondAttribute="bottom" constant="300" id="W4G-K1-7f8"/>
                                             <constraint firstAttribute="trailing" secondItem="zHq-xw-q0S" secondAttribute="trailing" constant="8" id="YS9-Gq-Dzk"/>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="1500" id="asi-jk-0ae"/>
                                             <constraint firstItem="zHq-xw-q0S" firstAttribute="top" secondItem="THm-nF-114" secondAttribute="top" constant="8" id="vWo-7R-KMQ"/>
