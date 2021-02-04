@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-class Product: Hashable {
+class Product: Hashable, NSCopying {
     enum ProductType: String {
         case BEST, MASK, GROCERY, FRYINGPAN
 
@@ -26,7 +26,7 @@ class Product: Hashable {
             }
         }
     }
-    
+
     let productId: Int
     let productName: String
     let groupDiscountedPrice: Int
@@ -50,7 +50,18 @@ class Product: Hashable {
         storeDomain = productElement.storeDomain
         type = productType
     }
-    
+
+    init(productId: Int, productName: String, groupDiscountedPrice: Int, originalPrice: Int, groupDiscountUserCount: Int, storeName: String, storeDomain: String, type productType: ProductType) {
+        self.productId = productId
+        self.productName = productName
+        self.groupDiscountedPrice = groupDiscountedPrice
+        self.originalPrice = originalPrice
+        self.groupDiscountUserCount = groupDiscountUserCount
+        self.storeName = storeName
+        self.storeDomain = storeDomain
+        self.type = productType
+    }
+
     func setImage(image: UIImage?) {
         productImage.onNext(image)
     }
@@ -65,6 +76,10 @@ class Product: Hashable {
         guard let filterText = filter else { return true }
         if filterText.isEmpty { return true }
         return productName.contains(filterText)
+    }
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copy = Product(productId: productId, productName: productName, groupDiscountedPrice: groupDiscountedPrice, originalPrice: originalPrice, groupDiscountUserCount: groupDiscountUserCount, storeName: storeName, storeDomain: storeDomain, type: type)
+        return copy
     }
 }
 

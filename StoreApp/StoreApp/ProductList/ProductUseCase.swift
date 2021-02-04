@@ -56,11 +56,11 @@ struct ProductUseCase {
             }
         }
     }
-    
+
     static private func processProduct(with manager: NetworkManable, productElements: [ProductElement], type: Product.ProductType, completed: @escaping ([Product]) -> Void) {
         completed(productElements.map {
             productElement in
-            
+
             let product = Product(productElement: productElement, type: type)
             do {
                 try manager.download(from: productElement.productImage) {

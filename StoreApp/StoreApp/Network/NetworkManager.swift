@@ -26,7 +26,7 @@ enum EndPoint: String {
 class NetworkManager: NetworkManable {
     typealias EndPointType = EndPoint
     let cacheManager = CacheManager()
-    
+
     enum Method: String {
         case GET, POST, PUT, DELETE
     }
@@ -56,7 +56,7 @@ class NetworkManager: NetworkManable {
             }
         }.resume()
     }
-    
+
     func download(from: String, completion: @escaping (Data?, Error?) -> Void) throws {
         guard let remoteUrl = URL(string: from) else {
             throw NetworkErrorCase.invalidURL
@@ -73,13 +73,13 @@ class NetworkManager: NetworkManable {
                 completion(nil, NetworkErrorCase.serverError)
                 return
             }
-            
+
             if let data = self.cacheManager.getData(localUrl: localUrl, forKey: remoteUrl.query ?? remoteUrl.lastPathComponent) {
                 completion(data, nil)
             } else {
                 completion(nil, NetworkErrorCase.cacheError)
             }
         }.resume()
-        
+
     }
 }

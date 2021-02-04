@@ -24,16 +24,16 @@ class CacheManager {
         }
         return image
     }
-    
+
     func setImage(image: UIImage, forKey: String) {
         imageCache.setObject(image, forKey: forKey as NSString)
     }
-    
+
     func getData(localUrl: URL, forKey: String) -> Data? {
         guard let path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first else { return nil }
         var filePath = URL(fileURLWithPath: path)
         filePath.appendPathComponent(forKey)
-        
+
         if !fileManager.fileExists(atPath: filePath.path) {
             do {
                 try fileManager.copyItem(at: localUrl, to: filePath)

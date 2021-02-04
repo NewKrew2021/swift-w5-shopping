@@ -15,7 +15,7 @@ class ProductCellViewModel {
     private(set) var groupDiscountedPrice: String?
     private(set) var originalPrice: String = ""
     private(set) var groupDiscountUserCount: String = ""
-    
+
     init(product: Product) {
         productName = product.productName
         groupDiscountedPrice = self.changeGroupDiscountedPriceFormat(from: product.groupDiscountedPrice)
@@ -33,7 +33,7 @@ class ProductCellViewModel {
     private func changeGroupDiscountUserCount(from: Int?) -> String {
         return String(from ?? 0)
     }
-    
+
     private func bindProductImage(productImage: ReplaySubject<UIImage?>) {
         self.productImage = productImage
     }
