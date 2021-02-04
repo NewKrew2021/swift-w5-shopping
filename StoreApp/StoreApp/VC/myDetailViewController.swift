@@ -14,14 +14,15 @@ class myDetailViewController:  UIViewController {
 
     var productId : String = ""
     var storeDomain = ""
-    
+    var detailItem = DetailStoreItem()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.title = "손안에 쇼핑"
     }
     
-    func setValue(productId : String, storeDomain : String){
-        self.productId = productId
-        self.storeDomain = storeDomain
+    func initVC(productId : String, storeDomain : String){
+        detailItem.downloadJson(productId: productId, storeDomain: storeDomain)
     }
+    
+    
 }
