@@ -8,14 +8,26 @@
 import Foundation
 
 class JsonDecoder {
-    func parseData(data: Data) -> [Product] {
+    func parseDataToProducts(data: Data) -> [Product]? {
         let decoder = JSONDecoder()
-        var decodeData: [Product] = []
+        var decodeData: [Product]?
         do {
             decodeData = try decoder.decode([Product].self, from: data)
         }catch {
             print(error.localizedDescription)
         }
         return decodeData
+    }
+    
+    func parseDataToDetail(data: Data) -> ProductDetail? {
+        let decoder = JSONDecoder()
+        var decodeData: ProductDetailJson?
+//        print(String(decoding: data, as: UTF8.self))
+        do {
+            decodeData = try decoder.decode(ProductDetailJson.self, from: data)
+        }catch {
+            print(error.localizedDescription)
+        }
+        return decodeData?.data
     }
 }
