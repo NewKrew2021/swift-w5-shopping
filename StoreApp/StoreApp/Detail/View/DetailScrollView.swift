@@ -13,11 +13,13 @@ class DetailScrollView: UIScrollView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setInitialize()
+        self.setTimer()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.setInitialize()
+        self.setTimer()
     }
 
     // MARK: Internal
@@ -39,13 +41,27 @@ class DetailScrollView: UIScrollView {
 
     // MARK: Private
 
+    private func setTimer() {
+        Timer.scheduledTimer(withTimeInterval: 0.7, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
+
+            let nowX = self.contentOffset.x
+            let nowY = self.contentOffset.y
+            if nowX >= self.contentSize.width - UIScreen.main.bounds.width {
+                // 처음부터 다시
+                self.setContentOffset(CGPoint(x: 0, y: nowY), animated: false)
+            } else {
+                self.setContentOffset(CGPoint(x: nowX + UIScreen.main.bounds.width, y: nowY), animated: true)
+            }
+        }
+    }
+
     private func addImageInScrollView(image: UIImage, indexOfImage: Int) {
         let imgView = UIImageView()
         imgView.image = image
         let positionX = UIScreen.main.bounds.width * CGFloat(indexOfImage)
         imgView.frame = CGRect(x: positionX, y: 0, width: self.frame.width, height: self.frame.height)
         imgView.contentMode = .scaleAspectFit
-        print(imgView.frame)
 
         self.contentSize.width = self.frame.width * CGFloat(indexOfImage + 1)
         self.addSubview(imgView)
