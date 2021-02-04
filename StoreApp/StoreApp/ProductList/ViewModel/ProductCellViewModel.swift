@@ -9,19 +9,19 @@ import UIKit
 import RxSwift
 
 class ProductCellViewModel {
-    var productName: String
-    var productImage: PublishSubject<UIImage?>
-    var groupDiscountedPrice: String? = ""
-    var originalPrice: String = ""
-    var groupDiscountUserCount: String = ""
-    
-    init(product: ProductElement) {
-        self.productImage = PublishSubject<UIImage?>()
+    let disposeBag = DisposeBag()
+    private(set) var productName: String
+    private(set) var productImage: ReplaySubject<UIImage?>!
+    private(set) var groupDiscountedPrice: String?
+    private(set) var originalPrice: String = ""
+    private(set) var groupDiscountUserCount: String = ""
+
+    init(product: Product) {
         productName = product.productName
         groupDiscountedPrice = self.changeGroupDiscountedPriceFormat(from: product.groupDiscountedPrice)
         originalPrice = self.changeOriginalPriceFormat(from: product.originalPrice)
         groupDiscountUserCount = self.changeGroupDiscountUserCount(from: product.groupDiscountUserCount)
-        self.setProductImage(from: product.productImage)
+        bindProductImage(productImage: product.productImage)
     }
 
     private func changeGroupDiscountedPriceFormat(from: Int?) -> String {
@@ -33,15 +33,8 @@ class ProductCellViewModel {
     private func changeGroupDiscountUserCount(from: Int?) -> String {
         return String(from ?? 0)
     }
-    private func setProductImage(from: String) {
-        do {
-            try NetworkManager().getResource(from: from) {data, _ in
-                if let data = data {
-                    self.productImage.onNext(UIImage(data: data))
-                }
-            }
-        } catch {
-            self.productImage.onNext(UIImage(named: "default"))
-        }
+
+    private func bindProductImage(productImage: ReplaySubject<UIImage?>) {
+        self.productImage = productImage
     }
 }

@@ -16,17 +16,17 @@ class ProductCell: UICollectionViewCell {
     @IBOutlet var originalPrice: UILabel!
     @IBOutlet var groupDiscountedPrice: UILabel!
     @IBOutlet var groupDiscountUserCount: UILabel!
-    private let disposeBag = DisposeBag()
     private var productViewModel: ProductCellViewModel?
-    
+    private let disposeBag = DisposeBag()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -43,6 +43,5 @@ class ProductCell: UICollectionViewCell {
             .bind(to: thumbnail.rx.image)
             .disposed(by: disposeBag)
     }
-    
-    
+
 }

@@ -11,12 +11,12 @@ import RxCocoa
 import RxDataSources
 
 class ProductController {
-    typealias Handler = ([ProductElement]) -> Void
-    var items: BehaviorRelay<[SectionModel<String, ProductElement>]>
+    typealias Handler = ([Product]) -> Void
+    var items: BehaviorRelay<[SectionModel<String, Product>]>
     private let networkManager: NetworkManable = NetworkManager()
 
     init() {
-        items = BehaviorRelay<[SectionModel<String, ProductElement>]>(value: [])
+        items = BehaviorRelay<[SectionModel<String, Product>]>(value: [])
         getBest(completed: nil)
         getGrocery(completed: nil)
         getFryingpan(completed: nil)
@@ -26,28 +26,28 @@ class ProductController {
     private func getBest(completed: Handler?) {
         ProductUseCase.getBest(with: networkManager) {
             (productList) in
-            self.items.accept(self.items.value+[SectionModel(model: "BEST", items: productList ?? [])])
+            self.items.accept(self.items.value+[SectionModel(model: "BEST", items: productList )])
         }
     }
 
     private func getGrocery(completed: Handler?) {
         ProductUseCase.getGrocery(with: networkManager) {
             (productList) in
-            self.items.accept(self.items.value+[SectionModel(model: "GROCERY", items: productList ?? [])])
+            self.items.accept(self.items.value+[SectionModel(model: "GROCERY", items: productList )])
         }
     }
 
     private func getFryingpan(completed: Handler?) {
         ProductUseCase.getFryingpan(with: networkManager) {
             (productList) in
-            self.items.accept(self.items.value+[SectionModel(model: "FRYINGPAN", items: productList ?? [])])
+            self.items.accept(self.items.value+[SectionModel(model: "FRYINGPAN", items: productList )])
         }
     }
 
     private func getMask(completed: Handler?) {
         ProductUseCase.getMask(with: networkManager) {
             (productList) in
-            self.items.accept(self.items.value+[SectionModel(model: "MASK", items: productList ?? [])])
+            self.items.accept(self.items.value+[SectionModel(model: "MASK", items: productList )])
         }
     }
 

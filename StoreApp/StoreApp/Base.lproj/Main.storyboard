@@ -3,6 +3,7 @@
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -57,11 +58,66 @@
                     <navigationItem key="navigationItem" title="카카오 쇼핑" id="uCe-uA-PVT"/>
                     <connections>
                         <outlet property="collectionView" destination="kBR-74-NOn" id="Ftl-D1-UXz"/>
+                        <segue destination="Qmg-Mn-O5j" kind="show" identifier="goToDetail" id="Zss-5P-OtB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="943.07692307692309" y="103.7914691943128"/>
+        </scene>
+        <!--Product Detail View Controller-->
+        <scene sceneID="N7w-Ih-DgF">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7A2-5Z-yye" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="ProductDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Qmg-Mn-O5j" customClass="ProductDetailViewController" customModule="StoreApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="maP-8g-iHb">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="n7l-2l-OEh">
+                                <rect key="frame" x="134" y="377" width="122" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="pageIndicatorTintColor" name="AccentColor"/>
+                                <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </pageControl>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="01n-Un-Gou">
+                                <rect key="frame" x="0.0" y="88" width="390" height="281"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cka-aG-La2">
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="281"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Cka-aG-La2" firstAttribute="width" secondItem="27L-eg-t0A" secondAttribute="width" id="BDU-rg-JRT"/>
+                                    <constraint firstItem="Cka-aG-La2" firstAttribute="top" secondItem="VFG-yc-qta" secondAttribute="top" id="Gxx-tT-bmD"/>
+                                    <constraint firstItem="Cka-aG-La2" firstAttribute="height" secondItem="27L-eg-t0A" secondAttribute="height" id="J5B-zZ-Y4P"/>
+                                    <constraint firstItem="Cka-aG-La2" firstAttribute="leading" secondItem="VFG-yc-qta" secondAttribute="leading" id="O1V-i5-l5U"/>
+                                    <constraint firstItem="Cka-aG-La2" firstAttribute="trailing" secondItem="VFG-yc-qta" secondAttribute="trailing" id="uju-Ue-zP3"/>
+                                    <constraint firstItem="Cka-aG-La2" firstAttribute="bottom" secondItem="VFG-yc-qta" secondAttribute="bottom" id="wmB-LU-KAF"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="VFG-yc-qta"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="27L-eg-t0A"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="IXX-9L-ruG"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="IXX-9L-ruG" firstAttribute="trailing" secondItem="01n-Un-Gou" secondAttribute="trailing" id="1pt-zI-Auv"/>
+                            <constraint firstItem="01n-Un-Gou" firstAttribute="leading" secondItem="IXX-9L-ruG" secondAttribute="leading" id="3FY-cb-v3C"/>
+                            <constraint firstItem="IXX-9L-ruG" firstAttribute="bottom" secondItem="01n-Un-Gou" secondAttribute="bottom" constant="441" id="b1n-6Y-nEO"/>
+                            <constraint firstItem="01n-Un-Gou" firstAttribute="top" secondItem="IXX-9L-ruG" secondAttribute="top" id="kVL-lB-dPr"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="FIW-WZ-6TO"/>
+                    <connections>
+                        <outlet property="imageScrollView" destination="01n-Un-Gou" id="kU4-TR-1la"/>
+                        <outlet property="scrollContentView" destination="Cka-aG-La2" id="szB-sf-McX"/>
+                        <outlet property="scrollViewWidthConstraint" destination="BDU-rg-JRT" id="8J4-kc-tAk"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1816.9230769230769" y="103.7914691943128"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="maf-Aa-Q9W">
@@ -83,6 +139,9 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
