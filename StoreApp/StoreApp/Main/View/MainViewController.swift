@@ -18,12 +18,11 @@ class MainViewController: UIViewController {
         setCollectionView()
         addObserver()
         getItems(index: 0)
+        title = "카카오 쇼핑"
     }
 
     @objc func didReceiveItemsNotification(_ noti: Notification) {
-        guard let items: [Item] = noti.userInfo?["Items"] as? [Item] else {
-            return
-        }
+        guard let items: [Item] = noti.userInfo?["Items"] as? [Item] else { return }
         viewModel.addItems(items: items)
 
         DispatchQueue.main.async { [weak self] in
@@ -32,11 +31,9 @@ class MainViewController: UIViewController {
         }
     }
 
-    @objc func didReceiveImageNotification(_ noti: Notification) {
-        guard let image: UIImage = noti.userInfo?["Image"] as? UIImage else {
-            return
-        }
-        print(image)
+    @objc func didReceiveDetaileNotification(_ noti: Notification) {
+        guard let detail: Detail = noti.userInfo?["Detail"] as? Detail else { return }
+        print(detail)
     }
 
     // MARK: Private
@@ -64,9 +61,11 @@ class MainViewController: UIViewController {
     }
 
     private func addObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveItemsNotification(_:)), name: DidReceiveItemsNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveItemsNotification(_:)), name: Request.DidReceiveItemsNotification, object: nil)
 
-        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveImageNotification(_:)), name: DidReceiveImageNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveImageNotification(_:)), name: Request.DidReceiveImageNotification, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveDetaileNotification(_:)), name: Request.DidReceiveDetailNotification, object: nil)
     }
 }
 
@@ -95,7 +94,13 @@ extension MainViewController: UICollectionViewDelegate {
         let item = viewModel[indexPath.section, indexPath.item]
         let name = item.name
         guard let price = item.price else { return }
+        let detailVC = DetailViewController()
+        request.requestDetail(storeDomain: item.storeDomain, productId: item.id) { detail, _ in
+            print(detail)
+            detailVC.viewModel.detail = detail
+        }
         Toast(text: "상품명 : \(name)\n가격 : \(price)원", delay: 0, duration: 1.0).show()
+        self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 

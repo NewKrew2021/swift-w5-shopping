@@ -19,6 +19,7 @@ struct Item: Codable {
         case numberOfParticipant = "groupDiscountUserCount"
         case storeId
         case storeName
+        case storeDomain
     }
 
     var id: Int
@@ -29,6 +30,7 @@ struct Item: Codable {
     var numberOfParticipant: Int?
     var storeId: Int
     var storeName: String
+    var storeDomain: String
 
     func hasTalkDeal() -> Bool {
         self.price != nil ? true : false
