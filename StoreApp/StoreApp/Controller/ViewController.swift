@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Toaster
 
 class ViewController: UIViewController {
     
@@ -91,7 +90,8 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let product = products[indexPath.section][indexPath.row]
-        let toast = Toast(text: "\(product.productName) \(product.groupDiscountedPrice ?? product.originalPrice)원")
-        toast.show()
+        let productVC = ProductViewController.init(nibName: "ProductViewController", bundle: nil)
+        productVC.product = product
+        self.navigationController?.pushViewController(productVC, animated: true)
     }
 }
