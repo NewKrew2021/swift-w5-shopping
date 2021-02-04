@@ -6,11 +6,10 @@
 //
 
 import UIKit
-import Toaster
 
 class ViewController: UIViewController {
     
-    private let request = Request()
+    private let network = Network()
     private var products: [[Product]] = Array(repeating: [Product](), count: 4)
     
     private let collectionView: UICollectionView = {
@@ -19,6 +18,9 @@ class ViewController: UIViewController {
         view.register(UINib(nibName: "ShoppingCollectionReusableView", bundle: .main), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "ShoppingCollectionReusableView")
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .clear
+        if let collectionViewLayout = view.collectionViewLayout as? UICollectionViewFlowLayout {
+            collectionViewLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        }
         return view
     }()
 
@@ -34,9 +36,7 @@ class ViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        for productType in ProductType.allCases {
-            request.request(productType: productType)
-        }
+        network.getProductData()
     }
     
     func addCollectionView() {
@@ -48,8 +48,10 @@ class ViewController: UIViewController {
     }
     
     @objc func completedJsonParsing(_ notification:Notification) {
-        self.products[(notification.userInfo?["productType"] as! ProductType).rawValue] = notification.userInfo?["products"] as! [Product]
-        self.collectionView.reloadData()
+        DispatchQueue.main.async {
+            self.products[notification.userInfo?["productTypeValue"] as! Int] = notification.userInfo?["products"] as! [Product]
+            self.collectionView.reloadData()
+        }
     }
 }
 
@@ -61,14 +63,9 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShoppingCollectionViewCell", for: indexPath) as! ShoppingCollectionViewCell
         
-        cell.setViewData(productName: products[indexPath.section][indexPath.row].productName, productImage: self.products[indexPath.section][indexPath.row].productImage, groupDiscountedPrice: self.products[indexPath.section][indexPath.row].groupDiscountedPrice ?? -1, originalPrice: self.products[indexPath.section][indexPath.row].originalPrice, groupDiscountUserCount: self.products[indexPath.section][indexPath.row].groupDiscountUserCount ?? -1)
+        cell.setViewData(product: self.products[indexPath.section][indexPath.row])
         
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = self.collectionView.frame.size.width
-        return CGSize(width: width, height: width)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -93,7 +90,14 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let product = products[indexPath.section][indexPath.row]
-        let toast = Toast(text: "\(product.productName) \(product.groupDiscountedPrice ?? product.originalPrice)원")
-        toast.show()
+        self.performSegue(withIdentifier: "productSegue", sender: product)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "productSegue" {
+            let productVC = segue.destination as! ProductViewController
+            let product = sender as! Product
+            productVC.product = product
+        }
     }
 }

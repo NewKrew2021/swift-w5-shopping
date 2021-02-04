@@ -8,15 +8,28 @@
 import UIKit
 
 struct Json {
-    func parsing(jsonData : Data, productType : ProductType) {
+    func parsingProduct(jsonData : Data) -> Request.Result<[Product], Error> {
         var products : [Product] = []
         let jsonDecoder: JSONDecoder = JSONDecoder()
 
         do {
             products = try jsonDecoder.decode([Product].self, from: jsonData)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "jsonParsing"),object: nil, userInfo: ["products" : products, "productType" : productType])
+            
+            return .success(products)
         } catch let error {
-            print("error: ", error)
+            return .failure(error)
+        }
+    }
+    
+    func parsingProductDetail(jsonData : Data) ->Request.Result<ProductDetail, Error> {
+        let jsonDecoder: JSONDecoder = JSONDecoder()
+//        print(String(decoding: jsonData, as: UTF8.self))
+        do {
+            let productDetail = try jsonDecoder.decode(ProductDetail.self, from: jsonData)
+            
+            return .success(productDetail)
+        } catch let error {
+            return .failure(error)
         }
     }
 }

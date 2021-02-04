@@ -7,15 +7,15 @@
 
 import Foundation
 
-enum ProductType : Int, CustomStringConvertible, CaseIterable {
+enum ProductType : Int, CaseIterable {
     case best, mask, grocery, fryingpan
     
-    var description: String {
+    var info : (description: String, korDescription: String) {
         switch self {
-        case .best: return "best.json"
-        case .mask: return "mask.json"
-        case .grocery: return "grocery.json"
-        case .fryingpan: return "fryingpan.json"
+        case .best: return ("best", "베스트")
+        case .mask: return ("mask", "마스크")
+        case .grocery: return ("grocery", "잡화")
+        case .fryingpan: return ("fryingpan", "프라이팬")
         }
     }
 }

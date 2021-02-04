@@ -15,24 +15,22 @@ class ShoppingCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var originalPriceLabel: UILabel!
     @IBOutlet weak var participationLabel: UILabel!
     
-    func setViewData(productName: String, productImage: String, groupDiscountedPrice: Int, originalPrice: Int, groupDiscountUserCount: Int) {
-        let imageUrl = URL(string: productImage)
-        do {
-            let data = try Data(contentsOf: imageUrl!)
-            self.imageView.image = UIImage(data: data)
-        } catch {
-            return
-        }
-        self.titleLabel.text = productName
-        if groupDiscountedPrice == -1 {
-            self.discountPriceLabel.text = "\(originalPrice)원"
+    override func awakeFromNib() {
+        self.contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.width).isActive = true
+    }
+    
+    func setViewData(product: Product) {
+        self.imageView.setImageUrl(product.productImage)
+        self.titleLabel.text = product.productName
+        if product.groupDiscountedPrice == nil {
+            self.discountPriceLabel.text = "\(product.originalPrice)원"
             self.originalPriceLabel.text = ""
         } else {
-            self.discountPriceLabel.text = "톡딜가 \(groupDiscountedPrice)원"
-            self.originalPriceLabel.text = "\(originalPrice)원"
+            self.discountPriceLabel.text = "톡딜가 \(product.groupDiscountedPrice ?? 0)원"
+            self.originalPriceLabel.text = "\(product.originalPrice)원"
         }
-        if groupDiscountUserCount != -1 {
-            self.participationLabel.text = "현재 \(groupDiscountUserCount)명 딜 참여중"
+        if product.groupDiscountUserCount != nil {
+            self.participationLabel.text = "현재 \(product.groupDiscountUserCount ?? 0)명 딜 참여중"
         } else {
             self.participationLabel.text = ""
         }
