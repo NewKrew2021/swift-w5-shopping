@@ -117,7 +117,17 @@ class StoreItems {
             return "현재 \(String(dc))명 딜 참여중"
         }
         return ""
-        
+    }
+    
+    func getProductId(indexPath: IndexPath) -> String {
+        if let dc = self[indexPath].productId {
+            return "\(dc)"
+        }
+        return ""
+    }
+    
+    func getStoreDomain(indexPath: IndexPath) -> String {
+        return self[indexPath].storeDomain 
     }
 }
 
