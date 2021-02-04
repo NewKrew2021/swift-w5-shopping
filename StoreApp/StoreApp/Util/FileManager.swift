@@ -18,7 +18,7 @@ class MyFileManager: FileManager, ImageManaging {
         return try? Data(contentsOf: imageUrl)
     }
 
-    func saveImageAtCahe(imageUrl: URL, fileName: String) {
+    func saveImageAtCahe(imageUrl: URL) {
         guard let localURL = urls(for: .cachesDirectory, in: .userDomainMask).first else { return }
         var filePath = URL(fileURLWithPath: localURL.path)
         filePath.appendPathComponent(imageUrl.lastPathComponent)
@@ -33,5 +33,5 @@ class MyFileManager: FileManager, ImageManaging {
 
 protocol ImageManaging {
     func getImageFromCache(imageUrl: URL) -> Data?
-    func saveImageAtCahe(imageUrl: URL, fileName: String)
+    func saveImageAtCahe(imageUrl: URL)
 }

@@ -36,15 +36,16 @@ class NetworkHandler {
             guard let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 else {
                 return
             }
-
+            
             let decoder = JsonDecoder()
             let products = decoder.parseData(data: data)
+            print(products)
             completionHandler(products)
         }
         dataTask.resume()
     }
 
-    class func getImage(url: URL, title: String, completionHandler: @escaping (Data) -> Void) {
+    class func getImage(url: URL, completionHandler: @escaping (Data) -> Void) {
         if let imageData = fileManager.getImageFromCache(imageUrl: url) {
             completionHandler(imageData)
         }
@@ -60,7 +61,7 @@ class NetworkHandler {
             }
 
             guard let tempLocalURL = tempLocalURL else { return }
-            fileManager.saveImageAtCahe(imageUrl: tempLocalURL, fileName: title)
+            fileManager.saveImageAtCahe(imageUrl: tempLocalURL)
             if let imageData = fileManager.getImageFromCache(imageUrl: tempLocalURL) {
                 completionHandler(imageData)
             }
