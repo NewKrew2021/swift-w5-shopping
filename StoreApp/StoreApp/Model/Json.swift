@@ -23,7 +23,7 @@ struct Json {
     
     func parsingProductDetail(jsonData : Data) ->Request.Result<ProductDetail, Error> {
         let jsonDecoder: JSONDecoder = JSONDecoder()
-        
+//        print(String(decoding: jsonData, as: UTF8.self))
         do {
             let productDetail = try jsonDecoder.decode(ProductDetail.self, from: jsonData)
             
