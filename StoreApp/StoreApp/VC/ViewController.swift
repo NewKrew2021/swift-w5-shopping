@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     private var cellwidth = UIScreen.main.bounds.width
     private var cellheight = UIScreen.main.bounds.height/3
     var item = StoreItems()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,7 +24,6 @@ class ViewController: UIViewController {
         
         myShoppingCollectionView.delegate = self
         myShoppingCollectionView.dataSource = self
-        
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadItems(notification:)), name: NSNotification.Name("reloadItem"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showToast(notification:)), name: NSNotification.Name("showToast"), object: nil)
@@ -62,8 +61,24 @@ class ViewController: UIViewController {
     func initNavigationBar(){
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.topItem?.title = "카카오 쇼핑"
+        
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touchedContentView = touches.first?.view  else { return }
+        guard let titleLabel = touchedContentView.subviews[1] as? UILabel else { return }
+        
+        
+        guard let mainViewController = self.storyboard?.instantiateViewController(withIdentifier: "myDetailViewController") else { return }
+        self.navigationController?.pushViewController(mainViewController, animated: true)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.next?.touchesEnded(touches, with: event)
+    }
+    
 }
+
 
 extension ViewController : UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
