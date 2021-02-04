@@ -71,7 +71,7 @@ class ViewController: UIViewController {
         guard let storeDomainLabel = touchedContentView.subviews[6] as? UILabel else { return }
         
         guard let myDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "myDetailViewController") as? myDetailViewController else { return }
-        myDetailVC.setValue(productId: productIdLabel.text!, storeDomain: storeDomainLabel.text!)
+        myDetailVC.initVC(productId: productIdLabel.text!, storeDomain: storeDomainLabel.text!)
         navigationController?.pushViewController(myDetailVC, animated: true)
         
     }
