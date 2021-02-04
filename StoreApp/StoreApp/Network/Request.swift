@@ -7,9 +7,6 @@
 
 import UIKit
 
-let DidReceiveItemsNotification = Notification.Name("DidReceiveItems")
-let DidReceiveImageNotification = Notification.Name("DidReceiveImage")
-
 // MARK: - Request
 
 class Request {
@@ -17,8 +14,12 @@ class Request {
 
     static let shared = Request()
 
+    static let DidReceiveItemsNotification = Notification.Name("DidReceiveItems")
+    static let DidReceiveImageNotification = Notification.Name("DidReceiveImage")
+    static let DidReceiveDetailNotification = Notification.Name("DidReceiveDetail")
+
     func requestItem(type: String) {
-        guard let url = URL(string: "\(base_url)\(type).json") else { return }
+        guard let url = URL(string: "\(base_itemUrl)\(type).json") else { return }
 
         let session = URLSession(configuration: .default)
         let dataTask = session.dataTask(with: url) { data, _, error in
@@ -29,12 +30,52 @@ class Request {
 
             guard let data = data else { return }
 
-            NotificationCenter.default.post(name: DidReceiveItemsNotification, object: nil, userInfo: ["Items": Decoder.parseData(data: data)])
+            NotificationCenter.default.post(name: Self.DidReceiveItemsNotification, object: nil, userInfo: ["Items": Decoder.parseToItem(data: data)])
         }
         dataTask.resume()
     }
 
+    func requestDetail(storeDomain: String, productId: Int, completionHandler: @escaping (Detail?, Error?) -> Void) {
+        guard let url = URL(string: "\(base_detailUrl)\(storeDomain)/product/\(productId)/detail") else { return }
+
+        let session = URLSession(configuration: .default)
+        session.dataTask(with: url) { data, _, error in
+            if let error = error {
+                print(error.localizedDescription)
+                completionHandler(nil, nil)
+                return
+            }
+
+            guard let data = data, let detail = Decoder.parseToDetail(data: data) else { return }
+            completionHandler(detail, nil)
+
+//            NotificationCenter.default.post(name: Self.DidReceiveDetailNotification, object: nil, userInfo: ["Detail": detail])
+        }.resume()
+    }
+
     func loadImage(
+        url: URL,
+        completion: @escaping (UIImage?, Error?) -> Void
+    ) {
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data else {
+                print("data")
+                completion(nil, nil)
+                return
+            }
+            
+            if let image = UIImage(data: data){
+                print("success")
+                completion(image, nil)
+                return
+            }
+            print("error")
+            completion(nil, error)
+            
+        }.resume()
+    }
+
+    func loadImageByCache(
         url: URL,
         completion: @escaping (UIImage?, Error?) -> Void
     ) {
@@ -59,6 +100,11 @@ class Request {
             completion(image, error)
         }
     }
+
+    // MARK: Private
+
+    private let base_itemUrl = "http://public.codesquad.kr/jk/kakao-2021/"
+    private let base_detailUrl = "https://store.kakao.com/a/"
 
     private func download(
         url: URL,
@@ -90,8 +136,4 @@ class Request {
             }
         }.resume()
     }
-
-    // MARK: Private
-
-    private let base_url = "http://public.codesquad.kr/jk/kakao-2021/"
 }
