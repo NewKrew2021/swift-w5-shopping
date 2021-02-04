@@ -22,6 +22,7 @@ class MainViewController: UIViewController {
     
     func initView() {       
         mainCollectionView.initView()
+        mainCollectionView.storeItems = self.storeItems
         NotificationCenter.default.addObserver(self, selector: #selector(addItemData), name: Notification.Name("getItemData"), object: nil)
     }
     
@@ -42,8 +43,8 @@ class MainViewController: UIViewController {
         let decoder = JSONDecoder()
         guard let results = try? decoder.decode([StoreItem].self, from: jsonData) else { return }
         
-        mainCollectionView.storeItems.addData(category: category, items: results)
-        mainCollectionView.reloadData()
+        self.storeItems.addData(category: category, items: results)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "reloadCollectionView"), object: nil)
         
     }
 

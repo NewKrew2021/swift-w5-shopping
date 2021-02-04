@@ -17,6 +17,7 @@ class MainCollectionView: UICollectionView {
         self.delegate = self
         self.dataSource = self
         setLayout()
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadCollectionView), name: Notification.Name("reloadCollectionView"), object: nil)
         
     }
     
@@ -35,6 +36,10 @@ class MainCollectionView: UICollectionView {
         }
         self.collectionViewLayout = layout
         
+    }
+    
+    @objc func reloadCollectionView(_ notification: Notification) {
+        self.reloadData()
     }
     
 }
