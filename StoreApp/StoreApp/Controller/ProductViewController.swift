@@ -60,7 +60,6 @@ class ProductViewController: UIViewController {
     @objc func autoScroll(timer : Timer) {
         guard let userInfo = timer.userInfo as? [String: Int] else {return}
         let totalPossibleOffset = self.pagingScrollView.bounds.size.width * CGFloat((userInfo["imageCount"] ?? 1)-1)
-        print("totalOffset : \(totalPossibleOffset)")
         if offSet == totalPossibleOffset {
             offSet = 0
         } else {
