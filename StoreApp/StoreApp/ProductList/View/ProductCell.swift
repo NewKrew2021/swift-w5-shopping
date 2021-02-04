@@ -16,8 +16,8 @@ class ProductCell: UICollectionViewCell {
     @IBOutlet var originalPrice: UILabel!
     @IBOutlet var groupDiscountedPrice: UILabel!
     @IBOutlet var groupDiscountUserCount: UILabel!
-    private let disposeBag = DisposeBag()
     private var productViewModel: ProductCellViewModel?
+    private let disposeBag = DisposeBag()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

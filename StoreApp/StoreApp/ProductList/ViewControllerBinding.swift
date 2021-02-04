@@ -13,7 +13,7 @@ import RxDataSources
 extension ViewController {
 
     func bindDataToCollectionView() {
-        let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, ProductElement>>(
+        let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, Product>>(
             configureCell: { (_, collectionView, indexPath, element) in
                 if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCell.identifier, for: indexPath) as? ProductCell {
                     cell.configure(viewModel: ProductCellViewModel(product: element))
@@ -43,7 +43,6 @@ extension ViewController {
         productController.items
             .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
-        
     }
 
 }
