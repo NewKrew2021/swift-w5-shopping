@@ -15,8 +15,10 @@ struct Item: Decodable {
     let groupDiscountedPrice: Int?
     let originalPrice: Int?
     let groupDiscountUserCount: Int?
+    let productId: Int?
+    let storeDomain: String
     
     enum CodingKeys: String, CodingKey {
-        case productName , productImage, groupDiscountedPrice, originalPrice, groupDiscountUserCount
+        case productName , productImage, groupDiscountedPrice, originalPrice, groupDiscountUserCount, productId, storeDomain
     }
 }

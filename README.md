@@ -1,6 +1,18 @@
 # swift-w5-shopping
 모바일 5주차 쇼핑 저장소
 
+# 21.02.04
+
+1. 상세화면 - detailViewController 생성
+2. 데이터 전송 및 Json 파일 디코딩
+3. 스크롤 뷰 및 웹 뷰 등 여러 속성 표시 
+4. 레이아웃 설정
+
+<결과 영상>
+
+https://user-images.githubusercontent.com/59315024/106902803-9165d200-673c-11eb-933e-bfecc442b876.mov
+
+
 # 21.02.03
 1. 피드백 내용 수정 및 기능 추가
 2. DetailViewController 추가 및 Segue 설정

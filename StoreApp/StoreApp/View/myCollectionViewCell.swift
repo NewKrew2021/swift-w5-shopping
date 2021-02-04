@@ -14,6 +14,8 @@ class myCollectionViewCell: UICollectionViewCell {
     var groupDiscountedPrice = UILabel()
     var originalPrice = UILabel()
     var groupDiscountUserCount = UILabel()
+    var productId: UILabel = UILabel()
+    var storeDomain: UILabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,6 +24,8 @@ class myCollectionViewCell: UICollectionViewCell {
         initGroupDiscountedPrice()
         initOriginalPrice()
         initGroupDiscountUserCount()
+        initProductId()
+        initStoreDomain()
     }
     
     required init?(coder: NSCoder) {
@@ -31,6 +35,8 @@ class myCollectionViewCell: UICollectionViewCell {
         initGroupDiscountedPrice()
         initOriginalPrice()
         initGroupDiscountUserCount()
+        initProductId()
+        initStoreDomain()
         contentView.sizeToFit()
     }
     
@@ -87,12 +93,35 @@ class myCollectionViewCell: UICollectionViewCell {
         groupDiscountUserCount.sizeToFit()
     }
     
+    func initProductId(){
+        contentView.addSubview(productId)
+        productId.isHidden = true
+    }
+    
+    func initStoreDomain(){
+        contentView.addSubview(storeDomain)
+        storeDomain.isHidden = true
+    }
+    
     func setSubViews(indexPath: IndexPath, data: StoreItems) {
+        
         productImage.image = data.getProductImage(indexPath: indexPath)
         productName.text = data.getProductName(indexPath: indexPath)
         groupDiscountedPrice.text = data.getGroupDiscountedPrice(indexPath: indexPath)
         originalPrice.text = data.getOriginalPrice(indexPath: indexPath)
         groupDiscountUserCount.text = data.getGroupDiscountUserCount(indexPath: indexPath)
+        productId.text = data.getProductId(indexPath: indexPath)
+        storeDomain.text = data.getStoreDomain(indexPath: indexPath)
         
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.next?.touchesBegan(touches, with: event)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.next?.touchesEnded(touches, with: event)
+    }
+    
+    
 }
