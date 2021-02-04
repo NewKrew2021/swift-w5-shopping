@@ -18,6 +18,7 @@
 		5D50EEAB25C791ED0049034B /* StoreApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5D50EEA925C791ED0049034B /* StoreApp.xcdatamodeld */; };
 		5D50EEAD25C791EE0049034B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D50EEAC25C791EE0049034B /* Assets.xcassets */; };
 		5D50EEB025C791EE0049034B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D50EEAE25C791EE0049034B /* LaunchScreen.storyboard */; };
+		5D71354725CBF03100491B64 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D71354525CBF03100491B64 /* ProductDetailViewController.swift */; };
 		5D95682E25CA496A0038AA6B /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D95682D25CA496A0038AA6B /* CacheManager.swift */; };
 		5DFAABEA25C7EB9900099D58 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 5DFAABE925C7EB9900099D58 /* .swiftlint.yml */; };
 		5DFAABF125C7F01400099D58 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFAABEF25C7F01400099D58 /* ProductCell.swift */; };
@@ -44,6 +45,7 @@
 		5D50EEAC25C791EE0049034B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5D50EEAF25C791EE0049034B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5D50EEB125C791EE0049034B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5D71354525CBF03100491B64 /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
 		5D95682D25CA496A0038AA6B /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		5DFAABE925C7EB9900099D58 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		5DFAABEF25C7F01400099D58 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 		5D50EE9F25C791ED0049034B /* StoreApp */ = {
 			isa = PBXGroup;
 			children = (
+				5D71353B25CBEF9400491B64 /* ProductDetail */,
 				5D95683025CA49710038AA6B /* Service */,
 				5DFAAC0625C8402500099D58 /* ProductList */,
 				5DFAABFE25C7FEE200099D58 /* Model */,
@@ -120,6 +123,14 @@
 				5D50EEA925C791ED0049034B /* StoreApp.xcdatamodeld */,
 			);
 			path = StoreApp;
+			sourceTree = "<group>";
+		};
+		5D71353B25CBEF9400491B64 /* ProductDetail */ = {
+			isa = PBXGroup;
+			children = (
+				5D71354525CBF03100491B64 /* ProductDetailViewController.swift */,
+			);
+			path = ProductDetail;
 			sourceTree = "<group>";
 		};
 		5D95683025CA49710038AA6B /* Service */ = {
@@ -322,6 +333,7 @@
 				5DFAABFA25C7FEB600099D58 /* NetworkManager.swift in Sources */,
 				5DFAABF125C7F01400099D58 /* ProductCell.swift in Sources */,
 				5D48D39225C8F489008C6F7A /* ViewControllerBinding.swift in Sources */,
+				5D71354725CBF03100491B64 /* ProductDetailViewController.swift in Sources */,
 				5D50EEA325C791ED0049034B /* SceneDelegate.swift in Sources */,
 				5D50EEAB25C791ED0049034B /* StoreApp.xcdatamodeld in Sources */,
 				5D48D3A925C916C1008C6F7A /* ProductCellViewModel.swift in Sources */,

@@ -9,7 +9,7 @@ import UIKit
 import Toaster
 import RxSwift
 
-class ViewController: UIViewController, UICollectionViewDelegate {
+class ViewController: UIViewController {
 
     @IBOutlet var collectionView: UICollectionView!
     internal let disposeBag = DisposeBag()

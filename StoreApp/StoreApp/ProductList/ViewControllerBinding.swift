@@ -35,8 +35,8 @@ extension ViewController {
                 return (indexPath, dataSource[indexPath])
             }
             .subscribe(onNext: { pair in
-                // to-do: handle click item
-                print(pair)
+                let (_, product) = pair
+                self.performSegue(withIdentifier: "goToDetail", sender: self)
             })
             .disposed(by: disposeBag)
         
@@ -45,4 +45,10 @@ extension ViewController {
             .disposed(by: disposeBag)
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToDetail" {
+            if let destinationVC = segue.destination as? ProductDetailViewController {
+            }
+        }
+    }
 }

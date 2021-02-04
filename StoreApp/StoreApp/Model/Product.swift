@@ -27,19 +27,27 @@ class Product: Hashable {
         }
     }
     
+    let productId: Int
     let productName: String
     let groupDiscountedPrice: Int
     let originalPrice: Int
     let groupDiscountUserCount: Int
     let type: ProductType
+    let storeName, storeDomain: String
+    var productDetailAddress: String {
+        return "https://store.kakao.com/a/\(storeDomain)/product/\(productId)/detail"
+    }
     let identifier = UUID()
     private(set) var productImage: ReplaySubject<UIImage?> = ReplaySubject<UIImage?>.create(bufferSize: 1)
 
     init(productElement: ProductElement, type productType: ProductType) {
+        productId = productElement.productId
         productName = productElement.productName
         groupDiscountedPrice = productElement.groupDiscountedPrice ?? productElement.originalPrice
         originalPrice = productElement.originalPrice
         groupDiscountUserCount = productElement.groupDiscountUserCount ?? 0
+        storeName = productElement.storeName
+        storeDomain = productElement.storeDomain
         type = productType
     }
     
