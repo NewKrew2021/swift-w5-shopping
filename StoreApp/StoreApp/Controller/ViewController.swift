@@ -36,7 +36,7 @@ class ViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        network.getData()
+        network.getProductData()
     }
     
     func addCollectionView() {
@@ -90,8 +90,14 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let product = products[indexPath.section][indexPath.row]
-        let productVC = ProductViewController.init(nibName: "ProductViewController", bundle: nil)
-        productVC.product = product
-        self.navigationController?.pushViewController(productVC, animated: true)
+        self.performSegue(withIdentifier: "productSegue", sender: product)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "productSegue" {
+            let productVC = segue.destination as! ProductViewController
+            let product = sender as! Product
+            productVC.product = product
+        }
     }
 }

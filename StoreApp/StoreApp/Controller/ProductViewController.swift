@@ -10,11 +10,22 @@ import UIKit
 class ProductViewController: UIViewController {
 
     var product : Product?
+    private let network = Network()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self,
+                    selector: #selector(completedJsonParsing),
+                    name: NSNotification.Name(rawValue: "jsonParsingProductDetail"),
+                    object: nil)
 
-        print(product)
+        network.getProductDetailData(product: product)
     }
 
+    @objc func completedJsonParsing(_ notification:Notification) {
+        DispatchQueue.main.async {
+            print(notification.userInfo?["productDetail"] as! ProductDetail)
+        }
+    }
 }

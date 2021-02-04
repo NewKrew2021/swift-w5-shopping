@@ -14,4 +14,5 @@ struct Product : Codable {
     let originalPrice : Int
     let groupDiscountedPrice : Int?
     let groupDiscountUserCount : Int?
+    let storeDomain : String
 }

@@ -10,9 +10,13 @@ import Foundation
 struct Network {
     private let request = Request()
     
-    func getData() {
+    func getProductData() {
         for productType in ProductType.allCases {
-            request.request(productType: productType)
+            request.requestProduct(productType: productType)
         }
+    }
+    
+    func getProductDetailData(product: Product?) {
+        request.requestProductDetail(storeDomain: product?.storeDomain ?? "", productId: product?.productId ?? 0)
     }
 }

@@ -19,6 +19,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="카카오 쇼핑" id="zhR-Kd-j9W"/>
+                    <connections>
+                        <segue destination="1sJ-ky-G0U" kind="show" identifier="productSegue" id="ktQ-8k-qwr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -52,6 +55,7 @@
                         <viewLayoutGuide key="safeArea" id="pWm-hv-0n4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Cbf-gR-hLk"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zGl-g2-aKr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

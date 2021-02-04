@@ -8,7 +8,7 @@
 import UIKit
 
 struct Json {
-    func parsing(jsonData : Data) -> Request.Result<[Product], Error> {
+    func parsingProduct(jsonData : Data) -> Request.Result<[Product], Error> {
         var products : [Product] = []
         let jsonDecoder: JSONDecoder = JSONDecoder()
 
@@ -16,6 +16,18 @@ struct Json {
             products = try jsonDecoder.decode([Product].self, from: jsonData)
             
             return .success(products)
+        } catch let error {
+            return .failure(error)
+        }
+    }
+    
+    func parsingProductDetail(jsonData : Data) ->Request.Result<ProductDetail, Error> {
+        let jsonDecoder: JSONDecoder = JSONDecoder()
+        
+        do {
+            let productDetail = try jsonDecoder.decode(ProductDetail.self, from: jsonData)
+            
+            return .success(productDetail)
         } catch let error {
             return .failure(error)
         }
