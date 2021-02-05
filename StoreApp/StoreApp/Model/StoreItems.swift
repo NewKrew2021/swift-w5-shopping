@@ -9,15 +9,6 @@
 import Foundation
 import UIKit
 
-enum JsonFileName : String {
-    case best = "best"
-    case mask = "mask"
-    case grocery = "grocery"
-    case fryingpan = "fryingpan"
-    
-    static let jsonFileName = [best, mask, grocery, fryingpan]
-}
-
 class StoreItems {
     private var allItems : [JsonFileName: [Item]] = [JsonFileName.best : []]
     
@@ -57,19 +48,6 @@ class StoreItems {
         NotificationCenter.default.post(name: NSNotification.Name("reloadItem"), object: self, userInfo: nil)
     }
     
-    private func presentGraySpace() -> UIImage{
-        let emptyView = UIView(frame: CGRect.zero)
-        emptyView.widthAnchor.constraint(equalToConstant: 100)
-        emptyView.heightAnchor.constraint(equalTo: emptyView.widthAnchor, multiplier: 1)
-        emptyView.backgroundColor = .white
-        emptyView.setNeedsLayout()
-        let renderer = UIGraphicsImageRenderer(size: emptyView.frame.size)
-        let emptyImage = renderer.image(actions: { _ in
-            emptyView.drawHierarchy(in: emptyView.bounds, afterScreenUpdates: true)
-        })
-        return emptyImage
-    }
-    
     func getProductImage(indexPath: IndexPath) -> UIImage {
         var tempImage : UIImage = UIImage()
         let url = self[indexPath].productImage
@@ -86,7 +64,7 @@ class StoreItems {
                     }
                 case .failure:
                     DispatchQueue.main.async {
-                        tempImage = self.presentGraySpace()
+                        tempImage = UIImage()
                     }
                 }
             })
@@ -100,21 +78,21 @@ class StoreItems {
     
     func getGroupDiscountedPrice(indexPath: IndexPath) -> String {
         if let dc = self[indexPath].groupDiscountedPrice {
-            return "톡딜가 : \(String(dc))원"
+            return "톡딜가 : \(dc)원"
         }
         return ""
     }
     
     func getOriginalPrice(indexPath: IndexPath) -> String {
         if let dc = self[indexPath].originalPrice {
-            return "\(String(dc))원"
+            return "\(dc)원"
         }
         return ""
     }
     
     func getGroupDiscountUserCount(indexPath: IndexPath) -> String {
         if let dc = self[indexPath].groupDiscountUserCount {
-            return "현재 \(String(dc))명 딜 참여중"
+            return "현재 \(dc)명 딜 참여중"
         }
         return ""
     }
@@ -130,5 +108,7 @@ class StoreItems {
         return self[indexPath].storeDomain 
     }
 }
+
+
 
 
