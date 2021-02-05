@@ -17,6 +17,7 @@ struct DetailData: Codable {
     var review: Review
     var delivery: Delivery
     var description: String
+    var status: String
     
     enum CodingKeys: String, CodingKey{
         case previewUrls = "previewImages"
@@ -24,6 +25,7 @@ struct DetailData: Codable {
         case review
         case delivery
         case description
+        case status
     }
     
 }
