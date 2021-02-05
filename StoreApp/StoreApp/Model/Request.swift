@@ -41,6 +41,7 @@ class Request {
     
     func requestProductDetail(storeDomain : String, productId : Int) {
         let url = "https://store.kakao.com/a/\(storeDomain)/product/\(productId)/detail"
+        print(url)
         URLSession.shared.dataTask(with: URL(string: url)!) { (data, response, error) in
             guard error == nil && data != nil else {
                 if let err = error {
