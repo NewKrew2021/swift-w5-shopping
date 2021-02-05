@@ -51,7 +51,7 @@ class MainViewController: UIViewController {
     
     @objc func delieverSelectedData(_ notification: Notification) {
         
-        let storeItem = notification.object as? StoreItem
+        guard let storeItem = notification.object as? StoreItem else { return };
         guard let detailViewController = self.storyboard?.instantiateViewController(identifier: "DetailViewController") as? DetailViewController else { return }
         detailViewController.storeItem = storeItem
         navigationController?.pushViewController(detailViewController, animated: true)

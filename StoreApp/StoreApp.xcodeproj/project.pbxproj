@@ -24,6 +24,7 @@
 		436EF8EB25CBB85F00CE0677 /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436EF8EA25CBB85F00CE0677 /* DownloadManager.swift */; };
 		436EF8ED25CBF27C00CE0677 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436EF8EC25CBF27C00CE0677 /* CacheManager.swift */; };
 		436EF8EF25CC5D1A00CE0677 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436EF8EE25CC5D1A00CE0677 /* DetailViewController.swift */; };
+		436EF8F125CD0CD100CE0677 /* StoreItemDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436EF8F025CD0CD100CE0677 /* StoreItemDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		436EF8EA25CBB85F00CE0677 /* DownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
 		436EF8EC25CBF27C00CE0677 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		436EF8EE25CC5D1A00CE0677 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		436EF8F025CD0CD100CE0677 /* StoreItemDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreItemDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 			children = (
 				436EF8D425C8CEC400CE0677 /* StoreItem.swift */,
 				436EF8D625C8CF7E00CE0677 /* StoreItems.swift */,
+				436EF8F025CD0CD100CE0677 /* StoreItemDetail.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				436EF8EB25CBB85F00CE0677 /* DownloadManager.swift in Sources */,
 				436EF8C125C7BAEA00CE0677 /* MainViewController.swift in Sources */,
 				436EF8EF25CC5D1A00CE0677 /* DetailViewController.swift in Sources */,
+				436EF8F125CD0CD100CE0677 /* StoreItemDetail.swift in Sources */,
 				436EF8E525C9438400CE0677 /* MainCollectionHeaderCell.swift in Sources */,
 				436EF89025C7986F00CE0677 /* AppDelegate.swift in Sources */,
 				436EF8E025C9245300CE0677 /* MainCollectionViewCell.swift in Sources */,

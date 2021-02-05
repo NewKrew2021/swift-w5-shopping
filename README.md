@@ -43,3 +43,7 @@
 9. embed navigation controller
 - MainViewController에 네비게이션 컨트롤러 embed
 - 셀 클릭시 StoreItem 객체 데이터 DetailViewController한테 전달
+
+
+10. parse StoreItemDetailData
+- 상품 세부 정보 json data 파싱

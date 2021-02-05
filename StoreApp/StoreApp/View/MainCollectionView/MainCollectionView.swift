@@ -121,20 +121,20 @@ extension MainCollectionView: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var sotreItemToDeliever: StoreItem?
+        var storeItemToDeliever: StoreItem?
         switch indexPath.section {
         case 0:
-            sotreItemToDeliever = storeItems.bests[indexPath.row]
+            storeItemToDeliever = storeItems.bests[indexPath.row]
         case 1:
-            sotreItemToDeliever = storeItems.masks[indexPath.row]
+            storeItemToDeliever = storeItems.masks[indexPath.row]
         case 2:
-            sotreItemToDeliever = storeItems.grocerys[indexPath.row]
+            storeItemToDeliever = storeItems.grocerys[indexPath.row]
         case 3:
-            sotreItemToDeliever = storeItems.fryingpans[indexPath.row]
+            storeItemToDeliever = storeItems.fryingpans[indexPath.row]
         default:
-            sotreItemToDeliever = nil
+            storeItemToDeliever = nil
         }
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "delieverSelectedData"), object: storeItems.bests[0])
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "delieverSelectedData"), object: storeItemToDeliever)
     }
 
     
