@@ -51,7 +51,6 @@ class NetworkHandler {
             print("URL is nil")
             return
         }
-
         // Request
         let request = URLRequest(url: url)
 

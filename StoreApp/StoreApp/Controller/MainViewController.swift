@@ -37,13 +37,15 @@ class MainViewController: UIViewController {
         guard let product = productManager.getProduct(productType: productType, at: indexPath.item) else { return }
         Toast(text: "상품명:\(product.title) \n가격:\(product.originalPrice)").start()
         
-        guard let detailViewController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") else { return }
+        print(navigationController?.viewControllers)
+        
+        guard let detailViewController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
         navigationController?.pushViewController(detailViewController , animated: true)
         NetworkHandler.getData(storeDomain: product.storeDomain, productId: product.productId){(data) in
             let decoder = JsonDecoder()
             guard let detail = decoder.parseDataToDetail(data: data) else { return }
-            print(detail)
-//            detailViewController.test
+            detailViewController.productDetail = detail
+//            detailViewController.webView?.loadHTMLString(detail.description, baseURL: nil)
         }
        
     }
