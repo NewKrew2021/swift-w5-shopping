@@ -20,6 +20,8 @@ class myDetailView: UIScrollView {
     var noticeCreateAt: UILabel = UILabel()
     var productDescription: WKWebView = WKWebView()
     
+    var pagingScrollView: UIScrollView = UIScrollView()
+    
     private var contentView = UIView()
     
     private var standardPriceLeadingAnchorConstraint : NSLayoutConstraint! = nil
@@ -29,6 +31,8 @@ class myDetailView: UIScrollView {
     private var webViewHeightAnchorConstraint : NSLayoutConstraint!
     
     var detailItem = DetailStoreItem()
+    
+    private var offSet: CGFloat = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,9 +48,33 @@ class myDetailView: UIScrollView {
         detailItem.downloadJson(productId: productId, storeDomain: storeDomain)
     }
     
+      func setTimer(imageCount: Int) {
+            Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(autoScroll), userInfo: ["imageCount" : imageCount], repeats: true)
+        }
+    //
+        @objc func autoScroll(timer : Timer) {
+            guard let userInfo = timer.userInfo as? [String: Int] else {return}
+            let totalPossibleOffset = self.pagingScrollView.bounds.size.width * CGFloat((userInfo["imageCount"] ?? 1)-1)
+            if offSet == totalPossibleOffset {
+                offSet = 0
+            } else {
+                offSet += self.pagingScrollView.bounds.size.width
+            }
+            DispatchQueue.main.async() {
+                UIView.animate(withDuration: 0.1, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: {
+                    self.pagingScrollView.contentOffset.x = CGFloat(self.offSet)
+                }, completion: nil)
+            }
+        }
+    
     @objc func setView(){
+        
         DispatchQueue.main.async {
-            self.productImage.image = self.detailItem.getProductImage()
+            let sc = self.detailItem.getPagingScrollView(bounds: self.pagingScrollView.bounds)
+            self.setTimer(imageCount: sc.subviews.count)
+            for view in sc.subviews {
+                self.pagingScrollView.addSubview(view)
+            }
         }
         productName.text = detailItem.getProductName()
         discountPrice.setTitle(detailItem.getGroupDiscountedPrice(), for: .normal)
@@ -81,20 +109,25 @@ class myDetailView: UIScrollView {
         contentView.trailingAnchor.constraint(equalTo: contentLayoutGuide.trailingAnchor).isActive = true
         contentView.widthAnchor.constraint(equalTo: frameLayoutGuide.widthAnchor).isActive = true
     }
-    
+
     func initProductImageView(){
-        contentView.addSubview(productImage)
-        productImage.translatesAutoresizingMaskIntoConstraints = false
-        productImage.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        productImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        productImage.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
-        productImage.heightAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
+        contentView.addSubview(pagingScrollView)
+        pagingScrollView.translatesAutoresizingMaskIntoConstraints = false
+        pagingScrollView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        pagingScrollView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        pagingScrollView.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
+        pagingScrollView.heightAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
+        
+        
+        self.pagingScrollView.delegate = self
+        self.pagingScrollView.isPagingEnabled = true
+        self.pagingScrollView.alwaysBounceVertical = false
     }
     
     func initProduntNameLabel(){
         contentView.addSubview(productName)
         productName.translatesAutoresizingMaskIntoConstraints = false
-        productName.topAnchor.constraint(equalTo: productImage.bottomAnchor, constant: 10).isActive = true
+        productName.topAnchor.constraint(equalTo: pagingScrollView.bottomAnchor, constant: 10).isActive = true
         productName.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         productName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
         productName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
@@ -194,11 +227,21 @@ class myDetailView: UIScrollView {
         productDescription.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         productDescription.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
-    
-    
 }
 
-extension myDetailView : WKNavigationDelegate {
+extension myDetailView : UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        self.offSet = self.pagingScrollView.contentOffset.x
+    }
+}
+    
+    
+    
+
+
+
+
+extension  myDetailView : WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             if self.webViewHeightAnchorConstraint != nil {
