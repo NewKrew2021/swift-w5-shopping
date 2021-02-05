@@ -5,8 +5,8 @@
 //  Created by 윤준수 on 2021/02/01.
 //
 
-import UIKit
 import Toaster
+import UIKit
 
 class MainViewController: UIViewController {
     @IBOutlet var shoppingCollectionView: UICollectionView!
@@ -19,7 +19,7 @@ class MainViewController: UIViewController {
         productCollectionView.productManager = productManager
         shoppingCollectionView.delegate = productCollectionView
         shoppingCollectionView.dataSource = productCollectionView
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(reloadSection(_:)), name: NSNotification.Name("reloadSection"), object: nil)
     }
 
@@ -29,24 +29,16 @@ class MainViewController: UIViewController {
             self.shoppingCollectionView.reloadSections(IndexSet(integer: index))
         }
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+    override func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {
         guard let touchPoint = touches.first?.location(in: shoppingCollectionView) else { return }
         guard let indexPath = shoppingCollectionView.indexPathForItem(at: touchPoint) else { return }
         guard let productType = ProductType(rawValue: indexPath.section) else { return }
         guard let product = productManager.getProduct(productType: productType, at: indexPath.item) else { return }
         Toast(text: "상품명:\(product.title) \n가격:\(product.originalPrice)").start()
-        
-        print(navigationController?.viewControllers)
-        
+
         guard let detailViewController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
-        navigationController?.pushViewController(detailViewController , animated: true)
-        NetworkHandler.getData(storeDomain: product.storeDomain, productId: product.productId){(data) in
-            let decoder = JsonDecoder()
-            guard let detail = decoder.parseDataToDetail(data: data) else { return }
-            detailViewController.productDetail = detail
-//            detailViewController.webView?.loadHTMLString(detail.description, baseURL: nil)
-        }
-       
+        navigationController?.pushViewController(detailViewController, animated: true)
+        detailViewController.initData(storeDomain: product.storeDomain, productId: product.productId)
     }
 }
