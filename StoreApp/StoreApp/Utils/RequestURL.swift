@@ -28,12 +28,12 @@ class RequestURL {
         do {
             if let decodeData = try? JSONDecoder().decode([Item].self, from : data){
                 let userInfo: [AnyHashable: Any] = [iter.rawValue:decodeData]
-                NotificationCenter.default.post(name: NSNotification.Name("saveItem"), object: self, userInfo: userInfo)
+                NotificationCenter.default.post(name: .saveItem, object: self, userInfo: userInfo)
             }
         } catch {
             let str = "\(iter.rawValue).json 을 읽어올 수 없습니다."
             let userInfo: [AnyHashable: Any] = [iter.rawValue:str]
-            NotificationCenter.default.post(name: NSNotification.Name("showToast"), object: self, userInfo: userInfo)
+            NotificationCenter.default.post(name: .showToast, object: self, userInfo: userInfo)
         }
     }
     

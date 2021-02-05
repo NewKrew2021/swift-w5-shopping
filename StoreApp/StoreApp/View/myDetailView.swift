@@ -37,7 +37,7 @@ class myDetailView: UIScrollView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         initUI()
-        NotificationCenter.default.addObserver(self, selector: #selector(setView), name: NSNotification.Name("saveDetailItem"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setView), name: .saveDetailItem, object: nil)
     }
     
     func downloadJson(productId: String, storeDomain: String){
@@ -126,11 +126,9 @@ class myDetailView: UIScrollView {
         let str = "\(productName.text!)을(를) \n\(button.titleLabel!.text!)에 구매하셨습니다."
 
         let userInfo: [AnyHashable: Any] = ["text":str]
-        NotificationCenter.default.post(name: NSNotification.Name("showToastDetail"), object: self, userInfo: userInfo)
+        NotificationCenter.default.post(name: .showToastDetail, object: self, userInfo: userInfo)
     }
 
-        
-        
     func initOriginalPriceLabel(){
         contentView.addSubview(standardPrice)
         standardPrice.translatesAutoresizingMaskIntoConstraints = false

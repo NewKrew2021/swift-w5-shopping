@@ -25,8 +25,8 @@ class ViewController: UIViewController {
         myShoppingCollectionView.delegate = self
         myShoppingCollectionView.dataSource = self
         
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadItems(notification:)), name: NSNotification.Name("reloadItem"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showToast(notification:)), name: NSNotification.Name("showToast"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadItems(notification:)), name: .reloadItem, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showToast(notification:)), name: .showToast, object: nil)
         
         setLayout()
         initNavigationBar()

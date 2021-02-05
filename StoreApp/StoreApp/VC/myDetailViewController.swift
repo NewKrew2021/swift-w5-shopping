@@ -20,8 +20,8 @@ class myDetailViewController:  UIViewController {
         super.viewDidLoad()
         self.navigationController?.title = "손안에 쇼핑"
         myDetailView.downloadJson(productId: productId, storeDomain: storeDomain)
-        NotificationCenter.default.addObserver(self, selector: #selector(showToastDetail(notification:)), name: NSNotification.Name("showToastDetail"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(cantLoadJson(notification:)), name: NSNotification.Name("cantLoadJson"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showToastDetail(notification:)), name: .showToastDetail, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(cantLoadJson(notification:)), name: .cantLoadJson, object: nil)
     }
     
     func initVC(productId : String, storeDomain : String){

@@ -26,9 +26,9 @@ class DetailStoreItem {
             do {
                 if let decodeData = try? JSONDecoder().decode(DetailItem.self, from : data){
                     self.detailItem = decodeData
-                    NotificationCenter.default.post(name: NSNotification.Name("saveDetailItem"), object: self, userInfo: nil)
+                    NotificationCenter.default.post(name: .saveDetailItem, object: self, userInfo: nil)
                 } else{
-                    NotificationCenter.default.post(name: NSNotification.Name("cantLoadJson"), object: self, userInfo: nil)
+                    NotificationCenter.default.post(name: .cantLoadJson, object: self, userInfo: nil)
                 }
             } catch {
             }
