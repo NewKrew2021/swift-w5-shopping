@@ -44,6 +44,9 @@
                     <color key="backgroundColor" red="0.96639782190000001" green="0.8940365911" blue="0.29647296670000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="talkDealTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="qHW-wM-4YE"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mSP-np-kCX">
                     <rect key="frame" x="16" y="135" width="42" height="21"/>

@@ -19,7 +19,6 @@ struct ProductDetailUseCase {
                         completed(viewModel, nil)
                     }
                 } catch {
-                    print(error)
                     completed(nil, error)
                 }
             }
@@ -49,5 +48,14 @@ struct ProductDetailUseCase {
             NotificationCenter.default.post(name: NSNotification.Name.didDownloadImage, object: nil)
         })
         completed(productDetailViewModel)
+    }
+
+    static func buyProduct(with manager: NetworkManable, completed: @escaping (Data?, Error?) -> Void) {
+        let body = ["text": "From Bean Milky, JK 감사합니다!"]
+        guard let payload = try? JSONEncoder().encode(body) else { return }
+
+        try? manager.getResource(endPoint: nil, from: EndPoint.paymentUrl, method: RequestMethod.POST, payload: payload) { (data, error) in
+            completed(data, error)
+        }
     }
 }

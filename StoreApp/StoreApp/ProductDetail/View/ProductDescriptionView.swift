@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ProductDescriptionViewDelegate: AnyObject {
+    func talkDealTapped()
+}
+
 class ProductDescriptionView: UIView {
 
     @IBOutlet var reviews: UILabel!
@@ -15,6 +19,7 @@ class ProductDescriptionView: UIView {
     @IBOutlet var talkDealButton: UIButton!
     @IBOutlet var storeName: UILabel!
     @IBOutlet var participants: UILabel!
+    weak var delegate: ProductDescriptionViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,4 +38,7 @@ class ProductDescriptionView: UIView {
         participants.text = "딜 \(viewModel.quantity.maxPurchaseOfBuyer ?? viewModel.quantity.minPurchase ?? 0) 참여"
     }
 
+    @IBAction func talkDealTapped(_ sender: Any) {
+        self.delegate?.talkDealTapped()
+    }
 }

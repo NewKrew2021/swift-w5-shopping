@@ -14,6 +14,7 @@ extension Notification.Name {
 protocol ProductDetailPresenterDelegate: AnyObject {
     func productDetailPresenter(_ presenter: ProductDetailPresenter, imagesAddedToHorizontalScrollView images: [UIImage])
     func productDetailPresenter(_ presenter: ProductDetailPresenter, configureDescriptionViewWith viewModel: ProductDetailViewModel)
+    func productDetailPresenter(_ presenter: ProductDetailPresenter, loadWebViewWith htmlString: String)
 }
 
 class ProductDetailPresenter {
@@ -46,12 +47,19 @@ class ProductDetailPresenter {
         if let with = with {
             self.delegate = with
             configureDescriptionView()
+            loadWebViewWithHtmlString()
         }
     }
 
     private func configureDescriptionView() {
         if let delegate = delegate {
             delegate.productDetailPresenter(self, configureDescriptionViewWith: viewModel)
+        }
+    }
+
+    private func loadWebViewWithHtmlString() {
+        if let delegate = delegate {
+            delegate.productDetailPresenter(self, loadWebViewWith: viewModel.productDescription)
         }
     }
 

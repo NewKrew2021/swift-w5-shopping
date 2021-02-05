@@ -72,7 +72,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bgs-bS-xjU">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bgs-bS-xjU" userLabel="Vertical Scroll View">
                                 <rect key="frame" x="0.0" y="88" width="390" height="756"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Blv-2O-t6F" userLabel="Vertical Scroll Content View">
@@ -84,7 +84,7 @@
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cka-aG-La2">
                                                         <rect key="frame" x="0.0" y="0.0" width="390" height="281"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                     </view>
                                                 </subviews>
                                                 <constraints>
@@ -99,30 +99,38 @@
                                                 <viewLayoutGuide key="frameLayoutGuide" id="27L-eg-t0A"/>
                                             </scrollView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n3h-gk-vsT" userLabel="Description View">
-                                                <rect key="frame" x="0.0" y="289" width="390" height="240"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <rect key="frame" x="0.0" y="281" width="390" height="220"/>
+                                                <color key="backgroundColor" systemColor="systemGray3Color"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="240" id="Noy-aF-IQi"/>
+                                                    <constraint firstAttribute="height" constant="220" id="Noy-aF-IQi"/>
                                                 </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RbC-v2-7VF" userLabel="WebKit Container">
+                                                <rect key="frame" x="0.0" y="501" width="390" height="255"/>
+                                                <color key="backgroundColor" systemColor="systemGray2Color"/>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="n3h-gk-vsT" firstAttribute="top" secondItem="Cka-aG-La2" secondAttribute="bottom" constant="8" symbolic="YES" id="7zQ-gM-94r"/>
+                                            <constraint firstItem="RbC-v2-7VF" firstAttribute="top" secondItem="n3h-gk-vsT" secondAttribute="bottom" id="30u-Xy-TWf"/>
+                                            <constraint firstItem="n3h-gk-vsT" firstAttribute="top" secondItem="Cka-aG-La2" secondAttribute="bottom" id="7zQ-gM-94r"/>
+                                            <constraint firstItem="RbC-v2-7VF" firstAttribute="trailing" secondItem="n3h-gk-vsT" secondAttribute="trailing" id="PDv-5U-q8F"/>
+                                            <constraint firstItem="RbC-v2-7VF" firstAttribute="leading" secondItem="n3h-gk-vsT" secondAttribute="leading" id="jn9-Us-wk8"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Blv-2O-t6F" firstAttribute="width" secondItem="bgs-bS-xjU" secondAttribute="width" id="4NS-RA-l5W"/>
+                                    <constraint firstItem="Blv-2O-t6F" firstAttribute="bottom" secondItem="jWv-EA-YG6" secondAttribute="bottom" id="E0S-D8-G3B"/>
                                     <constraint firstItem="n3h-gk-vsT" firstAttribute="width" secondItem="RFL-Tj-prJ" secondAttribute="width" id="Kdn-Fl-Ub4"/>
+                                    <constraint firstItem="jWv-EA-YG6" firstAttribute="top" secondItem="Blv-2O-t6F" secondAttribute="top" id="M6w-ce-kf7"/>
                                     <constraint firstAttribute="trailing" secondItem="Blv-2O-t6F" secondAttribute="trailing" id="Nee-e2-rCE"/>
                                     <constraint firstItem="n3h-gk-vsT" firstAttribute="centerX" secondItem="RFL-Tj-prJ" secondAttribute="centerX" id="RD6-dA-Kps"/>
                                     <constraint firstItem="RFL-Tj-prJ" firstAttribute="trailing" secondItem="n3h-gk-vsT" secondAttribute="trailing" id="UaR-wU-yla"/>
-                                    <constraint firstAttribute="bottom" secondItem="Blv-2O-t6F" secondAttribute="bottom" id="dB0-hE-HSe"/>
+                                    <constraint firstItem="jWv-EA-YG6" firstAttribute="bottom" secondItem="RbC-v2-7VF" secondAttribute="bottom" id="ZeK-aS-yAC"/>
                                     <constraint firstItem="n3h-gk-vsT" firstAttribute="leading" secondItem="RFL-Tj-prJ" secondAttribute="leading" id="h9K-hq-oQQ"/>
                                     <constraint firstItem="Blv-2O-t6F" firstAttribute="leading" secondItem="bgs-bS-xjU" secondAttribute="leading" id="rgW-eP-oTX"/>
                                     <constraint firstItem="Blv-2O-t6F" firstAttribute="height" secondItem="bgs-bS-xjU" secondAttribute="height" id="yIg-uu-Wjv"/>
-                                    <constraint firstItem="Blv-2O-t6F" firstAttribute="top" secondItem="bgs-bS-xjU" secondAttribute="top" id="yLR-Ks-BdU"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="jWv-EA-YG6"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="RFL-Tj-prJ"/>
@@ -143,6 +151,8 @@
                         <outlet property="horizontalScrollContentView" destination="Cka-aG-La2" id="Huw-LL-OJ7"/>
                         <outlet property="imageScrollView" destination="01n-Un-Gou" id="kU4-TR-1la"/>
                         <outlet property="scrollViewWidthConstraint" destination="BDU-rg-JRT" id="f18-50-8Ah"/>
+                        <outlet property="verticalScrollView" destination="bgs-bS-xjU" id="vFL-81-M5A"/>
+                        <outlet property="webViewContainer" destination="RbC-v2-7VF" id="kGY-K2-03L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7A2-5Z-yye" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -171,6 +181,15 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray3Color">
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
