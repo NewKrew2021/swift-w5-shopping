@@ -13,6 +13,7 @@ struct ProductDetailJson: Decodable {
 }
 
 struct ProductDetail: Decodable {
+    var title: String?
     var previewImages: [URL]
     var description: String
     var review: Review
