@@ -12,6 +12,7 @@ class MainViewController: UIViewController {
     @IBOutlet var shoppingCollectionView: UICollectionView!
     private let productManager = ProductManagerImpl.instance
     lazy var productCollectionView = ProductCollcetionViewUsecase(productManager: productManager)
+    private let productDetailManager = ProductDetailManager.instance
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +40,7 @@ class MainViewController: UIViewController {
 
         guard let detailViewController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
         navigationController?.pushViewController(detailViewController, animated: true)
-        detailViewController.initData(storeDomain: product.storeDomain, productId: product.productId)
+        detailViewController.productDetailManager = productDetailManager
+        productDetailManager.getProductDetail(storeDomain: product.storeDomain, productId: product.productId, productTitle: product.title)
     }
 }

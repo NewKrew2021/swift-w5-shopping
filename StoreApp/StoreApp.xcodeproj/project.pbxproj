@@ -29,6 +29,7 @@
 		F7E9B50325CB955F0042C82F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E9B50225CB955F0042C82F /* DetailViewController.swift */; };
 		F7E9B50725CB95EF0042C82F /* ProductCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E9B50625CB95EF0042C82F /* ProductCollectionView.swift */; };
 		F7E9B51925CD3FF30042C82F /* DetailMainSrcollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E9B51825CD3FF30042C82F /* DetailMainSrcollView.swift */; };
+		F7E9B51D25CD49070042C82F /* ProductDetailManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E9B51C25CD49070042C82F /* ProductDetailManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		F7E9B50225CB955F0042C82F /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		F7E9B50625CB95EF0042C82F /* ProductCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionView.swift; sourceTree = "<group>"; };
 		F7E9B51825CD3FF30042C82F /* DetailMainSrcollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMainSrcollView.swift; sourceTree = "<group>"; };
+		F7E9B51C25CD49070042C82F /* ProductDetailManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 				F704D07625C7FFE300E82AB5 /* Product.swift */,
 				F704D09F25C919FB00E82AB5 /* ProductManagerImpl.swift */,
 				F7E9B4F625CB8F750042C82F /* ProductDetail.swift */,
+				F7E9B51C25CD49070042C82F /* ProductDetailManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				F7E9B4F125CB89D90042C82F /* UIImageView+.swift in Sources */,
 				F704D07725C7FFE300E82AB5 /* Product.swift in Sources */,
 				F704D0A025C919FB00E82AB5 /* ProductManagerImpl.swift in Sources */,
+				F7E9B51D25CD49070042C82F /* ProductDetailManager.swift in Sources */,
 				F71FD48E25C7905500E826A5 /* MainViewController.swift in Sources */,
 				F71FD48A25C7905500E826A5 /* AppDelegate.swift in Sources */,
 				F704D04925C7982600E82AB5 /* ProductCollcetionViewUsecase.swift in Sources */,

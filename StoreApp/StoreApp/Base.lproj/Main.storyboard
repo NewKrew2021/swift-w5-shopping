@@ -162,11 +162,11 @@
         <scene sceneID="Msc-IE-8qL">
             <objects>
                 <viewController storyboardIdentifier="DetailViewController" id="tGd-zX-hNk" customClass="DetailViewController" customModule="StoreApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="sXG-BR-0U7">
+                    <view key="view" contentMode="scaleToFill" id="sXG-BR-0U7" customClass="DetailMainView" customModule="StoreApp" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccq-UA-cf1" customClass="DetailMainSrcollView" customModule="StoreApp" customModuleProvider="target">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccq-UA-cf1">
                                 <rect key="frame" x="0.0" y="88" width="390" height="722"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="p8s-qt-vKP">
@@ -230,8 +230,8 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JLS-a3-tzP">
                                                         <rect key="frame" x="194.66666666666663" y="0.0" width="195.33333333333337" height="128"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vht-GD-CTZ">
-                                                                <rect key="frame" x="62" y="-1" width="134" height="128"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vht-GD-CTZ">
+                                                                <rect key="frame" x="58.666666666666686" y="0.0" width="136.66666666666666" height="128"/>
                                                                 <color key="backgroundColor" red="1" green="0.87785291219999995" blue="0.1569414502" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <state key="normal" title="톡딜가">
                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -318,9 +318,23 @@
                             <constraint firstItem="I2O-I6-g7U" firstAttribute="trailing" secondItem="ccq-UA-cf1" secondAttribute="trailing" id="Xpk-Y5-ahA"/>
                             <constraint firstItem="ccq-UA-cf1" firstAttribute="leading" secondItem="I2O-I6-g7U" secondAttribute="leading" id="eaS-NU-VIG"/>
                         </constraints>
+                        <connections>
+                            <outlet property="deliveryFee" destination="Jnb-5r-Abt" id="MpI-r8-COC"/>
+                            <outlet property="imageScrollView" destination="hWn-R6-oNj" id="piE-4L-nQE"/>
+                            <outlet property="mainScrollView" destination="ccq-UA-cf1" id="WVd-vG-Koj"/>
+                            <outlet property="noticeDate" destination="bRL-wH-VfE" id="tt5-7q-XHJ"/>
+                            <outlet property="noticeTitle" destination="eFY-3Z-YGZ" id="3k6-Or-gHk"/>
+                            <outlet property="numberOfParticipant" destination="xl0-gP-74V" id="E9q-f0-Jpj"/>
+                            <outlet property="productTitle" destination="6vc-vD-0AW" id="hWf-bX-NmK"/>
+                            <outlet property="purchaseDiscount" destination="vht-GD-CTZ" id="x0r-Ly-uLb"/>
+                            <outlet property="purchaseOriginal" destination="Zz1-Hl-Pdl" id="fYH-jy-JmB"/>
+                            <outlet property="starRate" destination="6Lf-hf-eFd" id="U4B-MI-rXT"/>
+                            <outlet property="webView" destination="fge-64-8B3" id="5rr-ru-Jib"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="손안에쇼핑" id="BEg-72-rCU"/>
                     <connections>
+                        <outlet property="detailMainView" destination="sXG-BR-0U7" id="qCw-vR-w3m"/>
                         <outlet property="imageScrollView" destination="hWn-R6-oNj" id="0NF-Q2-Uds"/>
                         <outlet property="mainScrollView" destination="ccq-UA-cf1" id="vzx-y1-D5Z"/>
                         <outlet property="webView" destination="fge-64-8B3" id="ppZ-L0-FGl"/>

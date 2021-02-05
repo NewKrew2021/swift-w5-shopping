@@ -10,36 +10,33 @@ import UIKit
 import WebKit
 
 class DetailViewController: UIViewController {
-    @IBOutlet weak var mainScrollView: UIScrollView!
-    @IBOutlet weak var imageScrollView: UIScrollView!
+    @IBOutlet var detailMainView: DetailMainView!
+    @IBOutlet var mainScrollView: UIScrollView!
+    @IBOutlet var imageScrollView: UIScrollView!
     var imageViews: [UIImageView] = []
-    @IBOutlet weak var webView: WKWebView!
-    var productDetail: ProductDetail?
+    @IBOutlet var webView: WKWebView!
+    var productDetailManager: ProductDetailManager?
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        initView()
+        NotificationCenter.default.addObserver(self, selector: #selector(setViewData(_:)), name: .getProductDetailFinished, object: nil)
+        detailMainView.initView()
     }
 
-    func initData(storeDomain: String, productId: Int) {
-        NetworkHandler.getData(storeDomain: storeDomain, productId: productId) { data in
-            let decoder = JsonDecoder()
-            guard let detail = decoder.parseDataToDetail(data: data) else { return }
-            self.productDetail = detail
-            DispatchQueue.main.async { [self] in
-                setImageAtImageScroll()
-                loadDescription()
-            }
+    @objc func setViewData(_: Notification) {
+        DispatchQueue.main.async {
+            self.setImageAtImageScroll()
+        }
+        DispatchQueue.main.async {
+            self.loadDescription()
+        }
+        guard let productDetail = productDetailManager?.productDetail else { return }
+        DispatchQueue.main.async {
+            self.detailMainView.setViewData(productDetail: productDetail)
         }
     }
 
-    func initView() {
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        webView.navigationDelegate = self
-    }
-
     func setImageAtImageScroll() {
-        guard let imageUrls = productDetail?.previewImages else { return }
+        guard let imageUrls = productDetailManager?.previewImages else { return }
         for index in imageUrls.indices {
             let imageView = UIImageView()
             imageViews.append(imageView)
@@ -53,13 +50,12 @@ class DetailViewController: UIViewController {
         }
         imageViews[0].leadingAnchor.constraint(equalTo: imageScrollView.contentLayoutGuide.leadingAnchor).isActive = true
         imageScrollView.contentSize = CGSize(width: view.bounds.width * CGFloat(imageViews.count), height: view.bounds.width * 0.75)
-        imageScrollView.isPagingEnabled = true
     }
 
     func loadDescription() {
-        let meta_java : String = "<meta name=\"viewport\" content=\"width=device-width, shrink-to-fit=YES\">"
+        let meta_java: String = "<meta name=\"viewport\" content=\"width=device-width, shrink-to-fit=YES\">"
 
-        guard let descriptionHtml = productDetail?.description else { return }
+        guard let descriptionHtml = productDetailManager?.productDetail?.description else { return }
         webView.loadHTMLString(meta_java + descriptionHtml, baseURL: nil)
     }
 
@@ -69,7 +65,7 @@ class DetailViewController: UIViewController {
     }
 }
 
-extension DetailViewController: WKNavigationDelegate{
+extension DetailViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish _: WKNavigation!) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.webView.heightAnchor.constraint(equalToConstant: webView.scrollView.contentSize.height).isActive = true
