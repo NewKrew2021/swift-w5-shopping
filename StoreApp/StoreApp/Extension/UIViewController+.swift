@@ -9,7 +9,7 @@
 import Foundation
 import Toaster
 
-extension ViewController {
+extension UIViewController {
     func showToast(text : String){
          let toast = Toast(text: text)
         ToastView.appearance().font = UIFont.systemFont(ofSize: 13, weight: .bold)
