@@ -14,6 +14,10 @@ struct ProductDetailResult: Codable {
 
 struct ProductDetail: Codable {
 
+    enum Status: String, Codable {
+        case ON_SALE, SOLD_OUT
+    }
+
     let gift: String
     let benefits: [String]
     let booked: Bool
@@ -22,13 +26,16 @@ struct ProductDetail: Codable {
     let optionType: String
     let certTypeFood: Bool
     let price: Price
+    let review: Review
     let id: Int
     let reviewCreatable: Bool
     let delivery: Delivery
     let images: [String]
+    let quantity: Quantity
     let coupon: Bool
     let store: Store
     let taxDeduction: Bool
+    let notices: [Notice]
     let imageRatio: String
     let adultOnly: Bool
     let name: String
@@ -40,11 +47,16 @@ struct ProductDetail: Codable {
     enum CodingKeys: String, CodingKey {
         case gift, benefits, booked
         case productDescription = "description"
-        case previewImages, optionType, certTypeFood, price, id, reviewCreatable, delivery, images, coupon, store, taxDeduction, imageRatio, adultOnly, name, category, favorite
-        case sharingImageUrl
-        case status
+        case previewImages, optionType, certTypeFood, price, review, id, reviewCreatable, delivery, images, quantity, coupon, store, taxDeduction, notices, imageRatio, adultOnly, name, category, favorite, sharingImageUrl, status
     }
 
+}
+
+struct Review: Codable {
+    let qnaCount, reviewCount, averageRating: Int
+    let totalProductStarRating: Double
+    let totalDeliveryStarRating, productPositivePercentage, deliveryPositivePercentage, productStar1Percentage: Int
+    let productStar2Percentage, productStar3Percentage, productStar4Percentage: Int
 }
 
 struct Price: Codable {
@@ -54,11 +66,16 @@ struct Price: Codable {
 }
 
 struct Delivery: Codable {
+
+    enum DeliveryFeeType: String, Codable {
+        case FREE, CONDITIONAL_FREE
+    }
+
     let deliveryMethodType: String
-    let deliveryFeeType, deliveryFeePaymentType: String
+    let deliveryFeeType: DeliveryFeeType
+    let deliveryFeePaymentType: String
     let deliveryFee: Int
     let bundleGroupAvailable: Bool
-    let isolatedAreaNotice: String
 }
 
 struct Store: Codable {
@@ -74,4 +91,16 @@ struct Store: Codable {
 
 struct Category: Codable {
     let id, name: String
+}
+
+struct Quantity: Codable {
+    let maxPurchase: Int?
+    let maxPurchaseOfBuyer: Int?
+    let minPurchase: Int?
+    let minPurchaseOfBuyer: Int?
+}
+
+struct Notice: Codable {
+    let id: Int
+    let title, content, createdAt: String
 }
