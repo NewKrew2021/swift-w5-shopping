@@ -20,8 +20,8 @@ class myDetailViewController:  UIViewController {
         super.viewDidLoad()
         self.navigationController?.title = "손안에 쇼핑"
         myDetailView.downloadJson(productId: productId, storeDomain: storeDomain)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(showToastDetail(notification:)), name: NSNotification.Name("showToastDetail"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(cantLoadJson(notification:)), name: NSNotification.Name("cantLoadJson"), object: nil)
     }
     
     func initVC(productId : String, storeDomain : String){
@@ -31,11 +31,13 @@ class myDetailViewController:  UIViewController {
     
     @objc func showToastDetail(notification: Notification){
         guard let userInfo = notification.userInfo as NSDictionary? as? [String: String] else {return}
-        let toast = Toast(text: userInfo.values.first!)
-        ToastView.appearance().font = UIFont.systemFont(ofSize: 13, weight: .bold)
-        toast.show()
+        
+        showToast(text: userInfo.values.first!)
+        self.navigationController?.popViewController(animated: true)
     }
     
-    
-    
+    @objc func cantLoadJson(notification: Notification){
+        showToast(text: "페이지를 읽어올 수 없습니다.")
+        self.navigationController?.popViewController(animated: true)
+    }
 }
