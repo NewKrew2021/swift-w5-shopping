@@ -7,3 +7,12 @@
 //
 
 import Foundation
+
+enum JsonFileName : String {
+    case best = "best"
+    case mask = "mask"
+    case grocery = "grocery"
+    case fryingpan = "fryingpan"
+    
+    static let jsonFileName = [best, mask, grocery, fryingpan]
+}
