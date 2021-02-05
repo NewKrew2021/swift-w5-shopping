@@ -7,6 +7,7 @@
 
 import UIKit
 import WebKit
+import Cosmos
 
 class ProductViewController: UIViewController {
     var product : Product?
@@ -14,6 +15,8 @@ class ProductViewController: UIViewController {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var pagingScrollView: UIScrollView!
     private var offSet: CGFloat = 0
+    @IBOutlet weak var ratingView: CosmosView!
+    @IBOutlet weak var reviewCountLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +39,7 @@ class ProductViewController: UIViewController {
         self.navigationItem.title = productDetail.data.store.name
         setPagingScrollView(imageUrls: productDetail.data.previewImages)
         setTimer(imageCount: productDetail.data.previewImages.count)
+        setReviewStackView(totalProductStarRating: productDetail.data.review.totalProductStarRating, reviewCount: productDetail.data.review.reviewCount)
     }
     
     func setPagingScrollView(imageUrls:[String]) {
@@ -55,6 +59,18 @@ class ProductViewController: UIViewController {
     
     func setTimer(imageCount: Int) {
         Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(autoScroll), userInfo: ["imageCount" : imageCount], repeats: true)
+    }
+    
+    func setReviewStackView(totalProductStarRating:Double, reviewCount:Int) {
+        var cosmosSetting = CosmosSettings()
+        cosmosSetting.totalStars = Int(ceil(totalProductStarRating))
+        cosmosSetting.starSize = 13
+        cosmosSetting.filledColor = .systemBlue
+        cosmosSetting.filledBorderColor = .systemBlue
+        cosmosSetting.starMargin = 0
+        self.ratingView.rating = totalProductStarRating
+        ratingView.settings = cosmosSetting
+        self.reviewCountLabel.text = "리뷰 \(reviewCount)건"
     }
     
     @objc func autoScroll(timer : Timer) {
