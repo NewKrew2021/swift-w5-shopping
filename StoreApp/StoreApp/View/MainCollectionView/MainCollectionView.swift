@@ -8,9 +8,14 @@
 
 import UIKit
 
+protocol SendStoreItemDataDelegate {
+    func sendData(storeItem: StoreItem?)
+}
+
 class MainCollectionView: UICollectionView {
     
     var storeItems = StoreItems()
+    var sendStoreItemDataDelegate: SendStoreItemDataDelegate?
     
     func initView() {
         
@@ -113,6 +118,23 @@ extension MainCollectionView: UICollectionViewDelegate, UICollectionViewDataSour
         let height: CGFloat = 20
         return CGSize(width: width, height: height)
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        var storeItemToDeliever: StoreItem?
+        switch indexPath.section {
+        case 0:
+            storeItemToDeliever = storeItems.bests[indexPath.row]
+        case 1:
+            storeItemToDeliever = storeItems.masks[indexPath.row]
+        case 2:
+            storeItemToDeliever = storeItems.grocerys[indexPath.row]
+        case 3:
+            storeItemToDeliever = storeItems.fryingpans[indexPath.row]
+        default:
+            storeItemToDeliever = nil
+        }
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "delieverSelectedData"), object: storeItemToDeliever)
     }
 
     

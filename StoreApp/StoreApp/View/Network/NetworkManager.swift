@@ -23,4 +23,17 @@ class NetworkManager {
         
     }
     
+    func getDetailData(storeItem: StoreItem) {
+        
+        let url = "https://store.kakao.com/a/\(storeItem.storeDomain!)/product/\(storeItem.productId!)/detail"
+        URLSession(configuration: URLSessionConfiguration.default).dataTask(with: URL(string: url)!) {
+            (data, response, error) in
+            guard let jsonData = data else {return}
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "getDetailData"), object: jsonData)
+            }
+        }.resume()
+        
+    }
+    
 }

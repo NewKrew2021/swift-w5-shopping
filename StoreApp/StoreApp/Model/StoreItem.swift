@@ -20,5 +20,6 @@ class StoreItem: Decodable {
     let groupDiscountedPrice: Int?
     let groupDiscountWillClosed: Bool?
     let groupDiscountUserCount: Int?
+    let storeDomain: String?
     
 }

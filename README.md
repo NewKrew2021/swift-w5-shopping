@@ -38,3 +38,13 @@
 - CacheManager, DownloadManager class 생성
 - 캐시 디렉토리에 없는 이미지 파일은 다운로드 후 출력
 - 캐시 디렉토리에 있는 파일은 출력
+
+
+9. embed navigation controller
+- MainViewController에 네비게이션 컨트롤러 embed
+- 셀 클릭시 StoreItem 객체 데이터 DetailViewController한테 전달
+
+
+10. parse StoreItemDetailData
+- 상품 세부 정보 json data 파싱
+- 일부 데이터 StoreItemDetailController에 출력
