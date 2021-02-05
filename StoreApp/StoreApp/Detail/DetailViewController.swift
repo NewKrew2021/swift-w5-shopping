@@ -8,6 +8,8 @@
 import UIKit
 import WebKit
 
+// MARK: - DetailViewController
+
 class DetailViewController: UIViewController {
     // MARK: Internal
 
@@ -114,7 +116,7 @@ class DetailViewController: UIViewController {
         contentView.bottomAnchor.constraint(equalTo: mainScrollView.bottomAnchor).isActive = true
         contentView.leftAnchor.constraint(equalTo: mainScrollView.leftAnchor).isActive = true
         contentView.rightAnchor.constraint(equalTo: mainScrollView.rightAnchor).isActive = true
-        contentView.frame.size = CGSize(width: view.bounds.width, height: view.bounds.height*3)
+        contentView.frame.size = CGSize(width: view.bounds.width, height: view.bounds.height)
     }
     
     private func addDetailScrollView() {
@@ -182,11 +184,27 @@ class DetailViewController: UIViewController {
     
     private func addWebView() {
         contentView.addSubview(webView)
+        webView.navigationDelegate = self
         webView.loadHTMLString(viewModel.detail?.data.description ?? "", baseURL: nil)
         webView.topAnchor.constraint(equalTo: infoView.bottomAnchor, constant: 5).isActive = true
-        webView.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor).isActive = true
-        webView.rightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.rightAnchor).isActive = true
+        webView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        webView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         webView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        contentView.sizeToFit()
+        webView.frame.size = webView.scrollView.contentSize
+        webView.setNeedsLayout()
+        print(webView.frame.size.height)
+        contentView.frame.size.height += webView.frame.size.height
+    }
+}
+
+// MARK: WKNavigationDelegate
+
+extension DetailViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.1) { [weak self] in
+            print(webView.scrollView.contentSize.height)
+            self?.contentView.frame.size.height += webView.scrollView.contentSize.height
+            self?.contentView.layoutIfNeeded()
+        }
     }
 }
