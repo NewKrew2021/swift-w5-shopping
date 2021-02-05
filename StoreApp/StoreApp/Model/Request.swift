@@ -60,4 +60,24 @@ class Request {
             }
         }.resume()
     }
+    
+    func requestPostPurchase(text: String) {
+        guard let url = URL(string:"https://hooks.slack.com/services/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") else { return }
+        let parameterDictionary = ["text" : text]
+        var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+            guard let httpBody = try? JSONSerialization.data(withJSONObject: parameterDictionary, options: []) else {
+                return
+            }
+            request.httpBody = httpBody
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard error == nil && data != nil else {
+                if let err = error {
+                    print(err.localizedDescription)
+                }
+                return
+            }
+        }.resume()
+    }
 }

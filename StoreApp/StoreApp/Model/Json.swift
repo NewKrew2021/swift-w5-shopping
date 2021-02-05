@@ -23,9 +23,9 @@ struct Json {
     
     func parsingProductDetail(jsonData : Data) ->Request.Result<ProductDetail, Error> {
         let jsonDecoder: JSONDecoder = JSONDecoder()
-//        print(String(decoding: jsonData, as: UTF8.self))
         do {
-            let productDetail = try jsonDecoder.decode(ProductDetail.self, from: jsonData)
+            let jsonString = String(decoding: jsonData, as: UTF8.self).replacingOccurrences(of: "\\u", with: "").replacingOccurrences(of: "\\\"", with: "")
+            let productDetail = try jsonDecoder.decode(ProductDetail.self, from: jsonString.data(using: .utf8) ?? Data())
             
             return .success(productDetail)
         } catch let error {

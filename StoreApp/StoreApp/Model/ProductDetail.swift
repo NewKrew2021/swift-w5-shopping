@@ -19,8 +19,10 @@ struct ProductDetail: Codable {
         let delivery : Delivery
         let notices : [Notice]
         let description : String
+        let name : String
         
         struct Price : Codable {
+            let standardPrice : Int
             let discountedPrice : Int
         }
         

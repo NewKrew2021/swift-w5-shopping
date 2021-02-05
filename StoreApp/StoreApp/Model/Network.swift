@@ -19,4 +19,8 @@ struct Network {
     func getProductDetailData(product: Product?) {
         request.requestProductDetail(storeDomain: product?.storeDomain ?? "", productId: product?.productId ?? 0)
     }
+    
+    func postPurchaseItem(purchaseText: String) {
+        request.requestPostPurchase(text: purchaseText)
+    }
 }
