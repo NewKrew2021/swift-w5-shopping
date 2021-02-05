@@ -15,9 +15,9 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(123)
         setCollectionView()
         addObserver()
-        getItems(index: 0)
         title = "카카오 쇼핑"
     }
 
@@ -93,10 +93,11 @@ extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = viewModel[indexPath.section, indexPath.item]
         let name = item.name
-        guard let price = item.price else { return }
+        let price = item.originalPrice
         let detailVC = DetailViewController()
         detailVC.title = item.storeName
-        request.requestDetail(storeDomain: item.storeDomain, productId: item.id) { detail, _ in
+
+        request.requestDetail(storeDomain: item.storeDomain, productId: item.id) { detail, error in
             detailVC.viewModel.detail = detail
             
             DispatchQueue.main.async {[weak self] in
@@ -188,6 +189,7 @@ extension MainViewController: UIScrollViewDelegate {
         if distanceFromBottom < height {
             for section in 0 ..< viewModel.flags.count {
                 if !viewModel.hasItems(at: section) {
+                    print("getItem\(section)")
                     getItems(index: section)
                     break
                 }

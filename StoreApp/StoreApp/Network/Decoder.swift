@@ -7,12 +7,15 @@
 
 import Foundation
 
-class Decoder{
-    
-    static func parseToItem(data: Data) -> [Item]{
+class Decoder {
+    static func parseToItem(data: Data) -> [Item] {
         var items: [Item] = []
         do {
-            items = try JSONDecoder().decode([Item].self, from: data)
+            let str = String(data: data, encoding: .utf8)
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .deferredToDate
+            decoder.keyDecodingStrategy = .useDefaultKeys
+            items = try decoder.decode([Item].self, from: (str?.data(using: .unicode))!)
         } catch let DecodingError.keyNotFound(key, context) {
             Swift.print("could not find key \(key) in JSON: \(context.debugDescription)")
         } catch let DecodingError.valueNotFound(type, context) {
@@ -27,10 +30,11 @@ class Decoder{
         return items
     }
     
-    static func parseToDetail(data: Data) -> Detail?{
+    static func parseToDetail(data: Data) -> Detail? {
         var detail: Detail?
-        do{
-            detail = try JSONDecoder().decode(Detail.self, from: data)
+        do {
+            let data1 = Data(String(data: data, encoding: .utf8)!.replacingOccurrences(of: "\\u", with: "").utf8)
+            detail = try JSONDecoder().decode(Detail.self, from: data1)
             return detail
         } catch let DecodingError.keyNotFound(key, context) {
             Swift.print("could not find key \(key) in JSON: \(context.debugDescription)")
@@ -45,5 +49,4 @@ class Decoder{
         }
         return detail
     }
-    
 }

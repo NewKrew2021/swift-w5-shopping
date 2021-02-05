@@ -20,7 +20,7 @@ class Request {
 
     func requestItem(type: String) {
         guard let url = URL(string: "\(base_itemUrl)\(type).json") else { return }
-
+        
         let session = URLSession(configuration: .default)
         let dataTask = session.dataTask(with: url) { data, _, error in
             if let error = error {
