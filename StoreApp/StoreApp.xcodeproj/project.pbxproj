@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		19427E96506E90864F026049 /* Pods_StoreApp_StoreAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAFAC40F7890543BD970DA03 /* Pods_StoreApp_StoreAppUITests.framework */; };
 		3254818225CD27EF00D9D83A /* DetailScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3254818125CD27EF00D9D83A /* DetailScrollView.swift */; };
+		3254818825CD3E2900D9D83A /* UIButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3254818725CD3E2900D9D83A /* UIButtonDelegate.swift */; };
 		3271AF2B25C7AE9600682D17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3271AF2A25C7AE9600682D17 /* AppDelegate.swift */; };
 		3271AF2D25C7AE9600682D17 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3271AF2C25C7AE9600682D17 /* SceneDelegate.swift */; };
 		3271AF2F25C7AE9600682D17 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3271AF2E25C7AE9600682D17 /* ViewController.swift */; };
@@ -56,6 +57,7 @@
 		1C6CE4FCF91185637CB6C002 /* Pods-StoreApp-StoreAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreApp-StoreAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-StoreApp-StoreAppUITests/Pods-StoreApp-StoreAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		227777DBB18F577932455DBD /* Pods-StoreApp-StoreAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreApp-StoreAppUITests.release.xcconfig"; path = "Target Support Files/Pods-StoreApp-StoreAppUITests/Pods-StoreApp-StoreAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3254818125CD27EF00D9D83A /* DetailScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScrollView.swift; sourceTree = "<group>"; };
+		3254818725CD3E2900D9D83A /* UIButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonDelegate.swift; sourceTree = "<group>"; };
 		3271AF2725C7AE9600682D17 /* StoreApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StoreApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3271AF2A25C7AE9600682D17 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3271AF2C25C7AE9600682D17 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +121,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3254818625CD3E1900D9D83A /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				3254818725CD3E2900D9D83A /* UIButtonDelegate.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		3271AF1E25C7AE9600682D17 = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +154,7 @@
 		3271AF2925C7AE9600682D17 /* StoreApp */ = {
 			isa = PBXGroup;
 			children = (
+				3254818625CD3E1900D9D83A /* Protocol */,
 				32E045EA25CAB3B0009B0A77 /* Extension */,
 				3271AF6925C8376200682D17 /* Model */,
 				3271AF5E25C7BB4800682D17 /* View */,
@@ -487,6 +498,7 @@
 				3254818225CD27EF00D9D83A /* DetailScrollView.swift in Sources */,
 				3271AF6425C7BEDE00682D17 /* ShoppingCollectionViewCell.swift in Sources */,
 				3271AF2F25C7AE9600682D17 /* ViewController.swift in Sources */,
+				3254818825CD3E2900D9D83A /* UIButtonDelegate.swift in Sources */,
 				3271AF6B25C8377200682D17 /* Product.swift in Sources */,
 				32E045EC25CAB3DF009B0A77 /* UIImageView+.swift in Sources */,
 				3271AF2B25C7AE9600682D17 /* AppDelegate.swift in Sources */,

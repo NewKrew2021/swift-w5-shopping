@@ -22,8 +22,11 @@ class DetailScrollView: UIScrollView, UIScrollViewDelegate {
     @IBOutlet weak var storeNameLabel: UILabel!
     @IBOutlet weak var deliveryLabel: UILabel!
     @IBOutlet weak var webView: WKWebView!
+    var uiButtonDeleage : UIButtonDelegate?
+    private var productDetail : ProductDetail?
     
     func setViewData(productDetail:ProductDetail) {
+        self.productDetail = productDetail
         setPagingScrollView(imageUrls: productDetail.data.previewImages)
         setTimer(imageCount: productDetail.data.previewImages.count)
         setReviewStackView(totalProductStarRating: productDetail.data.review.totalProductStarRating, reviewCount: productDetail.data.review.reviewCount)
@@ -87,10 +90,12 @@ class DetailScrollView: UIScrollView, UIScrollViewDelegate {
             priceStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8).isActive = true
             priceStackView.addArrangedSubview(purchaseButton)
             priceStackView.addArrangedSubview(talkDealButton)
+            talkDealButton.addTarget(self, action: #selector(clickedPurchaseButton), for: .touchUpInside)
         } else {
             purchaseButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
             priceStackView.addArrangedSubview(purchaseButton)
         }
+        purchaseButton.addTarget(self, action: #selector(clickedTalkDealButton), for: .touchUpInside)
     }
     
     @objc func autoScroll(timer : Timer) {
@@ -121,6 +126,14 @@ class DetailScrollView: UIScrollView, UIScrollViewDelegate {
         self.webView.scrollView.isScrollEnabled = false
         self.webView.loadHTMLString(description, baseURL: nil)
         self.webView.sizeToFit()
+    }
+    
+    @objc func clickedPurchaseButton() {
+        uiButtonDeleage?.purchaseItem(purchaseText: "Blue \(self.productDetail?.data.name ?? "") \(self.productDetail?.data.price.standardPrice ?? 0)원 주문완료")
+    }
+    
+    @objc func clickedTalkDealButton() {
+        uiButtonDeleage?.purchaseItem(purchaseText: "Blue \(self.productDetail?.data.name ?? "") \(self.productDetail?.data.price.discountedPrice ?? 0)원 주문완료")
     }
 }
 

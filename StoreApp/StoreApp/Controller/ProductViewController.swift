@@ -20,6 +20,7 @@ class ProductViewController: UIViewController {
                     name: NSNotification.Name(rawValue: "jsonParsingProductDetail"),
                     object: nil)
         
+        mainScrollView.uiButtonDeleage = self
         network.getProductDetailData(product: product)
     }
 
@@ -33,5 +34,11 @@ class ProductViewController: UIViewController {
     func setViewData(productDetail:ProductDetail) {
         self.navigationItem.title = productDetail.data.store.name
         mainScrollView.setViewData(productDetail: productDetail)
+    }
+}
+
+extension ProductViewController : UIButtonDelegate {
+    func purchaseItem(purchaseText: String) {
+        network.postPurchaseItem(purchaseText: purchaseText)
     }
 }
