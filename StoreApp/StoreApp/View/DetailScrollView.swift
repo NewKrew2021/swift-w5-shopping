@@ -7,6 +7,7 @@
 
 import UIKit
 import Cosmos
+import WebKit
 
 class DetailScrollView: UIScrollView, UIScrollViewDelegate {
     
@@ -20,6 +21,7 @@ class DetailScrollView: UIScrollView, UIScrollViewDelegate {
     @IBOutlet weak var priceStackView: UIStackView!
     @IBOutlet weak var storeNameLabel: UILabel!
     @IBOutlet weak var deliveryLabel: UILabel!
+    @IBOutlet weak var webView: WKWebView!
     
     func setViewData(productDetail:ProductDetail) {
         setPagingScrollView(imageUrls: productDetail.data.previewImages)
@@ -29,6 +31,7 @@ class DetailScrollView: UIScrollView, UIScrollViewDelegate {
         setPriceStackView(status: productDetail.data.status, standardPrice: productDetail.data.price.standardPrice, discountedPrice: productDetail.data.price.discountedPrice)
         self.storeNameLabel.text = productDetail.data.store.name
         setDelivery(deliveryFeeType: productDetail.data.delivery.deliveryFeeType, deliveryFee: productDetail.data.delivery.deliveryFee)
+        setWebView(description: productDetail.data.description)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -110,6 +113,21 @@ class DetailScrollView: UIScrollView, UIScrollViewDelegate {
             deliveryLabel.text = "배송비 무료"
         } else {
             deliveryLabel.text = "배송비 \(deliveryFee)원"
+        }
+    }
+    
+    func setWebView(description: String) {
+        self.webView.navigationDelegate = self
+        self.webView.scrollView.isScrollEnabled = false
+        self.webView.loadHTMLString(description, baseURL: nil)
+        self.webView.sizeToFit()
+    }
+}
+
+extension DetailScrollView : WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.webView.heightAnchor.constraint(equalToConstant: webView.scrollView.contentSize.height).isActive = true
         }
     }
 }
