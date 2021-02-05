@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WebKit
 
 class DetailViewController: UIViewController {
     // MARK: Internal
@@ -21,19 +22,22 @@ class DetailViewController: UIViewController {
         addTitleView()
         addBuyButton()
         addInfoView()
+        addWebView()
         scrollView.addImages(urls: viewModel.detail?.data.previewUrls ?? [])
     }
 
     // MARK: Private
 
     private var scrollView = DetailScrollView()
+    private var contentView = UIView()
     private var mainScrollView: UIScrollView = {
         let view = UIScrollView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-        view.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+//        view.contentSize = CGSize(width: 1000, height: 1000)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.isDirectionalLockEnabled = true
         return view
     }()
-    
+
     private var starLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -91,6 +95,13 @@ class DetailViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    private var webView: WKWebView = {
+        let view = WKWebView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.scrollView.isScrollEnabled = false
+        return view
+    }()
 
     private func addMainScrollView() {
         view.addSubview(mainScrollView)
@@ -98,61 +109,84 @@ class DetailViewController: UIViewController {
         mainScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         mainScrollView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
         mainScrollView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
+        mainScrollView.addSubview(contentView)
+        contentView.topAnchor.constraint(equalTo: mainScrollView.topAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: mainScrollView.bottomAnchor).isActive = true
+        contentView.leftAnchor.constraint(equalTo: mainScrollView.leftAnchor).isActive = true
+        contentView.rightAnchor.constraint(equalTo: mainScrollView.rightAnchor).isActive = true
+        contentView.frame.size = CGSize(width: view.bounds.width, height: view.bounds.height*3)
     }
     
     private func addDetailScrollView() {
-        mainScrollView.addSubview(scrollView)
-        scrollView.leftAnchor.constraint(equalTo: mainScrollView.safeAreaLayoutGuide.leftAnchor).isActive = true
-        scrollView.rightAnchor.constraint(equalTo: mainScrollView.safeAreaLayoutGuide.rightAnchor).isActive = true
-        scrollView.topAnchor.constraint(equalTo: mainScrollView.safeAreaLayoutGuide.topAnchor).isActive = true
-        scrollView.heightAnchor.constraint(equalTo: mainScrollView.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4).isActive = true
-        print(scrollView.frame)
-        print(scrollView.bounds)
+        contentView.addSubview(scrollView)
+        scrollView.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor).isActive = true
+        scrollView.rightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.rightAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor).isActive = true
+        scrollView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4).isActive = true
     }
     
     private func addReviewView() {
-        mainScrollView.addSubview(starLabel)
-        mainScrollView.addSubview(reviewLabel)
-        starLabel.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 5).isActive = true
+        contentView.addSubview(starLabel)
+        contentView.addSubview(reviewLabel)
+        
         reviewLabel.topAnchor.constraint(equalTo: starLabel.topAnchor).isActive = true
-        starLabel.trailingAnchor.constraint(equalTo: mainScrollView.safeAreaLayoutGuide.centerXAnchor, constant: -30).isActive = true
-        reviewLabel.centerXAnchor.constraint(equalTo: mainScrollView.safeAreaLayoutGuide.centerXAnchor, constant: 30).isActive = true
+        reviewLabel.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor, constant: 30).isActive = true
+        reviewLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        starLabel.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 5).isActive = true
+        starLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor, constant: -30).isActive = true
+        starLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
     
     private func addTitleView() {
-        mainScrollView.addSubview(titleTextView)
-        titleTextView.widthAnchor.constraint(equalTo: mainScrollView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8).isActive = true
-        titleTextView.heightAnchor.constraint(equalTo: mainScrollView.safeAreaLayoutGuide.heightAnchor, multiplier: 0.08).isActive = true
-        titleTextView.centerXAnchor.constraint(equalTo: mainScrollView.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        contentView.addSubview(titleTextView)
+        titleTextView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
+        titleTextView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.08).isActive = true
+        titleTextView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         titleTextView.topAnchor.constraint(equalTo: starLabel.bottomAnchor).isActive = true
     }
     
     private func addBuyButton() {
         if viewModel.detail?.data.status != "ON_SALE" {
-            mainScrollView.addSubview(buyImmediately)
-            buyImmediately.centerXAnchor.constraint(equalTo: mainScrollView.safeAreaLayoutGuide.centerXAnchor).isActive = true
+            contentView.addSubview(buyImmediately)
+            buyImmediately.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            buyImmediately.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 0.33).isActive = true
+            buyImmediately.heightAnchor.constraint(equalToConstant: 50).isActive = true
             buyImmediately.topAnchor.constraint(equalTo: titleTextView.bottomAnchor, constant: 5).isActive = true
+            buyImmediately.makeEllipse()
         } else {
-            mainScrollView.addSubview(buyImmediately)
-            mainScrollView.addSubview(buyDeal)
+            contentView.addSubview(buyImmediately)
+            contentView.addSubview(buyDeal)
             
             buyImmediately.topAnchor.constraint(equalTo: titleTextView.bottomAnchor, constant: 5).isActive = true
-            buyImmediately.leftAnchor.constraint(equalTo: mainScrollView.safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
-            buyImmediately.frame.size = CGSize(width: UIScreen.main.bounds.width * 0.33, height: 60)
+            buyImmediately.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
+            buyImmediately.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.33).isActive = true
+            buyImmediately.heightAnchor.constraint(equalToConstant: 50).isActive = true
             buyImmediately.makeEllipse()
             
             buyDeal.topAnchor.constraint(equalTo: buyImmediately.topAnchor).isActive = true
-            buyDeal.rightAnchor.constraint(equalTo: mainScrollView.safeAreaLayoutGuide.rightAnchor, constant: -10).isActive = true
-            buyDeal.frame.size = CGSize(width: UIScreen.main.bounds.width * 0.33, height: 60)
+            buyDeal.rightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.rightAnchor, constant: -10).isActive = true
+            buyDeal.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.33).isActive = true
+            buyDeal.heightAnchor.constraint(equalToConstant: 50).isActive = true
             buyDeal.makeEllipse()
         }
     }
     
-    private func addInfoView(){
-        mainScrollView.addSubview(infoView)
+    private func addInfoView() {
+        contentView.addSubview(infoView)
         infoView.topAnchor.constraint(equalTo: buyImmediately.bottomAnchor, constant: 5).isActive = true
-        infoView.leftAnchor.constraint(equalTo: buyImmediately.leftAnchor).isActive = true
-        infoView.rightAnchor.constraint(equalTo: buyDeal.rightAnchor).isActive = true
+        infoView.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor).isActive = true
+        infoView.rightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.rightAnchor).isActive = true
         infoView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+    }
+    
+    private func addWebView() {
+        contentView.addSubview(webView)
+        webView.loadHTMLString(viewModel.detail?.data.description ?? "", baseURL: nil)
+        webView.topAnchor.constraint(equalTo: infoView.bottomAnchor, constant: 5).isActive = true
+        webView.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor).isActive = true
+        webView.rightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.rightAnchor).isActive = true
+        webView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        contentView.sizeToFit()
     }
 }

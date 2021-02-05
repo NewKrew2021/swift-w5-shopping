@@ -12,20 +12,18 @@ import UIKit
 class EllipseButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.makeEllipse()
         setInset()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        self.makeEllipse()
         setInset()
     }
 }
 
 extension EllipseButton {
     func makeEllipse() {
-        self.layer.cornerRadius = self.frame.size.width / 8
+        self.layer.cornerRadius = 8
         self.clipsToBounds = true
     }
 
