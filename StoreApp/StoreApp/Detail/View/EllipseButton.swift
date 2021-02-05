@@ -25,11 +25,11 @@ class EllipseButton: UIButton {
 
 extension EllipseButton {
     func makeEllipse() {
-        self.layer.borderWidth = 1
-        self.layer.cornerRadius = self.frame.size.height/5
+        self.layer.cornerRadius = self.frame.size.width / 8
         self.clipsToBounds = true
     }
-    func setInset(){
-        self.contentEdgeInsets = UIEdgeInsets(top: 1, left: 10, bottom: 1, right: 10)
+
+    func setInset() {
+        self.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
 }

@@ -20,6 +20,7 @@ class DetailViewController: UIViewController {
         addReviewView()
         addTitleView()
         addBuyButton()
+        addInfoView()
         scrollView.addImages(urls: viewModel.detail?.data.previewUrls ?? [])
     }
 
@@ -64,7 +65,7 @@ class DetailViewController: UIViewController {
     }()
     
     private var buyImmediately: EllipseButton = {
-        let button = EllipseButton(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width * 0.4, height: 60))
+        let button = EllipseButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("바로구매 00원", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -75,7 +76,7 @@ class DetailViewController: UIViewController {
     }()
     
     private var buyDeal: EllipseButton = {
-        let button = EllipseButton(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width * 0.4, height: 60))
+        let button = EllipseButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("톡딜가 00원", for: .normal)
         button.setTitleColor(.black, for: .normal)
@@ -83,6 +84,12 @@ class DetailViewController: UIViewController {
         button.backgroundColor = .yellow
         button.tintColor = .yellow
         return button
+    }()
+    
+    private var infoView: InfoView = {
+        let view = InfoView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
 
     private func addMainScrollView() {
@@ -99,6 +106,8 @@ class DetailViewController: UIViewController {
         scrollView.rightAnchor.constraint(equalTo: mainScrollView.safeAreaLayoutGuide.rightAnchor).isActive = true
         scrollView.topAnchor.constraint(equalTo: mainScrollView.safeAreaLayoutGuide.topAnchor).isActive = true
         scrollView.heightAnchor.constraint(equalTo: mainScrollView.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4).isActive = true
+        print(scrollView.frame)
+        print(scrollView.bounds)
     }
     
     private func addReviewView() {
@@ -106,7 +115,7 @@ class DetailViewController: UIViewController {
         mainScrollView.addSubview(reviewLabel)
         starLabel.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 5).isActive = true
         reviewLabel.topAnchor.constraint(equalTo: starLabel.topAnchor).isActive = true
-        starLabel.trailingAnchor.constraint(equalTo: reviewLabel.leadingAnchor, constant: -20).isActive = true
+        starLabel.trailingAnchor.constraint(equalTo: mainScrollView.safeAreaLayoutGuide.centerXAnchor, constant: -30).isActive = true
         reviewLabel.centerXAnchor.constraint(equalTo: mainScrollView.safeAreaLayoutGuide.centerXAnchor, constant: 30).isActive = true
     }
     
@@ -119,18 +128,31 @@ class DetailViewController: UIViewController {
     }
     
     private func addBuyButton() {
-        if viewModel.detail?.data.status == "ON_SALE" {
+        if viewModel.detail?.data.status != "ON_SALE" {
             mainScrollView.addSubview(buyImmediately)
             buyImmediately.centerXAnchor.constraint(equalTo: mainScrollView.safeAreaLayoutGuide.centerXAnchor).isActive = true
             buyImmediately.topAnchor.constraint(equalTo: titleTextView.bottomAnchor, constant: 5).isActive = true
         } else {
             mainScrollView.addSubview(buyImmediately)
             mainScrollView.addSubview(buyDeal)
+            
             buyImmediately.topAnchor.constraint(equalTo: titleTextView.bottomAnchor, constant: 5).isActive = true
             buyImmediately.leftAnchor.constraint(equalTo: mainScrollView.safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
+            buyImmediately.frame.size = CGSize(width: UIScreen.main.bounds.width * 0.33, height: 60)
+            buyImmediately.makeEllipse()
             
             buyDeal.topAnchor.constraint(equalTo: buyImmediately.topAnchor).isActive = true
             buyDeal.rightAnchor.constraint(equalTo: mainScrollView.safeAreaLayoutGuide.rightAnchor, constant: -10).isActive = true
+            buyDeal.frame.size = CGSize(width: UIScreen.main.bounds.width * 0.33, height: 60)
+            buyDeal.makeEllipse()
         }
+    }
+    
+    private func addInfoView(){
+        mainScrollView.addSubview(infoView)
+        infoView.topAnchor.constraint(equalTo: buyImmediately.bottomAnchor, constant: 5).isActive = true
+        infoView.leftAnchor.constraint(equalTo: buyImmediately.leftAnchor).isActive = true
+        infoView.rightAnchor.constraint(equalTo: buyDeal.rightAnchor).isActive = true
+        infoView.heightAnchor.constraint(equalToConstant: 120).isActive = true
     }
 }

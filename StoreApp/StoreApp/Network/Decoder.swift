@@ -11,11 +11,7 @@ class Decoder {
     static func parseToItem(data: Data) -> [Item] {
         var items: [Item] = []
         do {
-            let str = String(data: data, encoding: .utf8)
-            let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .deferredToDate
-            decoder.keyDecodingStrategy = .useDefaultKeys
-            items = try decoder.decode([Item].self, from: (str?.data(using: .unicode))!)
+            items = try JSONDecoder().decode([Item].self, from: data)
         } catch let DecodingError.keyNotFound(key, context) {
             Swift.print("could not find key \(key) in JSON: \(context.debugDescription)")
         } catch let DecodingError.valueNotFound(type, context) {
