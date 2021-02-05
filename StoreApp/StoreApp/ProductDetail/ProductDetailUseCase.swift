@@ -8,18 +8,18 @@
 import UIKit
 
 struct ProductDetailUseCase {
-    
+
     static func getDetail(with manager: NetworkManable, from: String, completed: @escaping (ProductDetailViewModel?, Error?) -> Void) {
         try? manager.getResource(from: from) {
             (data, _) in
             if let data = data {
                 do {
                     let result = try JSONDecoder().decode(ProductDetailResult.self, from: data)
-                    ProductDetailUseCase.processProductDetail(with: manager, productDetail: result.data){viewModel in
+                    ProductDetailUseCase.processProductDetail(with: manager, productDetail: result.data) {viewModel in
                         completed(viewModel, nil)
                     }
-                }
-                catch {
+                } catch {
+                    print(error)
                     completed(nil, error)
                 }
             }

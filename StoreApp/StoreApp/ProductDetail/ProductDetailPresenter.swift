@@ -12,36 +12,47 @@ extension Notification.Name {
 }
 
 protocol ProductDetailPresenterDelegate: AnyObject {
-    func addImagetoHorizontalScrollView(image: UIImage)
+    func productDetailPresenter(_ presenter: ProductDetailPresenter, imagesAddedToHorizontalScrollView images: [UIImage])
+    func productDetailPresenter(_ presenter: ProductDetailPresenter, configureDescriptionViewWith viewModel: ProductDetailViewModel)
 }
 
 class ProductDetailPresenter {
-    
+
     weak var delegate: ProductDetailPresenterDelegate?
     let viewModel: ProductDetailViewModel
-    
+
     init(viewModel: ProductDetailViewModel) {
         self.viewModel = viewModel
         NotificationCenter.default.addObserver(self, selector: #selector(self.didHorizontalImageDownload), name: .didDownloadImage,
             object: nil)
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     @objc
     func didHorizontalImageDownload() {
-        print("didHorizontalImageDownload")
-        viewModel.previewImages.forEach {
-            image in
-            self.addImagetoHorizontalScrollView(image: image)
-        }
+        self.addImagetoHorizontalScrollView(images: viewModel.previewImages)
     }
-    
-    func addImagetoHorizontalScrollView(image: UIImage) {
+
+    private func addImagetoHorizontalScrollView(images: [UIImage]) {
         if let delegate = delegate {
-            delegate.addImagetoHorizontalScrollView(image: image)
+            delegate.productDetailPresenter(self, imagesAddedToHorizontalScrollView: images)
         }
     }
+
+    func setDelegate(with: ProductDetailPresenterDelegate?) {
+        if let with = with {
+            self.delegate = with
+            configureDescriptionView()
+        }
+    }
+
+    private func configureDescriptionView() {
+        if let delegate = delegate {
+            delegate.productDetailPresenter(self, configureDescriptionViewWith: viewModel)
+        }
+    }
+
 }

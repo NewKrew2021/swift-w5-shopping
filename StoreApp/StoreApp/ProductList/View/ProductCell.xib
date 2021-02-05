@@ -91,7 +91,7 @@
                 <outlet property="originalPrice" destination="Oqj-UX-fbl" id="b0l-Ys-XSP"/>
                 <outlet property="thumbnail" destination="ziR-EZ-icE" id="Dsi-a8-fWu"/>
             </connections>
-            <point key="canvasLocation" x="-178" y="174"/>
+            <point key="canvasLocation" x="-178.2608695652174" y="173.77232142857142"/>
         </collectionViewCell>
     </objects>
 </document>

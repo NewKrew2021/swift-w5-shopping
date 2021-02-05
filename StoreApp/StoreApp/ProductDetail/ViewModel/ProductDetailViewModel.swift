@@ -8,15 +8,17 @@
 import UIKit
 
 class ProductDetailViewModel {
-    
+
     let productDescription: String
     var previewImages: [UIImage] = []
     let optionType: String
     let price: Price
+    let review: Review
     let id: Int
     let reviewCreatable: Bool
     let delivery: Delivery
     var images: [UIImage] = []
+    let quantity: Quantity
     let coupon: Bool
     let store: Store
     let taxDeduction: Bool
@@ -25,15 +27,19 @@ class ProductDetailViewModel {
     let category: Category
     let favorite: Bool
     let sharingImageUrl: String
-    
+    var starRating: String {
+        return String(Array(0..<Int(review.totalProductStarRating)).map { _ in "⭐️" })
+    }
+
     init(productDetail: ProductDetail) {
-        print(productDetail)
         productDescription = productDetail.productDescription
         optionType = productDetail.optionType
         price = productDetail.price
+        review = productDetail.review
         id = productDetail.id
         reviewCreatable = productDetail.reviewCreatable
         delivery = productDetail.delivery
+        quantity = productDetail.quantity
         coupon = productDetail.coupon
         store = productDetail.store
         taxDeduction = productDetail.taxDeduction
@@ -48,7 +54,7 @@ class ProductDetailViewModel {
         guard let image = image else { return }
         self.previewImages.append(image)
     }
-    
+
     func addImage(image: UIImage?) {
         guard let image = image else { return }
         self.images.append(image)
