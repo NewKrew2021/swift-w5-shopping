@@ -10,27 +10,40 @@ import UIKit
 class ProductDetailViewController: UIViewController {
 
     @IBOutlet var imageScrollView: UIScrollView!
-    @IBOutlet var scrollContentView: UIView!
+    @IBOutlet var horizontalScrollContentView: UIView!
     @IBOutlet var scrollViewWidthConstraint: NSLayoutConstraint!
-    private var viewModel: ProductDetailViewModel?
-
+    private var productDetailPresenter: ProductDetailPresenter?
+    
     override func viewDidLoad() {
-        let screenWidth = UIScreen.main.bounds.width
         super.viewDidLoad()
     }
 
-    func setViewModel(viewModel: ProductDetailViewModel) {
-        self.viewModel = viewModel
-    }
-
-    func addImagetoScrollView(image: UIImage) {
-        let screenWidth = UIScreen.main.bounds.width
-        if scrollViewWidthConstraint.constant != 0 {
-            scrollViewWidthConstraint.constant += screenWidth
+    func setProduct(product: Product?) {
+        if let product = product {
+            ProductDetailUseCase.getDetail(with: NetworkManager(), from: product.productDetailAddress) { [weak self]
+                productDetailViewModel, error in
+                if let viewModel = productDetailViewModel {
+                    self?.productDetailPresenter = ProductDetailPresenter(viewModel: viewModel)
+                    self?.productDetailPresenter?.delegate = self
+                }
+            }
         }
-        let view = UIImageView(frame: CGRect(x: screenWidth, y: 0, width: screenWidth, height: scrollContentView.frame.height))
-        view.image = image
-        scrollContentView.addSubview(view)
     }
 
+}
+
+extension ProductDetailViewController: ProductDetailPresenterDelegate {
+    
+    func addImagetoHorizontalScrollView(image: UIImage) {
+        let screenWidth = UIScreen.main.bounds.width
+        if self.scrollViewWidthConstraint.constant != 0 {
+            self.scrollViewWidthConstraint.constant += screenWidth
+        }
+        let subView = UIImageView(frame: CGRect(x: screenWidth, y: 0, width: screenWidth, height: self.horizontalScrollContentView.frame.height))
+        subView.image = image
+        self.horizontalScrollContentView.addSubview(subView)
+        self.view.setNeedsLayout()
+        print(subView.image)
+    }
+    
 }

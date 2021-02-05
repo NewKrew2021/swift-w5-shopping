@@ -14,6 +14,10 @@ struct ProductDetailResult: Codable {
 
 struct ProductDetail: Codable {
 
+    enum Status: String, Codable {
+        case ON_SALE, SOLD_OUT
+    }
+    
     let gift: String
     let benefits: [String]
     let booked: Bool
@@ -30,17 +34,16 @@ struct ProductDetail: Codable {
     let store: Store
     let taxDeduction: Bool
     let imageRatio: String
-    let adultOnly: Bool
     let name: String
     let category: Category
     let favorite: Bool
     let sharingImageUrl: String
-    let status: String
-
+    let status: Status
+    
     enum CodingKeys: String, CodingKey {
         case gift, benefits, booked
         case productDescription = "description"
-        case previewImages, optionType, certTypeFood, price, id, reviewCreatable, delivery, images, coupon, store, taxDeduction, imageRatio, adultOnly, name, category, favorite
+        case previewImages, optionType, certTypeFood, price, id, reviewCreatable, delivery, images, coupon, store, taxDeduction, imageRatio, name, category, favorite
         case sharingImageUrl
         case status
     }
@@ -54,11 +57,16 @@ struct Price: Codable {
 }
 
 struct Delivery: Codable {
+    
+    enum DeliveryFeeType: String, Codable {
+        case FREE, CONDITIONAL_FREE
+    }
+    
     let deliveryMethodType: String
-    let deliveryFeeType, deliveryFeePaymentType: String
+    let deliveryFeeType: DeliveryFeeType
+    let deliveryFeePaymentType: String
     let deliveryFee: Int
     let bundleGroupAvailable: Bool
-    let isolatedAreaNotice: String
 }
 
 struct Store: Codable {

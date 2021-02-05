@@ -77,7 +77,7 @@ extension ViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToDetail" {
             if let destinationVC = segue.destination as? ProductDetailViewController {
-                destinationVC.setViewModel(viewModel: ProductDetailViewModel(product: selectedProduct))
+                destinationVC.setProduct(product: selectedProduct)
             }
         }
     }
