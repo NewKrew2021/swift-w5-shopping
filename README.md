@@ -30,3 +30,14 @@
 
 <div>
 <img width: 200 src = "https://user-images.githubusercontent.com/45382324/106583546-8f5b1200-6588-11eb-9ef9-c251917ead2c.png"></div>
+
+### 2021.02.04
+
+1. 상품셀 클릭시 응답체인을 활용에 메인 컨트롤러에서 처리하도록 구현
+2. 상세 화면 전환 구현
+3. 상세화면 데이터 전송 구현
+4. 제품 상세 데이터 요청, 파싱 구현
+5. 상세화면 스크롤, 이미지 스크롤,  웹뷰 구현
+
+<div>
+<img width: 200 src = "https://user-images.githubusercontent.com/45382324/106978971-aecc8780-67a0-11eb-9a57-1b174e346db9.png"></div>
