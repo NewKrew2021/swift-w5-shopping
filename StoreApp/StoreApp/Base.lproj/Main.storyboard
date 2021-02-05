@@ -118,21 +118,39 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" alignment="center" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="wa9-Vh-VXI">
                                                 <rect key="frame" x="8" y="466" width="398" height="159"/>
                                             </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXh-a4-Yoj">
+                                                <rect key="frame" x="8" y="633" width="398" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDW-55-wwn">
+                                                <rect key="frame" x="8" y="662" width="398" height="20"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="wa9-Vh-VXI" firstAttribute="centerX" secondItem="THm-nF-114" secondAttribute="centerX" id="4Fa-ID-IOj"/>
+                                            <constraint firstAttribute="trailing" secondItem="KDW-55-wwn" secondAttribute="trailing" constant="8" id="5c5-ov-fGj"/>
                                             <constraint firstItem="wa9-Vh-VXI" firstAttribute="top" secondItem="fKt-Dr-H95" secondAttribute="bottom" constant="8" id="8CW-5z-CcI"/>
                                             <constraint firstItem="fKt-Dr-H95" firstAttribute="top" secondItem="Rjn-UH-vVH" secondAttribute="bottom" constant="8" id="8cE-bh-Xws"/>
-                                            <constraint firstAttribute="bottom" secondItem="wa9-Vh-VXI" secondAttribute="bottom" constant="875" id="G41-9V-ftG"/>
+                                            <constraint firstItem="gXh-a4-Yoj" firstAttribute="leading" secondItem="THm-nF-114" secondAttribute="leading" constant="8" id="FO1-jJ-jvE"/>
+                                            <constraint firstItem="KDW-55-wwn" firstAttribute="top" secondItem="gXh-a4-Yoj" secondAttribute="bottom" constant="8" id="H4O-ka-2bu"/>
                                             <constraint firstAttribute="trailing" secondItem="fKt-Dr-H95" secondAttribute="trailing" constant="8" id="HDo-kd-zaY"/>
                                             <constraint firstItem="fKt-Dr-H95" firstAttribute="leading" secondItem="THm-nF-114" secondAttribute="leading" constant="8" id="Lbr-9W-CXz"/>
                                             <constraint firstItem="zHq-xw-q0S" firstAttribute="leading" secondItem="THm-nF-114" secondAttribute="leading" constant="8" id="Lf1-hK-1lO"/>
                                             <constraint firstItem="Rjn-UH-vVH" firstAttribute="top" secondItem="zHq-xw-q0S" secondAttribute="bottom" constant="8" id="Rnp-Gu-TYi"/>
+                                            <constraint firstItem="KDW-55-wwn" firstAttribute="leading" secondItem="THm-nF-114" secondAttribute="leading" constant="8" id="SmZ-pB-bUO"/>
                                             <constraint firstItem="Rjn-UH-vVH" firstAttribute="centerX" secondItem="THm-nF-114" secondAttribute="centerX" id="XUC-8A-3sV"/>
                                             <constraint firstAttribute="trailing" secondItem="zHq-xw-q0S" secondAttribute="trailing" constant="8" id="YS9-Gq-Dzk"/>
-                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="1500" id="asi-jk-0ae"/>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="10000" id="asi-jk-0ae"/>
+                                            <constraint firstItem="gXh-a4-Yoj" firstAttribute="top" secondItem="wa9-Vh-VXI" secondAttribute="bottom" constant="15" id="gZR-SX-kGe"/>
+                                            <constraint firstAttribute="bottom" secondItem="KDW-55-wwn" secondAttribute="bottom" constant="30" id="vLh-gL-aju"/>
                                             <constraint firstItem="zHq-xw-q0S" firstAttribute="top" secondItem="THm-nF-114" secondAttribute="top" constant="8" id="vWo-7R-KMQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="gXh-a4-Yoj" secondAttribute="trailing" constant="8" id="yFR-Lb-Jeq"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -146,10 +164,12 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="pT3-bV-bcw"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="8QN-PP-9Hi"/>
                                 <connections>
+                                    <outlet property="deliveryLabel" destination="KDW-55-wwn" id="J7v-Lj-93u"/>
                                     <outlet property="pagingScrollView" destination="zHq-xw-q0S" id="q3U-9J-GKZ"/>
                                     <outlet property="priceStackView" destination="wa9-Vh-VXI" id="IaG-xU-uhL"/>
                                     <outlet property="ratingView" destination="zUw-hA-bUP" id="Lje-ha-DXN"/>
                                     <outlet property="reviewCountLabel" destination="kqp-ZE-m13" id="zvH-TX-HHT"/>
+                                    <outlet property="storeNameLabel" destination="gXh-a4-Yoj" id="xtC-43-a25"/>
                                     <outlet property="titleLabel" destination="fKt-Dr-H95" id="cJ4-rt-R6s"/>
                                 </connections>
                             </scrollView>

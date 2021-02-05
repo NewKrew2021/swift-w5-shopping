@@ -18,6 +18,8 @@ class DetailScrollView: UIScrollView, UIScrollViewDelegate {
     private var purchaseButton: UIButton = UIButton()
     private var talkDealButton: UIButton = UIButton()
     @IBOutlet weak var priceStackView: UIStackView!
+    @IBOutlet weak var storeNameLabel: UILabel!
+    @IBOutlet weak var deliveryLabel: UILabel!
     
     func setViewData(productDetail:ProductDetail) {
         setPagingScrollView(imageUrls: productDetail.data.previewImages)
@@ -25,6 +27,8 @@ class DetailScrollView: UIScrollView, UIScrollViewDelegate {
         setReviewStackView(totalProductStarRating: productDetail.data.review.totalProductStarRating, reviewCount: productDetail.data.review.reviewCount)
         self.titleLabel.text = productDetail.data.name
         setPriceStackView(status: productDetail.data.status, standardPrice: productDetail.data.price.standardPrice, discountedPrice: productDetail.data.price.discountedPrice)
+        self.storeNameLabel.text = productDetail.data.store.name
+        setDelivery(deliveryFeeType: productDetail.data.delivery.deliveryFeeType, deliveryFee: productDetail.data.delivery.deliveryFee)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -98,6 +102,14 @@ class DetailScrollView: UIScrollView, UIScrollViewDelegate {
             UIView.animate(withDuration: 0.1, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: {
                 self.pagingScrollView.contentOffset.x = CGFloat(self.offSet)
             }, completion: nil)
+        }
+    }
+    
+    func setDelivery(deliveryFeeType: String, deliveryFee: Int) {
+        if deliveryFeeType == "FREE" {
+            deliveryLabel.text = "배송비 무료"
+        } else {
+            deliveryLabel.text = "배송비 \(deliveryFee)원"
         }
     }
 }
