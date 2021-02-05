@@ -43,15 +43,7 @@ class ViewController: UIViewController {
     
     @objc func showToast(notification: Notification){
         guard let userInfo = notification.userInfo as NSDictionary? as? [String: String] else {return}
-        let toast = Toast(text: userInfo.values.first!)
-        ToastView.appearance().font = UIFont.systemFont(ofSize: 13, weight: .bold)
-        toast.show()
-    }
-    
-    func showToast(text : String){
-         let toast = Toast(text: text)
-        ToastView.appearance().font = UIFont.systemFont(ofSize: 13, weight: .bold)
-        toast.show()
+        showToast(text: userInfo.values.first!)
     }
     
     @objc func reloadItems(notification: Notification) {
