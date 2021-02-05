@@ -115,9 +115,14 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" alignment="center" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="wa9-Vh-VXI">
+                                                <rect key="frame" x="8" y="466" width="398" height="159"/>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
+                                            <constraint firstItem="wa9-Vh-VXI" firstAttribute="centerX" secondItem="THm-nF-114" secondAttribute="centerX" id="4Fa-ID-IOj"/>
+                                            <constraint firstItem="wa9-Vh-VXI" firstAttribute="top" secondItem="fKt-Dr-H95" secondAttribute="bottom" constant="8" id="8CW-5z-CcI"/>
                                             <constraint firstItem="fKt-Dr-H95" firstAttribute="top" secondItem="Rjn-UH-vVH" secondAttribute="bottom" constant="8" id="8cE-bh-Xws"/>
                                             <constraint firstAttribute="trailing" secondItem="fKt-Dr-H95" secondAttribute="trailing" constant="8" id="HDo-kd-zaY"/>
                                             <constraint firstItem="fKt-Dr-H95" firstAttribute="leading" secondItem="THm-nF-114" secondAttribute="leading" constant="8" id="Lbr-9W-CXz"/>
@@ -153,7 +158,9 @@
                     <navigationItem key="navigationItem" id="Cbf-gR-hLk"/>
                     <connections>
                         <outlet property="contentView" destination="THm-nF-114" id="wvV-sk-xos"/>
+                        <outlet property="mainScrollView" destination="xr0-1c-u4s" id="qTq-S0-TZS"/>
                         <outlet property="pagingScrollView" destination="zHq-xw-q0S" id="5G6-ja-YXg"/>
+                        <outlet property="priceStackView" destination="wa9-Vh-VXI" id="oP8-bO-WKV"/>
                         <outlet property="ratingView" destination="zUw-hA-bUP" id="aOg-H0-1vz"/>
                         <outlet property="reviewCountLabel" destination="kqp-ZE-m13" id="aFG-bA-KsZ"/>
                         <outlet property="titleLabel" destination="fKt-Dr-H95" id="NdU-gu-v9G"/>

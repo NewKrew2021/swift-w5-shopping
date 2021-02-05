@@ -22,6 +22,7 @@ struct ProductDetail: Codable {
         let name : String
         
         struct Price : Codable {
+            let standardPrice : Int
             let discountedPrice : Int
         }
         
