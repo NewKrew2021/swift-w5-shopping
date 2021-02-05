@@ -156,9 +156,70 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="epF-Uz-cr7">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QrG-FS-BKX">
+                                                <rect key="frame" x="10" y="10" width="394" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="Dj7-NC-Be5">
+                                                <rect key="frame" x="10" y="40.5" width="150" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="gb2-zE-YRj"/>
+                                                    <constraint firstAttribute="width" constant="150" id="pgB-kR-XNA"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="xQ4-Ax-BRd">
+                                                <rect key="frame" x="254" y="40.5" width="150" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="8GB-Fm-6Rq"/>
+                                                    <constraint firstAttribute="height" constant="50" id="lIq-fV-KQe"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85U-Jf-xUD">
+                                                <rect key="frame" x="10" y="100.5" width="37.5" height="18"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HTc-Fz-gdF">
+                                                <rect key="frame" x="368.5" y="100.5" width="35.5" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdk-4u-5x5">
+                                                <rect key="frame" x="10" y="128.5" width="40" height="18"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
+                                            <constraint firstItem="HTc-Fz-gdF" firstAttribute="top" secondItem="xQ4-Ax-BRd" secondAttribute="bottom" constant="10" id="1Pp-YG-CCk"/>
+                                            <constraint firstItem="fdk-4u-5x5" firstAttribute="top" secondItem="85U-Jf-xUD" secondAttribute="bottom" constant="10" id="7ed-zA-WNO"/>
+                                            <constraint firstItem="fdk-4u-5x5" firstAttribute="leading" secondItem="epF-Uz-cr7" secondAttribute="leading" constant="10" id="8V7-vb-P8d"/>
+                                            <constraint firstItem="Dj7-NC-Be5" firstAttribute="leading" secondItem="epF-Uz-cr7" secondAttribute="leading" constant="10" id="Fjc-Jf-Pwc"/>
                                             <constraint firstAttribute="height" constant="1000" id="IsJ-Ud-nBb"/>
+                                            <constraint firstItem="QrG-FS-BKX" firstAttribute="top" secondItem="epF-Uz-cr7" secondAttribute="top" constant="10" id="R16-ib-gHO"/>
+                                            <constraint firstAttribute="trailing" secondItem="xQ4-Ax-BRd" secondAttribute="trailing" constant="10" id="Se5-Fm-YU1"/>
+                                            <constraint firstItem="QrG-FS-BKX" firstAttribute="leading" secondItem="epF-Uz-cr7" secondAttribute="leading" constant="10" id="X3D-fP-lQs"/>
+                                            <constraint firstItem="85U-Jf-xUD" firstAttribute="top" secondItem="Dj7-NC-Be5" secondAttribute="bottom" constant="10" id="bKd-Mh-Qhd"/>
+                                            <constraint firstItem="xQ4-Ax-BRd" firstAttribute="top" secondItem="QrG-FS-BKX" secondAttribute="bottom" constant="10" id="gjA-mp-RP8"/>
+                                            <constraint firstItem="85U-Jf-xUD" firstAttribute="leading" secondItem="epF-Uz-cr7" secondAttribute="leading" constant="10" id="gm6-d5-N4o"/>
+                                            <constraint firstAttribute="trailing" secondItem="HTc-Fz-gdF" secondAttribute="trailing" constant="10" id="j8k-uH-2QQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="QrG-FS-BKX" secondAttribute="trailing" constant="10" id="xEl-bU-hLk"/>
+                                            <constraint firstItem="Dj7-NC-Be5" firstAttribute="top" secondItem="QrG-FS-BKX" secondAttribute="bottom" constant="10" id="yDI-CE-Md0"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -182,7 +243,12 @@
                     </view>
                     <navigationItem key="navigationItem" title="손 안에 쇼핑" id="jsC-N4-4Bo"/>
                     <connections>
+                        <outlet property="deliveryFeeLabel" destination="fdk-4u-5x5" id="5Wh-VQ-BgZ"/>
+                        <outlet property="discountedPriceLabel" destination="xQ4-Ax-BRd" id="gNN-U0-SSw"/>
+                        <outlet property="nameLabel" destination="QrG-FS-BKX" id="zhY-Jk-18x"/>
                         <outlet property="parentView" destination="epF-Uz-cr7" id="9Ph-6H-d6D"/>
+                        <outlet property="standardPriceLabel" destination="Dj7-NC-Be5" id="DSG-ma-IXw"/>
+                        <outlet property="storeNameLabel" destination="85U-Jf-xUD" id="gii-Cv-92B"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gaa-NA-wKl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

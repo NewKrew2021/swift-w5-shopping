@@ -26,6 +26,7 @@ class StoreItemDetailData: Decodable {
 }
 
 class StoreItemDetailPrice: Decodable {
+    let standardPrice: Int?
     let discountedPrice: Int?
 }
 

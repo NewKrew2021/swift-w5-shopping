@@ -47,3 +47,4 @@
 
 10. parse StoreItemDetailData
 - 상품 세부 정보 json data 파싱
+- 일부 데이터 StoreItemDetailController에 출력
