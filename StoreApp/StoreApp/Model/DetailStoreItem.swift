@@ -13,27 +13,27 @@ class DetailStoreItem {
     var detailItem : DetailItem?
     
     func downloadJson(productId: String, storeDomain: String){
-                guard let url = URL(string: "https://store.kakao.com/a/\(storeDomain)/product/\(productId)/detail") else { return }
-                print(url)
-                URLSession.shared.dataTask(with: url) { (data, response, error) in
-                    guard let data = data else { return }
-                    DispatchQueue.main.async {
-                        do {
-                            if let decodeData = try? JSONDecoder().decode(DetailItem.self, from : data){
-                                self.detailItem = decodeData
-                                NotificationCenter.default.post(name: NSNotification.Name("saveDetailItem"), object: self, userInfo: nil)
-                            } else{
-                                self.detailItem = nil
-                            }
-                        } catch {
-                        }
-                    }
-                }.resume()
+        guard let url = URL(string: "https://store.kakao.com/a/\(storeDomain)/product/\(productId)/detail") else { return }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            guard let data = data else { return }
+            self.decoding(data: data)
+        }.resume()
     }
-
-    func decoding(iter: JsonFileName, data : Data){
-               
-           }
+    
+    func decoding(data: Data){
+        DispatchQueue.main.async {
+            do {
+                if let decodeData = try? JSONDecoder().decode(DetailItem.self, from : data){
+                    self.detailItem = decodeData
+                    NotificationCenter.default.post(name: NSNotification.Name("saveDetailItem"), object: self, userInfo: nil)
+                } else{
+                    self.detailItem = nil
+                }
+            } catch {
+            }
+        }
+    }
     
     
     private func presentGraySpace() -> UIImage{
@@ -54,8 +54,8 @@ class DetailStoreItem {
         let url = detailItem?.data.previewImages![0]
         let name = URL(string: url!)!.query!
         if let cachedData = CacheStorage().retrieve(name) {
-                tempImage = UIImage(data: cachedData)!
-
+            tempImage = UIImage(data: cachedData)!
+            
         } else {
             Downloader.downloadWithDataTask(from: url!, completionHandler: { response in
                 switch response {
@@ -77,14 +77,14 @@ class DetailStoreItem {
     func getProductName() -> String {
         return self.detailItem?.data.name ?? ""
     }
-
+    
     func getGroupDiscountedPrice() -> String {
         if let dc = self.detailItem?.data.price?.discountedPrice {
             return "톡딜가 \(dc)원"
         }
         return ""
     }
-
+    
     func getOriginalPrice() -> String {
         if let dc = self.detailItem?.data.price?.standardPrice {
             return "바로 구매 \(dc)원"
@@ -97,7 +97,7 @@ class DetailStoreItem {
         }
         return ""
     }
-
+    
     func getDeliveryPrice() -> String {
         if let dc = self.detailItem?.data.delivery?.deliveryFeeType {
             if dc == "FREE" {
@@ -109,7 +109,7 @@ class DetailStoreItem {
         }
         return ""
     }
-
+    
     func getNoticeTitle() -> String {
         if let dc = self.detailItem?.data.notices {
             if dc.count > 0 {
@@ -118,7 +118,7 @@ class DetailStoreItem {
         }
         return ""
     }
-
+    
     func getNoticeCreateAt() -> String {
         if let dc = self.detailItem?.data.notices{
             if dc.count > 0 {
@@ -134,26 +134,4 @@ class DetailStoreItem {
         }
         return ""
     }
-    
-    
-
-    
-    
-//    func getGroupDiscountUserCount(indexPath: IndexPath) -> String {
-//        if let dc = self[indexPath].groupDiscountUserCount {
-//            return "현재 \(String(dc))명 딜 참여중"
-//        }
-//        return ""
-//    }
-
-//    func getProductId(indexPath: IndexPath) -> String {
-//        if let dc = self[indexPath].productId {
-//            return "\(dc)"
-//        }
-//        return ""
-//    }
-//
-//    func getStoreDomain(indexPath: IndexPath) -> String {
-//        return self[indexPath].storeDomain
-//    }
 }
