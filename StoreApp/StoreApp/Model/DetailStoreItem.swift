@@ -15,7 +15,6 @@ class DetailStoreItem {
     func downloadJson(productId: String, storeDomain: String){
         guard let url = URL(string: "https://store.kakao.com/a/\(storeDomain)/product/\(productId)/detail") else { return }
         URLSession.shared.dataTask(with: url) { (data, response, error) in
-            
             guard let data = data else { return }
             self.decoding(data: data)
         }.resume()
@@ -30,11 +29,9 @@ class DetailStoreItem {
                 } else{
                     NotificationCenter.default.post(name: .cantLoadJson, object: self, userInfo: nil)
                 }
-            } catch {
-            }
+            } catch {}
         }
     }
-    
     
     private func presentGraySpace() -> UIImage{
         let emptyView = UIView(frame: CGRect.zero)
@@ -49,13 +46,12 @@ class DetailStoreItem {
         return emptyImage
     }
     
-    func getProductImage() -> UIImage {
+    func getProductImage(index: Int) -> UIImage {
         var tempImage : UIImage = UIImage()
-        let url = detailItem?.data.previewImages![0]
+        let url = detailItem?.data.previewImages![index]
         let name = URL(string: url!)!.query!
         if let cachedData = CacheStorage().retrieve(name) {
             tempImage = UIImage(data: cachedData)!
-            
         } else {
             Downloader.downloadWithDataTask(from: url!, completionHandler: { response in
                 switch response {
@@ -66,7 +62,7 @@ class DetailStoreItem {
                     }
                 case .failure:
                     DispatchQueue.main.async {
-                        tempImage = self.presentGraySpace()
+                        tempImage = UIImage()
                     }
                 }
             })
@@ -91,6 +87,7 @@ class DetailStoreItem {
         }
         return ""
     }
+    
     func getStoreName() -> String {
         if let dc = self.detailItem?.data.store?.name {
             return "\(dc)"
@@ -134,4 +131,24 @@ class DetailStoreItem {
         }
         return ""
     }
+    
+    func getPagingScrollView(bounds: CGRect) -> UIScrollView {
+        var scrollView = UIScrollView()
+        if let scrollViewImagesUrl : [String] = detailItem?.data.previewImages {
+            for index in 0..<scrollViewImagesUrl.count {
+                let imageView = UIImageView()
+                imageView.frame = bounds
+                imageView.frame.origin.x = bounds.width * CGFloat(index)
+                imageView.image = self.getProductImage(index: index)
+                imageView.contentMode = .scaleAspectFill
+                scrollView.addSubview(imageView)
+            }
+        }
+        return scrollView
+    }
+    func setPagingScrollView(scrollViewImagesUrl : [String], bounds : CGRect) {
+        
+    }
 }
+
+

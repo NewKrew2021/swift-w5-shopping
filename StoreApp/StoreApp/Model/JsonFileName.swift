@@ -1,5 +1,5 @@
 //
-//  NotificationName.swift
+//  JsonFileName.swift
 //  StoreApp
 //
 //  Created by 이준형 on 2021/02/05.
