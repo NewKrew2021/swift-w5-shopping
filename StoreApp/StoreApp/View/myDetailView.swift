@@ -117,8 +117,20 @@ class myDetailView: UIScrollView {
         discountPrice.setTitleColor(.black, for: .normal)
         discountPrice.layer.cornerRadius = 20
         discountPrice.layer.backgroundColor = UIColor.yellow.cgColor
+        
+        discountPrice.addTarget(self, action: #selector(onTapButton(button:)), for: .touchUpInside)
+
     }
     
+    @objc func onTapButton(button : UIButton) {
+        let str = "\(productName.text!)을(를) \n\(button.titleLabel!.text!)에 구매하셨습니다."
+
+        let userInfo: [AnyHashable: Any] = ["text":str]
+        NotificationCenter.default.post(name: NSNotification.Name("showToastDetail"), object: self, userInfo: userInfo)
+    }
+
+        
+        
     func initOriginalPriceLabel(){
         contentView.addSubview(standardPrice)
         standardPrice.translatesAutoresizingMaskIntoConstraints = false
@@ -134,6 +146,7 @@ class myDetailView: UIScrollView {
         standardPrice.titleLabel!.font = UIFont.boldSystemFont(ofSize: 15)
         standardPrice.layer.cornerRadius = 20
         standardPrice.layer.backgroundColor = UIColor.black.cgColor
+        standardPrice.addTarget(self, action: #selector(onTapButton(button:)), for: .touchUpInside)
     }
     
     func initStoreNameLabel(){
