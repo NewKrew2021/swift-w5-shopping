@@ -52,6 +52,7 @@ extension ProductDetailViewController: ProductDetailPresenterDelegate {
 
     func productDetailPresenter(_ presenter: ProductDetailPresenter, configureDescriptionViewWith viewModel: ProductDetailViewModel) {
         guard let descriptionView = Bundle(for: ProductDescriptionView.self).loadNibNamed("ProductDescriptionView", owner: nil, options: nil)?.first as? ProductDescriptionView else { return }
+        descriptionView.delegate = self
         self.descriptionView.addSubview(descriptionView)
         descriptionView.configure(viewModel: viewModel)
     }

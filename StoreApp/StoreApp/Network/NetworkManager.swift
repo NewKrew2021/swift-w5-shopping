@@ -51,14 +51,12 @@ class NetworkManager: NetworkManable {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = method.rawValue
         request.httpBody = payload
-        print(payload)
         URLSession.shared.dataTask(with: request) {
             (data, response, error) in
             guard let data = data, error == nil else {
                 completion(nil, error)
                 return
             }
-            print(data)
             if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
                 completion(nil, NetworkErrorCase.serverError)
                 return
