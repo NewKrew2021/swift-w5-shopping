@@ -109,9 +109,18 @@
                                                     </label>
                                                 </subviews>
                                             </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKt-Dr-H95">
+                                                <rect key="frame" x="8" y="434" width="398" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
+                                            <constraint firstItem="fKt-Dr-H95" firstAttribute="top" secondItem="Rjn-UH-vVH" secondAttribute="bottom" constant="8" id="8cE-bh-Xws"/>
+                                            <constraint firstAttribute="trailing" secondItem="fKt-Dr-H95" secondAttribute="trailing" constant="8" id="HDo-kd-zaY"/>
+                                            <constraint firstItem="fKt-Dr-H95" firstAttribute="leading" secondItem="THm-nF-114" secondAttribute="leading" constant="8" id="Lbr-9W-CXz"/>
                                             <constraint firstItem="zHq-xw-q0S" firstAttribute="leading" secondItem="THm-nF-114" secondAttribute="leading" constant="8" id="Lf1-hK-1lO"/>
                                             <constraint firstItem="Rjn-UH-vVH" firstAttribute="top" secondItem="zHq-xw-q0S" secondAttribute="bottom" constant="8" id="Rnp-Gu-TYi"/>
                                             <constraint firstItem="Rjn-UH-vVH" firstAttribute="centerX" secondItem="THm-nF-114" secondAttribute="centerX" id="XUC-8A-3sV"/>
@@ -147,6 +156,7 @@
                         <outlet property="pagingScrollView" destination="zHq-xw-q0S" id="5G6-ja-YXg"/>
                         <outlet property="ratingView" destination="zUw-hA-bUP" id="aOg-H0-1vz"/>
                         <outlet property="reviewCountLabel" destination="kqp-ZE-m13" id="aFG-bA-KsZ"/>
+                        <outlet property="titleLabel" destination="fKt-Dr-H95" id="NdU-gu-v9G"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zGl-g2-aKr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

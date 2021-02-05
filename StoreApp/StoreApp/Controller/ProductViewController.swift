@@ -17,6 +17,7 @@ class ProductViewController: UIViewController {
     private var offSet: CGFloat = 0
     @IBOutlet weak var ratingView: CosmosView!
     @IBOutlet weak var reviewCountLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,7 @@ class ProductViewController: UIViewController {
         setPagingScrollView(imageUrls: productDetail.data.previewImages)
         setTimer(imageCount: productDetail.data.previewImages.count)
         setReviewStackView(totalProductStarRating: productDetail.data.review.totalProductStarRating, reviewCount: productDetail.data.review.reviewCount)
+        self.titleLabel.text = productDetail.data.name
     }
     
     func setPagingScrollView(imageUrls:[String]) {
