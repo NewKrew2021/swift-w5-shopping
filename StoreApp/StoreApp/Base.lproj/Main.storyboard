@@ -53,7 +53,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xr0-1c-u4s">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xr0-1c-u4s" customClass="DetailScrollView" customModule="StoreApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="THm-nF-114">
@@ -124,6 +124,7 @@
                                             <constraint firstItem="wa9-Vh-VXI" firstAttribute="centerX" secondItem="THm-nF-114" secondAttribute="centerX" id="4Fa-ID-IOj"/>
                                             <constraint firstItem="wa9-Vh-VXI" firstAttribute="top" secondItem="fKt-Dr-H95" secondAttribute="bottom" constant="8" id="8CW-5z-CcI"/>
                                             <constraint firstItem="fKt-Dr-H95" firstAttribute="top" secondItem="Rjn-UH-vVH" secondAttribute="bottom" constant="8" id="8cE-bh-Xws"/>
+                                            <constraint firstAttribute="bottom" secondItem="wa9-Vh-VXI" secondAttribute="bottom" constant="875" id="G41-9V-ftG"/>
                                             <constraint firstAttribute="trailing" secondItem="fKt-Dr-H95" secondAttribute="trailing" constant="8" id="HDo-kd-zaY"/>
                                             <constraint firstItem="fKt-Dr-H95" firstAttribute="leading" secondItem="THm-nF-114" secondAttribute="leading" constant="8" id="Lbr-9W-CXz"/>
                                             <constraint firstItem="zHq-xw-q0S" firstAttribute="leading" secondItem="THm-nF-114" secondAttribute="leading" constant="8" id="Lf1-hK-1lO"/>
@@ -144,6 +145,13 @@
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="pT3-bV-bcw"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="8QN-PP-9Hi"/>
+                                <connections>
+                                    <outlet property="pagingScrollView" destination="zHq-xw-q0S" id="q3U-9J-GKZ"/>
+                                    <outlet property="priceStackView" destination="wa9-Vh-VXI" id="IaG-xU-uhL"/>
+                                    <outlet property="ratingView" destination="zUw-hA-bUP" id="Lje-ha-DXN"/>
+                                    <outlet property="reviewCountLabel" destination="kqp-ZE-m13" id="zvH-TX-HHT"/>
+                                    <outlet property="titleLabel" destination="fKt-Dr-H95" id="cJ4-rt-R6s"/>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pWm-hv-0n4"/>
@@ -157,13 +165,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Cbf-gR-hLk"/>
                     <connections>
-                        <outlet property="contentView" destination="THm-nF-114" id="wvV-sk-xos"/>
                         <outlet property="mainScrollView" destination="xr0-1c-u4s" id="qTq-S0-TZS"/>
-                        <outlet property="pagingScrollView" destination="zHq-xw-q0S" id="5G6-ja-YXg"/>
-                        <outlet property="priceStackView" destination="wa9-Vh-VXI" id="oP8-bO-WKV"/>
-                        <outlet property="ratingView" destination="zUw-hA-bUP" id="aOg-H0-1vz"/>
-                        <outlet property="reviewCountLabel" destination="kqp-ZE-m13" id="aFG-bA-KsZ"/>
-                        <outlet property="titleLabel" destination="fKt-Dr-H95" id="NdU-gu-v9G"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zGl-g2-aKr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
