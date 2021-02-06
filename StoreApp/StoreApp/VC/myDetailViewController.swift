@@ -8,20 +8,20 @@
 
 import Foundation
 import UIKit
-import Toaster
-import WebKit
 
 class myDetailViewController:  UIViewController {
     
     @IBOutlet weak var myDetailView: myDetailView!
+    
     var productId : String!
     var storeDomain : String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.registerObserver()
         self.navigationController?.title = "손안에 쇼핑"
         myDetailView.downloadJson(productId: productId, storeDomain: storeDomain)
-        NotificationCenter.default.addObserver(self, selector: #selector(showToastDetail(notification:)), name: .showToastDetail, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(cantLoadJson(notification:)), name: .cantLoadJson, object: nil)
     }
     
     func initVC(productId : String, storeDomain : String){
@@ -31,7 +31,6 @@ class myDetailViewController:  UIViewController {
     
     @objc func showToastDetail(notification: Notification){
         guard let userInfo = notification.userInfo as NSDictionary? as? [String: String] else {return}
-        
         showToast(text: userInfo.values.first!)
         self.navigationController?.popViewController(animated: true)
     }
