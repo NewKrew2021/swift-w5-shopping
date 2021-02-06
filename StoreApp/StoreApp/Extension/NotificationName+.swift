@@ -9,9 +9,11 @@
 import Foundation
 extension Notification.Name {
     static let showToast = Notification.Name("showToast")
-    static let saveItem = Notification.Name("saveItem")
-    static let saveDetailItem = Notification.Name("saveDetailItem")
+    static let saveItemCollection = Notification.Name("saveItemCollection")
     static let cantLoadJson = Notification.Name("cantLoadJson")
-    static let showToastDetail = Notification.Name("showToastDetail")
     static let reloadItem = Notification.Name("reloadItem")
+    
+    static let saveDetailItem = Notification.Name("saveDetailItem")
+    static let reloadDetailItem = Notification.Name("reloadDetailItem")
+    static let showToastDetail = Notification.Name("showToastDetail")
 }

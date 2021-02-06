@@ -16,21 +16,32 @@ class ViewController: UIViewController {
     private var cellwidth = UIScreen.main.bounds.width
     private var cellheight = UIScreen.main.bounds.height/3
     var item = StoreItems()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        RequestURL().requestDownloadURL()
-        
         myShoppingCollectionView.delegate = self
         myShoppingCollectionView.dataSource = self
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadItems(notification:)), name: .reloadItem, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showToast(notification:)), name: .showToast, object: nil)
-        
-        setLayout()
-        initNavigationBar()
+        self.registerObserver()
+        self.downloadJson()
+        self.setLayout()
+        self.initNavigationBar()
     }
+    
+    func downloadJson(){
+        for dataType in JsonFileName.jsonFileName {
+            let url = "http:public.codesquad.kr/jk/kakao-2021/\(dataType.rawValue).json"
+            RequestURL().requestDownloadURL(url : url, type : .saveItemCollection, dataType: dataType)
+            SectionHeader.headerTitle.append(dataType.rawValue)
+        }
+    }
+    
+    @objc func saveItemCollection(notification: Notification) {
+        print(notification.userInfo)
+        guard let userInfo = notification.userInfo as NSDictionary? as? [String: [Item]] else {return}
+        item.saveItems(userInfo: userInfo)
+    }
+    
     
     func setLayout(){
         let flowLayout = UICollectionViewFlowLayout()
@@ -38,7 +49,6 @@ class ViewController: UIViewController {
         
         let layout = myShoppingCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.sectionHeadersPinToVisibleBounds = true
-        
     }
     
     @objc func showToast(notification: Notification){
@@ -65,7 +75,6 @@ class ViewController: UIViewController {
         guard let myDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "myDetailViewController") as? myDetailViewController else { return }
         myDetailVC.initVC(productId: productIdLabel.text!, storeDomain: storeDomainLabel.text!)
         navigationController?.pushViewController(myDetailVC, animated: true)
-        
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -73,7 +82,6 @@ class ViewController: UIViewController {
     }
     
 }
-
 
 extension ViewController : UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
