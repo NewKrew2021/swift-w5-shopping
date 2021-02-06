@@ -9,7 +9,7 @@
 import UIKit
 import Toaster
 
-class ViewController: UIViewController {
+class myMainViewController: UIViewController {
     
     @IBOutlet weak var myShoppingCollectionView: UICollectionView!
     
@@ -37,11 +37,9 @@ class ViewController: UIViewController {
     }
     
     @objc func saveItemCollection(notification: Notification) {
-        print(notification.userInfo)
         guard let userInfo = notification.userInfo as NSDictionary? as? [String: [Item]] else {return}
         item.saveItems(userInfo: userInfo)
     }
-    
     
     func setLayout(){
         let flowLayout = UICollectionViewFlowLayout()
@@ -83,7 +81,7 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController : UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension myMainViewController : UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return item.count(index: section)
     }
