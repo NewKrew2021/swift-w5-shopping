@@ -11,26 +11,10 @@ import UIKit
 
 class DetailStoreItem {
     var detailItem : DetailItem?
-    
-    func downloadJson(productId: String, storeDomain: String){
-        guard let url = URL(string: "https://store.kakao.com/a/\(storeDomain)/product/\(productId)/detail") else { return }
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard let data = data else { return }
-            self.decoding(data: data)
-        }.resume()
-    }
-    
-    func decoding(data: Data){
-        DispatchQueue.main.async {
-            do {
-                if let decodeData = try? JSONDecoder().decode(DetailItem.self, from : data){
-                    self.detailItem = decodeData
-                    NotificationCenter.default.post(name: .saveDetailItem, object: self, userInfo: nil)
-                } else{
-                    NotificationCenter.default.post(name: .cantLoadJson, object: self, userInfo: nil)
-                }
-            } catch {}
-        }
+
+    func saveItems (userInfo : [String: DetailItem]){
+        detailItem = userInfo.values.first!
+        NotificationCenter.default.post(name: .reloadDetailItem, object: self, userInfo: nil)
     }
     
     private func presentGraySpace() -> UIImage{
