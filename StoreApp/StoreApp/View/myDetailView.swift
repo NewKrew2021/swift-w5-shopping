@@ -41,34 +41,21 @@ class myDetailView: UIScrollView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         initUI()
-        NotificationCenter.default.addObserver(self, selector: #selector(setView), name: .saveDetailItem, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(saveDetailItem), name: .saveDetailItem, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadDetailItem(notification:)), name: .reloadDetailItem, object: nil)
     }
     
     func downloadJson(productId: String, storeDomain: String){
-        detailItem.downloadJson(productId: productId, storeDomain: storeDomain)
+        let url = "https://store.kakao.com/a/\(storeDomain)/product/\(productId)/detail"
+        RequestURL().requestDownloadURL(url: url, type: .saveDetailItem, dataType: JsonFileName.best)
     }
     
-      func setTimer(imageCount: Int) {
-            Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(autoScroll), userInfo: ["imageCount" : imageCount], repeats: true)
-        }
-    //
-        @objc func autoScroll(timer : Timer) {
-            guard let userInfo = timer.userInfo as? [String: Int] else {return}
-            let totalPossibleOffset = self.pagingScrollView.bounds.size.width * CGFloat((userInfo["imageCount"] ?? 1)-1)
-            if offSet == totalPossibleOffset {
-                offSet = 0
-            } else {
-                offSet += self.pagingScrollView.bounds.size.width
-            }
-            DispatchQueue.main.async() {
-                UIView.animate(withDuration: 0.1, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: {
-                    self.pagingScrollView.contentOffset.x = CGFloat(self.offSet)
-                }, completion: nil)
-            }
-        }
+    @objc func saveDetailItem(notification: Notification){
+        guard let userInfo = notification.userInfo as NSDictionary? as? [String: DetailItem] else {return}
+        detailItem.saveItems(userInfo: userInfo)
+    }
     
-    @objc func setView(){
-        
+    @objc func reloadDetailItem(notification: Notification){
         DispatchQueue.main.async {
             let sc = self.detailItem.getPagingScrollView(bounds: self.pagingScrollView.bounds)
             self.setTimer(imageCount: sc.subviews.count)
@@ -76,6 +63,7 @@ class myDetailView: UIScrollView {
                 self.pagingScrollView.addSubview(view)
             }
         }
+        
         productName.text = detailItem.getProductName()
         discountPrice.setTitle(detailItem.getGroupDiscountedPrice(), for: .normal)
         standardPrice.setTitle(detailItem.getOriginalPrice(), for: .normal)
@@ -109,7 +97,7 @@ class myDetailView: UIScrollView {
         contentView.trailingAnchor.constraint(equalTo: contentLayoutGuide.trailingAnchor).isActive = true
         contentView.widthAnchor.constraint(equalTo: frameLayoutGuide.widthAnchor).isActive = true
     }
-
+    
     func initProductImageView(){
         contentView.addSubview(pagingScrollView)
         pagingScrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -152,16 +140,14 @@ class myDetailView: UIScrollView {
         discountPrice.layer.backgroundColor = UIColor.yellow.cgColor
         
         discountPrice.addTarget(self, action: #selector(onTapButton(button:)), for: .touchUpInside)
-
     }
     
     @objc func onTapButton(button : UIButton) {
         let str = "\(productName.text!)을(를) \n\(button.titleLabel!.text!)에 구매하셨습니다."
-
         let userInfo: [AnyHashable: Any] = ["text":str]
         NotificationCenter.default.post(name: .showToastDetail, object: self, userInfo: userInfo)
     }
-
+    
     func initOriginalPriceLabel(){
         contentView.addSubview(standardPrice)
         standardPrice.translatesAutoresizingMaskIntoConstraints = false
@@ -227,16 +213,36 @@ class myDetailView: UIScrollView {
         productDescription.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         productDescription.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
+    
+    func setTimer(imageCount: Int) {
+          Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(autoScroll), userInfo: ["imageCount" : imageCount], repeats: true)
+      }
+      
+      @objc func autoScroll(timer : Timer) {
+          guard let userInfo = timer.userInfo as? [String: Int] else {return}
+          let totalPossibleOffset = self.pagingScrollView.bounds.size.width * CGFloat((userInfo["imageCount"] ?? 1)-1)
+          if offSet == totalPossibleOffset {
+              offSet = 0
+          } else {
+              offSet += self.pagingScrollView.bounds.size.width
+          }
+          DispatchQueue.main.async() {
+              UIView.animate(withDuration: 0.1, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: {
+                  self.pagingScrollView.contentOffset.x = CGFloat(self.offSet)
+              }, completion: nil)
+          }
+      }
+      
 }
 
 extension myDetailView : UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        self.offSet = self.pagingScrollView.contentOffset.x
+        //        self.offSet = self.pagingScrollView.contentOffset.x
     }
 }
-    
-    
-    
+
+
+
 
 
 
