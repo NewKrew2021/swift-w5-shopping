@@ -27,12 +27,7 @@ class StoreItems {
         return allItems[JsonFileName.jsonFileName[indexPath[0]]]![indexPath[1]]
     }
     
-    init() {
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadItems(notification:)), name: NSNotification.Name("saveItem"), object: nil)
-    }
-    
-    @objc func reloadItems(notification: Notification) {
-        guard let userInfo = notification.userInfo as NSDictionary? as? [String: [Item]] else {return}
+    func saveItems(userInfo : [String: [Item]]) {
         switch userInfo.keys.first! {
         case "best":
             allItems[.best] = userInfo.values.first!
@@ -45,7 +40,7 @@ class StoreItems {
         default:
             return
         }
-        NotificationCenter.default.post(name: NSNotification.Name("reloadItem"), object: self, userInfo: nil)
+        NotificationCenter.default.post(name: .reloadItem, object: self, userInfo: nil)
     }
     
     func getProductImage(indexPath: IndexPath) -> UIImage {
