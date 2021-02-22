@@ -15,10 +15,9 @@ class Downloader {
         case success(Data)
         case failure
     }
-    
+
     static func downloadWithDataTask(from urlString: String, completionHandler: @escaping AfterTask) {
         guard let url = URL(string: urlString) else { return }
-            
         URLSession.shared.downloadTask(with: url) { localURL, urlResponse, error in
             if let localURL = localURL {
                 if let data = try? Data(contentsOf: localURL) {
