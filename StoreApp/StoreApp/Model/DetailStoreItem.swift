@@ -11,30 +11,11 @@ import UIKit
 
 class DetailStoreItem {
     var detailItem : DetailItem?
-    
-    func downloadJson(productId: String, storeDomain: String){
-                guard let url = URL(string: "https://store.kakao.com/a/\(storeDomain)/product/\(productId)/detail") else { return }
-                print(url)
-                URLSession.shared.dataTask(with: url) { (data, response, error) in
-                    guard let data = data else { return }
-                    DispatchQueue.main.async {
-                        do {
-                            if let decodeData = try? JSONDecoder().decode(DetailItem.self, from : data){
-                                self.detailItem = decodeData
-                                NotificationCenter.default.post(name: NSNotification.Name("saveDetailItem"), object: self, userInfo: nil)
-                            } else{
-                                self.detailItem = nil
-                            }
-                        } catch {
-                        }
-                    }
-                }.resume()
-    }
 
-    func decoding(iter: JsonFileName, data : Data){
-               
-           }
-    
+    func saveItems (userInfo : [String: DetailItem]){
+        detailItem = userInfo.values.first!
+        NotificationCenter.default.post(name: .reloadDetailItem, object: self, userInfo: nil)
+    }
     
     private func presentGraySpace() -> UIImage{
         let emptyView = UIView(frame: CGRect.zero)
@@ -49,13 +30,12 @@ class DetailStoreItem {
         return emptyImage
     }
     
-    func getProductImage() -> UIImage {
+    func getProductImage(index: Int) -> UIImage {
         var tempImage : UIImage = UIImage()
-        let url = detailItem?.data.previewImages![0]
+        let url = detailItem?.data.previewImages![index]
         let name = URL(string: url!)!.query!
         if let cachedData = CacheStorage().retrieve(name) {
-                tempImage = UIImage(data: cachedData)!
-
+            tempImage = UIImage(data: cachedData)!
         } else {
             Downloader.downloadWithDataTask(from: url!, completionHandler: { response in
                 switch response {
@@ -66,7 +46,7 @@ class DetailStoreItem {
                     }
                 case .failure:
                     DispatchQueue.main.async {
-                        tempImage = self.presentGraySpace()
+                        tempImage = UIImage()
                     }
                 }
             })
@@ -77,27 +57,28 @@ class DetailStoreItem {
     func getProductName() -> String {
         return self.detailItem?.data.name ?? ""
     }
-
+    
     func getGroupDiscountedPrice() -> String {
         if let dc = self.detailItem?.data.price?.discountedPrice {
             return "톡딜가 \(dc)원"
         }
         return ""
     }
-
+    
     func getOriginalPrice() -> String {
         if let dc = self.detailItem?.data.price?.standardPrice {
             return "바로 구매 \(dc)원"
         }
         return ""
     }
+    
     func getStoreName() -> String {
         if let dc = self.detailItem?.data.store?.name {
             return "\(dc)"
         }
         return ""
     }
-
+    
     func getDeliveryPrice() -> String {
         if let dc = self.detailItem?.data.delivery?.deliveryFeeType {
             if dc == "FREE" {
@@ -109,7 +90,7 @@ class DetailStoreItem {
         }
         return ""
     }
-
+    
     func getNoticeTitle() -> String {
         if let dc = self.detailItem?.data.notices {
             if dc.count > 0 {
@@ -118,7 +99,7 @@ class DetailStoreItem {
         }
         return ""
     }
-
+    
     func getNoticeCreateAt() -> String {
         if let dc = self.detailItem?.data.notices{
             if dc.count > 0 {
@@ -135,25 +116,23 @@ class DetailStoreItem {
         return ""
     }
     
-    
-
-    
-    
-//    func getGroupDiscountUserCount(indexPath: IndexPath) -> String {
-//        if let dc = self[indexPath].groupDiscountUserCount {
-//            return "현재 \(String(dc))명 딜 참여중"
-//        }
-//        return ""
-//    }
-
-//    func getProductId(indexPath: IndexPath) -> String {
-//        if let dc = self[indexPath].productId {
-//            return "\(dc)"
-//        }
-//        return ""
-//    }
-//
-//    func getStoreDomain(indexPath: IndexPath) -> String {
-//        return self[indexPath].storeDomain
-//    }
+    func getPagingScrollView(bounds: CGRect) -> UIScrollView {
+        var scrollView = UIScrollView()
+        if let scrollViewImagesUrl : [String] = detailItem?.data.previewImages {
+            for index in 0..<scrollViewImagesUrl.count {
+                let imageView = UIImageView()
+                imageView.frame = bounds
+                imageView.frame.origin.x = bounds.width * CGFloat(index)
+                imageView.image = self.getProductImage(index: index)
+                imageView.contentMode = .scaleAspectFill
+                scrollView.addSubview(imageView)
+            }
+        }
+        return scrollView
+    }
+    func setPagingScrollView(scrollViewImagesUrl : [String], bounds : CGRect) {
+        
+    }
 }
+
+

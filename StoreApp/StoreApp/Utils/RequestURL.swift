@@ -10,31 +10,31 @@ import Foundation
 import Toaster
 
 class RequestURL {
-    func requestDownloadURL(){
-        for iter in JsonFileName.jsonFileName {
-            guard let url = URL(string: "http://public.codesquad.kr/jk/kakao-2021/\(iter.rawValue).json") else { return }
-            
-            SectionHeader.headerTitle.append(iter.rawValue)
-            URLSession.shared.dataTask(with: url) { (data, response, error) in
-                guard let data = data else { return }
-                DispatchQueue.main.async {
-                    self.decoding(iter: iter, data: data)
+    func requestDownloadURL(url : String, type : Notification.Name, dataType: JsonFileName) {
+        guard let url = URL(string: url) else { return }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data else { return }
+            self.decoding(data: data, type: type, dataType: dataType)
+        }.resume()
+    }
+    
+    func decoding(data : Data, type: Notification.Name, dataType: JsonFileName)  {
+        DispatchQueue.main.async {
+            do {
+                if type == .saveItemCollection {
+                    if let decodeData = try? JSONDecoder().decode([Item].self, from : data){
+                        let userInfo: [AnyHashable: Any] = [dataType.rawValue:decodeData]
+
+                        NotificationCenter.default.post(name: type, object: self, userInfo: userInfo)
+                    }
                 }
-            }.resume()
+                else if type == .saveDetailItem {
+                    if let decodeData = try? JSONDecoder().decode(DetailItem.self, from : data){
+                        let userInfo: [AnyHashable: Any] = ["data":decodeData]
+                        NotificationCenter.default.post(name: type, object: self, userInfo: userInfo)
+                    }
+                }
+            } catch {}
         }
     }
-    
-    func decoding(iter: JsonFileName, data : Data){
-        do {
-            if let decodeData = try? JSONDecoder().decode([Item].self, from : data){
-                let userInfo: [AnyHashable: Any] = [iter.rawValue:decodeData]
-                NotificationCenter.default.post(name: NSNotification.Name("saveItem"), object: self, userInfo: userInfo)
-            }
-        } catch {
-            let str = "\(iter.rawValue).json 을 읽어올 수 없습니다."
-            let userInfo: [AnyHashable: Any] = [iter.rawValue:str]
-            NotificationCenter.default.post(name: NSNotification.Name("showToast"), object: self, userInfo: userInfo)
-        }
-    }
-    
 }
